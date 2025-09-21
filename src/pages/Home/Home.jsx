@@ -20,7 +20,7 @@ import SeoData from "../../SEO/SeoData";
 const Home = () => {
     return (
         <>
-            <SeoData title="Online Shopping Site for Mobiles, Electronics, Furniture, Grocery, Lifestyle, Books & More. Best Offers!" />
+            <SeoData title="Online Wholesaler Site for Mobiles, Electronics, Furniture, Grocery, Lifestyle, Books & More. Best Offers!" />
             <ScrollToTopOnRouteChange />
             <Categories />
             <main className="flex flex-col items-center gap-3 px-2 pb-5 sm:mt-2">

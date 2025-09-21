@@ -38,14 +38,19 @@ const Product = ({
 
     // add to wishlist function
     const addToWishlistHandler = async () => {
+        if (auth?.token === undefined) {
+            toast.error("Please login!", {
+                style: { top: "40px" },
+            });
+            return;
+        }
         const type = itemInWishlist ? "remove" : "add";
         try {
             // Update the UI before the API call
             updateWishlistUI(type === "add");
 
             const res = await axios.post(
-                `${
-                    import.meta.env.VITE_SERVER_URL
+                `${import.meta.env.VITE_SERVER_URL
                 }/api/v1/user/update-wishlist`,
                 { productId: _id, type },
                 { headers: { Authorization: auth.token } }
@@ -79,21 +84,21 @@ const Product = ({
                     url: shareUrl,
                 });
             } catch (err) {
-                toast.error("Share cancelled or failed.", {
-                    style: { top: "40px" },
-                });
+                // toast.error("Share cancelled or failed.", {
+                //     style: { top: "40px" },
+                // });
             }
         } else {
             // fallback: copy to clipboard
             try {
                 await navigator.clipboard.writeText(shareUrl);
-                toast.success("Product link copied!", {
+                toast.success("Product link copied!", {// TODO: make it round tick
                     style: { top: "40px" },
                 });
             } catch (err) {
-                toast.error("Failed to copy link.", {
-                    style: { top: "40px" },
-                });
+                // toast.error("Failed to copy link.", {
+                //     style: { top: "40px" },
+                // });
             }
         }
     };
@@ -105,11 +110,10 @@ const Product = ({
                 {/* <!-- wishlist badge --> */}
                 <span
                     onClick={addToWishlistHandler}
-                    className={`${
-                        itemInWishlist
+                    className={`${itemInWishlist
                             ? "text-red-500"
                             : "hover:text-red-500 text-gray-300"
-                    }
+                        }
                     ${isAdmin ? "hidden" : ""}
                     absolute z-10  top-2 right-3 cursor-pointer`}
                 >
@@ -168,7 +172,7 @@ const Product = ({
 
                         {/* <!-- price container --> */}
                         <div className="flex items-center gap-1.5 text-md font-medium">
-                            <span>₹{(price-discountPrice).toLocaleString()}</span>
+                            <span>₹{(price - discountPrice).toLocaleString()}</span>
                             <span className="text-gray-500 line-through text-xs">
                                 ₹{price.toLocaleString()}
                             </span>

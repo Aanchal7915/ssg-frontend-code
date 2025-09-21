@@ -194,6 +194,12 @@ const ProductDetails = () => {
     };
 
     const addToWishlistHandler = async () => {
+        if(auth?.token === undefined){
+            toast.error("Please login!", {
+                style: { top: "40px" },
+            });
+            return;
+        }
         let type = itemInWishlist ? "remove" : "add";
         try {
             // Update the UI before the API call
@@ -215,7 +221,7 @@ const ProductDetails = () => {
             res.status === 201 &&
                 toast.success(
                     type === "add"
-                        ? "Product Added To Wishlist"
+                        ? "Product Added To Wishlist"//TODO: better make it round tick
                         : "Product Removed From Wishlist",
                     {
                         style: {
@@ -245,21 +251,21 @@ const ProductDetails = () => {
                     url: shareUrl,
                 });
             } catch (err) {
-                toast.error("Share cancelled or failed.", {
-                    style: { top: "40px" },
-                });
+                // toast.error("Share cancelled or failed.", {
+                //     style: { top: "40px" },
+                // });
             }
         } else {
             // fallback: copy to clipboard
             try {
                 await navigator.clipboard.writeText(shareUrl);
-                toast.success("Product link copied!", {
+                toast.success("Product link copied!", {// make it round
                     style: { top: "40px" },
                 });
             } catch (err) {
-                toast.error("Failed to copy link.", {
-                    style: { top: "40px" },
-                });
+                // toast.error("Failed to copy link.", {
+                //     style: { top: "40px" },
+                // });
             }
         }
     };
