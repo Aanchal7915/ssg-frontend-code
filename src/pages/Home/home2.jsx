@@ -7,6 +7,7 @@ const products = [
 		description: "Experience premium sound quality with noise cancellation.",
 		price: "$120",
 		image: "https://images.unsplash.com/photo-1519677100203-a0e668c92439?auto=format&fit=crop&w=400&q=80",
+		feature: "40hr Battery",
 	},
 	{
 		id: 2,
@@ -14,6 +15,7 @@ const products = [
 		description: "Compact, stylish, and perfect for on-the-go listening.",
 		price: "$80",
 		image: "https://images.unsplash.com/photo-1511367461989-f85a21fda167?auto=format&fit=crop&w=400&q=80",
+		feature: "IPX7 Waterproof",
 	},
 	{
 		id: 3,
@@ -21,6 +23,7 @@ const products = [
 		description: "Fill any room with rich, immersive sound.",
 		price: "$65",
 		image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80",
+		feature: "360° Surround",
 	},
 	{
 		id: 4,
@@ -28,6 +31,39 @@ const products = [
 		description: "Crystal clear audio for an immersive gaming experience.",
 		price: "$95",
 		image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=80",
+		feature: "RGB Lighting",
+	},
+	{
+		id: 5,
+		name: "Smart Watch",
+		description: "Track your fitness and stay connected on the go.",
+		price: "$110",
+		image: "https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?auto=format&fit=crop&w=400&q=80",
+		feature: "Heart Rate Monitor",
+	},
+	{
+		id: 6,
+		name: "Wireless Charger",
+		description: "Fast and convenient charging for all your devices.",
+		price: "$35",
+		image: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80",
+		feature: "15W Fast Charge",
+	},
+	{
+		id: 7,
+		name: "Action Camera",
+		description: "Capture your adventures in stunning 4K resolution.",
+		price: "$150",
+		image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80",
+		feature: "4K Ultra HD",
+	},
+	{
+		id: 8,
+		name: "VR Headset",
+		description: "Step into a new world with immersive VR experiences.",
+		price: "$220",
+		image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80",
+		feature: "120° FOV",
 	},
 ];
 
@@ -46,6 +82,47 @@ const testimonials = [
 		name: "Rahul Singh",
 		text: "Huge variety and unbeatable deals. My business profits have grown!",
 		avatar: "https://randomuser.me/api/portraits/men/65.jpg",
+	},
+];
+
+const partners = [
+	{
+		name: "Sony",
+		logo: "https://upload.wikimedia.org/wikipedia/commons/2/2e/Sony_logo.svg",
+	},
+	{
+		name: "Samsung",
+		logo: "https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg",
+	},
+	{
+		name: "JBL",
+		logo: "https://upload.wikimedia.org/wikipedia/commons/2/2a/JBL_logo.svg",
+	},
+	{
+		name: "Boat",
+		logo: "https://seeklogo.com/images/B/boat-logo-6B1B6A6B3B-seeklogo.com.png",
+	},
+	{
+		name: "Apple",
+		logo: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg",
+	},
+];
+
+const blogPosts = [
+	{
+		title: "How to Choose the Best Headphones for Your Needs",
+		image: "https://cdn.pixabay.com/photo/2017/01/06/19/15/headphones-1954636_1280.jpg",
+		link: "#",
+	},
+	{
+		title: "Top 5 Tech Gadgets Every Business Needs in 2025",
+		image: "https://cdn.pixabay.com/photo/2016/11/29/09/32/technology-1869236_1280.jpg",
+		link: "#",
+	},
+	{
+		title: "Why Buy Wholesale? The Benefits for Retailers",
+		image: "https://cdn.pixabay.com/photo/2017/08/06/00/03/people-2581913_1280.jpg",
+		link: "#",
 	},
 ];
 
@@ -72,15 +149,27 @@ const Home = () => {
 				</div>
 				{/* Hero Content */}
 				<div className="z-10 max-w-xl md:w-1/2 space-y-7 animate-fadeIn">
-					<h1 className="text-5xl md:text-6xl font-extrabold text-indigo-200 drop-shadow-lg mb-4 leading-tight">
+					<div className="flex items-center gap-3 mb-2">
+						<img
+							src="https://cdn-icons-png.flaticon.com/512/1042/1042330.png"
+							alt="logo"
+							className="w-12 h-12 rounded-full shadow-lg border-2 border-indigo-500 bg-gray-900"
+						/>
+						<span className="text-2xl font-bold text-indigo-300 tracking-wide">ElectroWholesale</span>
+					</div>
+					<h1 className="text-5xl md:text-6xl font-extrabold text-indigo-200 drop-shadow-lg mb-2 leading-tight">
 						<span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-blue-400 to-indigo-200 animate-gradient">
-							ElectroWholesale
+							Premium Electronics, Wholesale Prices
 						</span>
-						<br />
-						<span className="text-indigo-400">Premium Electronics, Wholesale Prices</span>
 					</h1>
-					<p className="text-lg md:text-xl text-indigo-200/80 font-medium">
-						Discover unbeatable deals on headphones, earbuds, and Bluetooth devices. Shop the latest gadgets with fast shipping and dedicated support.
+					<div className="flex flex-wrap gap-2 mt-2">
+						<span className="bg-indigo-700/40 text-indigo-200 px-3 py-1 rounded-full text-xs font-semibold shadow animate-pulse">Bulk Deals</span>
+						<span className="bg-blue-700/40 text-blue-200 px-3 py-1 rounded-full text-xs font-semibold shadow animate-pulse">Latest Tech</span>
+						<span className="bg-indigo-700/40 text-indigo-200 px-3 py-1 rounded-full text-xs font-semibold shadow animate-pulse">Fast Shipping</span>
+						<span className="bg-blue-700/40 text-blue-200 px-3 py-1 rounded-full text-xs font-semibold shadow animate-pulse">Trusted Support</span>
+					</div>
+					<p className="text-lg md:text-xl text-indigo-200/80 font-medium mt-4">
+						Discover unbeatable deals on headphones, earbuds, smart gadgets, and more. Shop the latest electronics with lightning-fast shipping and dedicated support for your business.
 					</p>
 					<a
 						href="#products"
@@ -91,8 +180,9 @@ const Home = () => {
 				</div>
 				{/* Hero Illustration */}
 				<div className="z-10 md:w-1/2 flex justify-center items-center mt-10 md:mt-0">
+					{/* Animated GIF Illustration */}
 					<img
-						src="https://assets10.lottiefiles.com/packages/lf20_1pxqjqps.png"
+						src="https://cdn.pixabay.com/animation/2023/03/22/10/23/10-23-44-627_512.gif"
 						alt="Electronics Animation"
 						className="hidden md:block w-[420px] h-[340px] object-contain rounded-3xl shadow-2xl opacity-95 animate-slideIn"
 						style={{ background: "rgba(49, 46, 129, 0.12)" }}
@@ -110,6 +200,19 @@ const Home = () => {
 					</svg>
 				</div>
 			</header>
+
+			{/* Partners/Brands Section */}
+			<section className="py-8 px-4 bg-gradient-to-r from-gray-950 via-gray-900 to-gray-950">
+				<h3 className="text-xl font-bold text-indigo-200 text-center mb-6">Our Trusted Brands</h3>
+				<div className="flex flex-wrap justify-center gap-8 items-center">
+					{partners.map((brand) => (
+						<div key={brand.name} className="flex flex-col items-center">
+							<img src={brand.logo} alt={brand.name} className="h-10 w-auto grayscale hover:grayscale-0 transition duration-300" />
+							<span className="text-xs text-indigo-400 mt-1">{brand.name}</span>
+						</div>
+					))}
+				</div>
+			</section>
 
 			{/* Animated Banner Section */}
 			<section className="relative py-8 px-4 flex justify-center items-center bg-gradient-to-r from-indigo-900 via-indigo-800 to-blue-900 overflow-hidden">
@@ -145,6 +248,27 @@ const Home = () => {
 				</div>
 			</section>
 
+			{/* Product Highlights Section */}
+			<section className="py-10 px-6 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950">
+				<div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+					<div className="flex flex-col items-center text-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 rounded-2xl shadow-lg p-8 border border-gray-800 animate-fadeIn">
+						<img src="https://cdn-icons-png.flaticon.com/512/1042/1042330.png" alt="Bulk" className="w-16 h-16 mb-4 animate-float" />
+						<h3 className="text-xl font-bold text-indigo-200 mb-2">Bulk Orders</h3>
+						<p className="text-indigo-300">Order in bulk and save more. Special pricing for businesses and resellers.</p>
+					</div>
+					<div className="flex flex-col items-center text-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 rounded-2xl shadow-lg p-8 border border-gray-800 animate-fadeIn">
+						<img src="https://cdn-icons-png.flaticon.com/512/1042/1042332.png" alt="Warranty" className="w-16 h-16 mb-4 animate-float" />
+						<h3 className="text-xl font-bold text-indigo-200 mb-2">Warranty & Support</h3>
+						<p className="text-indigo-300">All products come with manufacturer warranty and 24/7 customer support.</p>
+					</div>
+					<div className="flex flex-col items-center text-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 rounded-2xl shadow-lg p-8 border border-gray-800 animate-fadeIn">
+						<img src="https://cdn-icons-png.flaticon.com/512/1042/1042331.png" alt="Shipping" className="w-16 h-16 mb-4 animate-float" />
+						<h3 className="text-xl font-bold text-indigo-200 mb-2">Express Shipping</h3>
+						<p className="text-indigo-300">Lightning-fast delivery across India. Track your orders in real time.</p>
+					</div>
+				</div>
+			</section>
+
 			{/* Products Section */}
 			<section id="products" className="py-16 px-6 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950">
 				<h2 className="text-3xl md:text-4xl font-bold text-center text-indigo-200 mb-12 animate-slideUp">
@@ -155,7 +279,7 @@ const Home = () => {
 						<div
 							key={product.id}
 							className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300 p-6 flex flex-col items-center animate-fadeIn border border-gray-800"
-							style={{ animationDelay: `${0.2 * idx}s`, animationFillMode: "both" }}
+							style={{ animationDelay: `${0.1 * idx}s`, animationFillMode: "both" }}
 						>
 							<img
 								src={product.image}
@@ -165,12 +289,37 @@ const Home = () => {
 							<div className="text-center space-y-2">
 								<h3 className="text-xl font-semibold text-indigo-100">{product.name}</h3>
 								<p className="text-indigo-300">{product.description}</p>
-								<span className="text-lg font-bold text-indigo-400">{product.price}</span>
+								<span className="inline-block bg-indigo-700/40 text-indigo-200 px-3 py-1 rounded-full text-xs font-semibold shadow">{product.feature}</span>
+								<div>
+									<span className="text-lg font-bold text-indigo-400">{product.price}</span>
+								</div>
 							</div>
 							<button className="mt-4 px-6 py-2 bg-gradient-to-r from-indigo-500 to-blue-500 text-white rounded-full font-semibold shadow hover:scale-105 transition-transform duration-300">
 								Buy Wholesale
 							</button>
 						</div>
+					))}
+				</div>
+			</section>
+
+			{/* Blog/Guides Section */}
+			<section className="py-14 px-6 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950">
+				<h2 className="text-2xl md:text-3xl font-bold text-indigo-200 mb-8 text-center">
+					Latest Guides & Tips
+				</h2>
+				<div className="flex flex-col md:flex-row gap-8 justify-center items-stretch max-w-6xl mx-auto">
+					{blogPosts.map((post, idx) => (
+						<a
+							href={post.link}
+							key={post.title}
+							className="flex-1 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 rounded-2xl shadow-lg border border-gray-800 overflow-hidden hover:scale-105 transition-transform duration-300 group"
+						>
+							<img src={post.image} alt={post.title} className="w-full h-40 object-cover group-hover:opacity-90 transition" />
+							<div className="p-5">
+								<h3 className="text-lg font-bold text-indigo-100 mb-2">{post.title}</h3>
+								<span className="text-indigo-400 text-xs">Read More &rarr;</span>
+							</div>
+						</a>
 					))}
 				</div>
 			</section>
