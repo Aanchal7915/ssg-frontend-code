@@ -3,6 +3,7 @@ import authImg from "../../assets/images/auth.png";
 import axios from "axios";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import { FiMail, FiLock } from "react-icons/fi";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useAuth } from "../../context/auth";
@@ -31,7 +32,6 @@ const Login = () => {
                 : navigate("/user/dashboard");
         }
     }, [navigate, auth, isAdmin]);
-    // axios.defaults.headers.common["Authorization"] = auth.token;
 
     //form submission handler
     const handleFormSubmit = async (e) => {
@@ -49,7 +49,6 @@ const Login = () => {
                     password,
                 }
             );
-            // console.log(response);
 
             if (response.status === 200) {
                 toast.success("Logged in Successfully!");
@@ -95,148 +94,129 @@ const Login = () => {
             {isSubmitting ? (
                 <Spinner />
             ) : (
-                <div className="container bg-primaryBg mt-5 sm:mt-0 md:mt-0 lg:mt-0 py-[2px]">
-                    <div className="flex items-center flex-col sm:flex-row md:flow-row lg:flex-row my-10 mx-auto w-full sm:w-[70vw] md:w-[70vw] lg:w-[70vw] min-h-[400px] md:h-[80vh] lg:h-[80vh] bg-white shadow-[0px_0px_8px_2px_rgba(212,212,212,0.6)] "
-                    >
-                        {/* left view  */}
-                        <div className=" w-full md:w-[40%] lg:w-[40%] h-full bg-green-900"
-                        >
-                            <div className="flex gap-2 md:gap-6 flex-col h-full mt-5 md:mt-10 px-6 ">
-                                <div className="text-white leading-8 text-[22px] font-[600]">
-                                    <h2>Log in</h2>
-                                </div>
-                                <div className="text-slate-300 text-base leading-7 font-[400]">
-                                    <p>
-                                        Get access to your Orders, Wishlist and
-                                        Recommendations
-                                    </p>
-                                    {/* 
-                                <p className="text-xs">
-                                    <span>
-                                        User <br />
-                                    </span>
-                                    username - test@test.com <br />
-                                    password - test123 <br />
-                                    <span>
-                                        Admin <br />
-                                    </span>
-                                    username - store@ssg.com <br />
-                                    password - admin123
-                                </p>*/}
-                                </div>
-                                <div className="">
-                                    <img src="/login-anim.gif" alt="auth image" />
-                                </div>
-                            </div>
+                <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 py-4 px-2">
+                    <div className="w-full max-w-4xl mx-auto rounded-2xl shadow-2xl border border-gray-800 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 p-0 flex flex-col md:flex-row gap-0 md:gap-0 overflow-hidden">
+                        {/* Left Side (Image/Brand) */}
+                        <div className="hidden md:flex flex-col justify-center items-center w-1/2 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 p-8">
+                            <img
+                                src="/logo-10.png"
+                                className="w-24 h-24 object-cover rounded-full border-[1px] border-indigo-500 shadow mb-4"
+                                alt="logo"
+                            />
+                            <h2 className="text-3xl font-bold text-indigo-300 mb-2">
+                                Welcome Back
+                            </h2>
+                            <p className="text-base text-gray-400 text-center mb-6">
+                                Log in to access your Orders, Wishlist and Recommendations
+                            </p>
+                            <img
+                                src="/login-anim.gif"
+                                alt="auth"
+                                className="w-56 h-56 object-contain"
+                            />
                         </div>
-
-                        {/* sign up form */}
-                        <div className="p-10 w-full h-full sm:w-[60%] md:w-[60%] lg:w-[60%] flex flex-col gap-y-10 ">
-                            <div className=" h-full w-full">
-                                <form
-                                    action="/login"
-                                    method="post"
-                                    className="w-[90%] mx-auto transition-all"
-                                    onSubmit={handleFormSubmit}
-                                >
-                                    <img src="/logo-9.png" 
-                                    className="w-[150px] h-auto object-cover mx-auto mb-3"
-                                    alt="logo"/>
-                                    <div className="text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7 pt-3 ">
-                                        <div className="relative">
-                                            <input
-                                                autoComplete="on"
-                                                id="email"
-                                                name="email"
-                                                type="email"
-                                                value={email}
-                                                onChange={(e) =>
-                                                    setEmail(e.target.value)
-                                                }
-                                                className="p-2 peer placeholder-transparent h-8 w-full border-b-2 text-gray-900 text-sm focus:outline-none focus:border-blue-400"
-                                                placeholder="Email address"
-                                                required
-                                                pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" // Email pattern
-                                            />
-                                            <label
-                                                htmlFor="email"
-                                                className="absolute left-0 -top-3 text-gray-600 text-xs peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3 peer-focus:text-gray-600 peer-focus:text-xs"
-                                            >
-                                                Email Address
-                                            </label>
-                                        </div>
-
-                                        <div className="relative">
-                                            <input
-                                                autoComplete="off"
-                                                id="password"
-                                                name="password"
-                                                type={
-                                                    showPassword
-                                                        ? "text"
-                                                        : "password"
-                                                }
-                                                value={password}
-                                                onChange={(e) =>
-                                                    setPassword(e.target.value)
-                                                }
-                                                className="p-2 peer placeholder-transparent h-8 w-full border-b-2 focus:border-blue-400 text-gray-900 focus:outline-none text-sm"
-                                                placeholder="Password"
-                                                required
-                                                minLength="5"
-                                            />
-                                            <label
-                                                htmlFor="password"
-                                                className="absolute left-0 -top-3 text-gray-600 text-xs peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3 peer-focus:text-gray-600 peer-focus:text-xs"
-                                            >
-                                                Password
-                                            </label>
-                                            <span
-                                                className="absolute right-3 bottom-2 hover:text-black cursor-pointer"
-                                                onClick={handlePasswordToggle}
-                                            >
-                                                {!showPassword && <AiFillEye />}
-                                                {showPassword && (
-                                                    <AiFillEyeInvisible />
-                                                )}
-                                            </span>
-                                        </div>
-                                        <div className="text-[9px] text-slate-500 ">
-                                            <p>
-                                                By continuing, you agree to
-                                                SSG&apos;s Terms of Use and
-                                                Privacy Policy.
-                                            </p>
-                                        </div>
-
-                                        <div className="relative flex flex-col">
-                                            <button className="bg-green-700/80 uppercase text-white text-[14px] font-[500] rounded-sm px-2 py-1">
-                                                Log in
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
+                        {/* Right Side (Form) */}
+                        <div className="flex-1 flex flex-col justify-center p-6 sm:p-10">
+                            {/* Logo for mobile */}
+                            <div className="flex flex-col items-center gap-2 md:hidden mb-4">
+                                <img
+                                    src="/logo-10.png"
+                                    className="w-20 h-20 object-cover rounded-full border-[1px] border-indigo-500 shadow"
+                                    alt="logo"
+                                />
+                                <h2 className="text-2xl font-bold text-indigo-300 mt-2">
+                                    Welcome Back
+                                </h2>
+                                <p className="text-sm text-gray-400 text-center">
+                                    Log in to access your Orders, Wishlist and Recommendations
+                                </p>
                             </div>
-
-                            <div className="relative -mt-7 w-full text-center">
+                            {/* Auth image for mobile */}
+                            <div className="flex justify-center md:hidden mb-4">
+                                <img
+                                    src="/login-anim.gif"
+                                    alt="auth"
+                                    className="w-32 h-32 object-contain"
+                                />
+                            </div>
+                            {/* Login Form */}
+                            <form
+                                action="/login"
+                                method="post"
+                                className="flex flex-col gap-5"
+                                onSubmit={handleFormSubmit}
+                            >
+                                <div className="relative">
+                                    <span className="absolute left-3 top-2.5 text-indigo-400">
+                                        <FiMail size={18} />
+                                    </span>
+                                    <input
+                                        autoComplete="on"
+                                        id="email"
+                                        name="email"
+                                        type="email"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        className="pl-10 pr-3 py-2 w-full rounded-lg bg-gray-900 border border-gray-700 text-indigo-100 placeholder-gray-500 focus:outline-none focus:border-indigo-500 text-base"
+                                        placeholder="Email address"
+                                        required
+                                        pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
+                                    />
+                                </div>
+                                <div className="relative">
+                                    <span className="absolute left-3 top-2.5 text-indigo-400">
+                                        <FiLock size={18} />
+                                    </span>
+                                    <input
+                                        autoComplete="off"
+                                        id="password"
+                                        name="password"
+                                        type={showPassword ? "text" : "password"}
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        className="pl-10 pr-10 py-2 w-full rounded-lg bg-gray-900 border border-gray-700 text-indigo-100 placeholder-gray-500 focus:outline-none focus:border-indigo-500 text-base"
+                                        placeholder="Password"
+                                        required
+                                        minLength="5"
+                                    />
+                                    <span
+                                        className="absolute right-3 top-2.5 text-indigo-400 hover:text-indigo-300 cursor-pointer"
+                                        onClick={handlePasswordToggle}
+                                    >
+                                        {!showPassword ? (
+                                            <AiFillEye size={18} />
+                                        ) : (
+                                            <AiFillEyeInvisible size={18} />
+                                        )}
+                                    </span>
+                                </div>
+                                <div className="text-xs text-gray-500 text-center">
+                                    By continuing, you agree to SSG&apos;s Terms of Use and Privacy Policy.
+                                </div>
+                                <button
+                                    className="w-full bg-gradient-to-r from-indigo-600 to-indigo-400 hover:from-indigo-700 hover:to-indigo-500 text-white font-semibold py-2.5 rounded-lg shadow-lg transition-all uppercase tracking-wide text-base"
+                                    type="submit"
+                                >
+                                    Log in
+                                </button>
+                            </form>
+                            <div className="flex flex-col gap-2 mt-4">
                                 <Link
                                     to="/forgot-password"
-                                    className=" text-green-700 font-[500] text-[12px] "
+                                    className="text-indigo-400 hover:text-indigo-300 text-xs text-center font-medium transition"
                                 >
-                                    Forgot Password ?
+                                    Forgot Password?
                                 </Link>
-                            </div>
-                            <div className="relative mt-4 w-full text-center">
                                 <Link
                                     to="/register"
-                                    className="text-green-700 font-[500] text-[12px] "
+                                    className="text-indigo-400 hover:text-indigo-300 text-xs text-center font-medium transition"
                                 >
                                     New to SSG? Create an account
                                 </Link>
                             </div>
                         </div>
                     </div>
-                </div >
+                </div>
             )}
         </>
     );
