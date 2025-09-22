@@ -120,7 +120,7 @@ const Login = () => {
                                     <span>
                                         Admin <br />
                                     </span>
-                                    username - store@flipkart.com <br />
+                                    username - store@ssg.com <br />
                                     password - admin123
                                 </p>*/}
                                 </div>
@@ -204,7 +204,7 @@ const Login = () => {
                                         <div className="text-[9px] text-slate-500 ">
                                             <p>
                                                 By continuing, you agree to
-                                                Flipkart&apos;s Terms of Use and
+                                                SSG&apos;s Terms of Use and
                                                 Privacy Policy.
                                             </p>
                                         </div>
@@ -231,7 +231,7 @@ const Login = () => {
                                     to="/register"
                                     className="text-green-700 font-[500] text-[12px] "
                                 >
-                                    New to Flipkart? Create an account
+                                    New to SSG? Create an account
                                 </Link>
                             </div>
                         </div>

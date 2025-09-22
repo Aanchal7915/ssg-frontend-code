@@ -26,28 +26,21 @@ const AllProducts = () => {
                         },
                     }
                 );
-                // console.log(res.data.products);
-
                 res.status === 201 && setProducts(res.data.products);
                 setLoading(false);
             } catch (error) {
                 console.error("Error fetching data:", error);
                 setLoading(false);
-
-                //server error
                 error.response?.status === 500 &&
                     toast.error(
                         "Something went wrong! Please try after sometime."
                     );
             }
         };
-        //initial call to fetch data from server
         fetchData();
     }, [auth.token]);
-    //update products details on client side after deletion
     const updateDeletedProduct = (id) => {
         setProducts((prevProducts) => {
-            // Filter out the deleted product from the previous products
             return prevProducts.filter((product) => product._id !== id);
         });
     };
@@ -98,7 +91,7 @@ const AllProducts = () => {
                 return (
                     <>
                         {params.row.stock < 10 ? (
-                            <span className="font-[500] text-red-700 rounded-full bg-red-200 p-1 w-6 h-6 flex items-center justify-center">
+                            <span className="font-[500] text-red-400 rounded-full bg-red-900/40 p-1 w-6 h-6 flex items-center justify-center">
                                 {params.row.stock}
                             </span>
                         ) : (
@@ -187,7 +180,7 @@ const AllProducts = () => {
         });
     });
     return (
-        <div className="relative p-2 w-full h-screen">
+        <div className="relative p-2 w-full min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 text-gray-100">
             <SeoData title="All Products - Flipkart Seller" />
 
             {loading ? (
@@ -195,17 +188,17 @@ const AllProducts = () => {
             ) : (
                 <div className="h-full">
                     <div className="flex justify-between items-center p-2">
-                        <h1 className="text-[16px] font-[600] uppercase">
+                        <h1 className="text-[16px] font-[600] uppercase text-indigo-300">
                             products
                         </h1>
                         <Link
                             to="/admin/dashboard/add-product"
-                            className="py-2 px-4 rounded shadow font-[500] text-white bg-primaryBlue hover:shadow-lg"
+                            className="py-2 px-4 rounded shadow font-[500] text-white bg-gradient-to-r from-indigo-600 to-indigo-400 border-2 border-indigo-400 hover:shadow-lg transition-all duration-300"
                         >
                             New Product
                         </Link>
                     </div>
-                    <div className="w-full h-[90%]">
+                    <div className="w-full h-[90%] bg-gradient-to-br from-gray-900/80 via-gray-800/80 to-gray-950/80 border border-gray-800 rounded-xl shadow">
                         <DataGrid
                             rows={rows}
                             columns={columns}
@@ -214,6 +207,33 @@ const AllProducts = () => {
                                     paginationModel: {
                                         pageSize: 10,
                                     },
+                                },
+                            }}
+                            sx={{
+                                color: "#e0e7ef",
+                                background: "transparent",
+                                border: "none",
+                                "& .MuiDataGrid-cell": {
+                                    borderColor: "#23272f",
+                                    background: "transparent",
+                                },
+                                "& .MuiDataGrid-columnHeaders": {
+                                    background: "#23272f",
+                                    color: "#a5b4fc",
+                                    fontWeight: 600,
+                                },
+                                "& .MuiDataGrid-footerContainer": {
+                                    background: "#23272f",
+                                    color: "#a5b4fc",
+                                },
+                                "& .MuiTablePagination-root": {
+                                    color: "#a5b4fc",
+                                },
+                                "& .MuiDataGrid-row": {
+                                    background: "transparent",
+                                },
+                                "& .MuiDataGrid-selectedRowCount": {
+                                    color: "#a5b4fc",
                                 },
                             }}
                             pageSizeOptions={[10]}

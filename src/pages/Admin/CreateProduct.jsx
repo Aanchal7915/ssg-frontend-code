@@ -200,10 +200,10 @@ const CreateProduct = () => {
                 <form
                     onSubmit={newProductSubmitHandler}
                     encType="multipart/form-data"
-                    className="flex flex-col w-full sm:flex-row bg-white rounded-lg shadow p-4"
+                    className="flex flex-col w-full sm:flex-row bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 rounded-lg shadow-xl p-4 border border-gray-800 text-gray-100"
                     id="mainForm"
                 >
-                    <div className="flex flex-col mx-auto py-2 gap-3 m-2 w-[90%] ">
+                    <div className="flex flex-col mx-auto py-2 gap-3 m-2 w-[90%]">
                         <TextField
                             label="Name"
                             variant="outlined"
@@ -211,6 +211,16 @@ const CreateProduct = () => {
                             required
                             value={name}
                             onChange={(e) => setName(e.target.value)}
+                            InputProps={{
+                                style: {
+                                    color: "#e0e7ef",
+                                    background: "#23272f",
+                                    borderRadius: 6,
+                                },
+                            }}
+                            InputLabelProps={{
+                                style: { color: "#6366f1" },
+                            }}
                         />
                         <TextField
                             label="Description"
@@ -221,6 +231,16 @@ const CreateProduct = () => {
                             size="small"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
+                            InputProps={{
+                                style: {
+                                    color: "#e0e7ef",
+                                    background: "#23272f",
+                                    borderRadius: 6,
+                                },
+                            }}
+                            InputLabelProps={{
+                                style: { color: "#6366f1" },
+                            }}
                         />
                         <div className="flex gap-2 justify-between">
                             <TextField
@@ -232,10 +252,18 @@ const CreateProduct = () => {
                                     inputProps: {
                                         min: 0,
                                     },
+                                    style: {
+                                        color: "#e0e7ef",
+                                        background: "#23272f",
+                                        borderRadius: 6,
+                                    },
                                 }}
                                 required
                                 value={price}
                                 onChange={(e) => setPrice(e.target.value)}
+                                InputLabelProps={{
+                                    style: { color: "#6366f1" },
+                                }}
                             />
                             <TextField
                                 label="Discount Price"
@@ -246,12 +274,20 @@ const CreateProduct = () => {
                                     inputProps: {
                                         min: 0,
                                     },
+                                    style: {
+                                        color: "#e0e7ef",
+                                        background: "#23272f",
+                                        borderRadius: 6,
+                                    },
                                 }}
                                 required
                                 value={discountPrice}
                                 onChange={(e) =>
                                     setDiscountPrice(e.target.value)
                                 }
+                                InputLabelProps={{
+                                    style: { color: "#6366f1" },
+                                }}
                             />
                         </div>
                         <div className="flex justify-between gap-4">
@@ -264,6 +300,16 @@ const CreateProduct = () => {
                                 required
                                 value={category}
                                 onChange={(e) => setCategory(e.target.value)}
+                                InputProps={{
+                                    style: {
+                                        color: "#e0e7ef",
+                                        background: "#23272f",
+                                        borderRadius: 6,
+                                    },
+                                }}
+                                InputLabelProps={{
+                                    style: { color: "#6366f1" },
+                                }}
                             >
                                 {categories.map((el, i) => (
                                     <MenuItem value={el} key={i}>
@@ -280,10 +326,18 @@ const CreateProduct = () => {
                                     inputProps: {
                                         min: 0,
                                     },
+                                    style: {
+                                        color: "#e0e7ef",
+                                        background: "#23272f",
+                                        borderRadius: 6,
+                                    },
                                 }}
                                 required
                                 value={stock}
                                 onChange={(e) => setStock(e.target.value)}
+                                InputLabelProps={{
+                                    style: { color: "#6366f1" },
+                                }}
                             />
                             <TextField
                                 label="Warranty"
@@ -294,15 +348,23 @@ const CreateProduct = () => {
                                     inputProps: {
                                         min: 0,
                                     },
+                                    style: {
+                                        color: "#e0e7ef",
+                                        background: "#23272f",
+                                        borderRadius: 6,
+                                    },
                                 }}
                                 required
                                 value={warranty}
                                 onChange={(e) => setWarranty(e.target.value)}
+                                InputLabelProps={{
+                                    style: { color: "#6366f1" },
+                                }}
                             />
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <div className="flex justify-between items-center border rounded">
+                            <div className="flex justify-between items-center border border-gray-700 rounded bg-gray-900">
                                 <input
                                     value={highlightInput}
                                     onChange={(e) =>
@@ -310,11 +372,11 @@ const CreateProduct = () => {
                                     }
                                     type="text"
                                     placeholder="Highlight"
-                                    className="px-2 flex-1 outline-none border-none"
+                                    className="px-2 flex-1 outline-none border-none bg-transparent text-indigo-200"
                                 />
                                 <span
                                     onClick={() => addHighlight()}
-                                    className="py-2 px-6 bg-primaryBlue text-white rounded-r hover:shadow-lg cursor-pointer"
+                                    className="py-2 px-6 bg-indigo-600 text-white rounded-r hover:shadow-lg cursor-pointer transition-all duration-200"
                                 >
                                     Add
                                 </span>
@@ -324,14 +386,14 @@ const CreateProduct = () => {
                                 {highlights.map((h, i) => (
                                     <div
                                         key={i}
-                                        className="flex justify-between rounded items-center py-1 px-2 bg-green-50"
+                                        className="flex justify-between rounded items-center py-1 px-2 bg-green-900/30 border border-green-700"
                                     >
-                                        <p className="text-green-800 text-sm font-medium">
+                                        <p className="text-green-300 text-sm font-medium">
                                             {h}
                                         </p>
                                         <span
                                             onClick={() => deleteHighlight(i)}
-                                            className="text-red-600 hover:bg-red-100 p-1 rounded-full cursor-pointer"
+                                            className="text-red-400 hover:bg-red-900/40 p-1 rounded-full cursor-pointer transition-all duration-200"
                                         >
                                             <DeleteIcon />
                                         </span>
@@ -340,7 +402,7 @@ const CreateProduct = () => {
                             </div>
                         </div>
 
-                        <h2 className="font-medium">Brand Details</h2>
+                        <h2 className="font-medium text-indigo-300">Brand Details</h2>
                         <div className="flex flex-col sm:flex-row justify-between gap-4 items-start">
                             <TextField
                                 label="Brand"
@@ -350,10 +412,20 @@ const CreateProduct = () => {
                                 required
                                 value={brand}
                                 onChange={(e) => setBrand(e.target.value)}
+                                InputProps={{
+                                    style: {
+                                        color: "#e0e7ef",
+                                        background: "#23272f",
+                                        borderRadius: 6,
+                                    },
+                                }}
+                                InputLabelProps={{
+                                    style: { color: "#6366f1" },
+                                }}
                             />
-                            <div className="w-24 h-10 flex items-center justify-center border rounded-lg relative">
+                            <div className="w-24 h-10 flex items-center justify-center border border-gray-700 rounded-lg relative bg-gray-900">
                                 {!logoPreview ? (
-                                    <ImageIcon />
+                                    <ImageIcon className="text-indigo-400" />
                                 ) : (
                                     <img
                                         draggable="false"
@@ -369,7 +441,7 @@ const CreateProduct = () => {
                                     </span>
                                 </span>
                             </div>
-                            <label className="rounded bg-primaryBlue text-center cursor-pointer text-white py-2 px-2.5 shadow hover:shadow-lg">
+                            <label className="rounded bg-indigo-600 text-center cursor-pointer text-white py-2 px-2.5 shadow hover:shadow-lg transition-all duration-200">
                                 <input
                                     type="file"
                                     name="logo"
@@ -381,9 +453,9 @@ const CreateProduct = () => {
                             </label>
                         </div>
 
-                        <h2 className="font-medium">
+                        <h2 className="font-medium text-indigo-300">
                             Specifications{" "}
-                            <span className="text-xs text-gray-500">
+                            <span className="text-xs text-gray-400">
                                 (at least 2 required)
                             </span>
                         </h2>
@@ -397,6 +469,16 @@ const CreateProduct = () => {
                                 placeholder="Model No."
                                 variant="outlined"
                                 size="small"
+                                InputProps={{
+                                    style: {
+                                        color: "#e0e7ef",
+                                        background: "#23272f",
+                                        borderRadius: 6,
+                                    },
+                                }}
+                                InputLabelProps={{
+                                    style: { color: "#6366f1" },
+                                }}
                             />
                             <TextField
                                 value={specsInput.description}
@@ -406,10 +488,20 @@ const CreateProduct = () => {
                                 placeholder="WJDK42DF5"
                                 variant="outlined"
                                 size="small"
+                                InputProps={{
+                                    style: {
+                                        color: "#e0e7ef",
+                                        background: "#23272f",
+                                        borderRadius: 6,
+                                    },
+                                }}
+                                InputLabelProps={{
+                                    style: { color: "#6366f1" },
+                                }}
                             />
                             <span
                                 onClick={() => addSpecs()}
-                                className="py-2 px-6 bg-primaryBlue text-white rounded hover:shadow-lg cursor-pointer"
+                                className="py-2 px-6 bg-indigo-600 text-white rounded hover:shadow-lg cursor-pointer transition-all duration-200"
                             >
                                 Add
                             </span>
@@ -419,15 +511,15 @@ const CreateProduct = () => {
                             {specs.map((spec, i) => (
                                 <div
                                     key={i}
-                                    className="flex justify-between gap-2 sm:gap-5 items-center text-sm rounded bg-blue-50 py-1 px-2"
+                                    className="flex justify-between gap-2 sm:gap-5 items-center text-sm rounded bg-blue-900/30 border border-blue-700 py-1 px-2"
                                 >
-                                    <p className="text-gray-500 font-medium">
+                                    <p className="text-indigo-300 font-medium">
                                         {spec.title}
                                     </p>
-                                    <p>{spec.description}</p>
+                                    <p className="text-gray-200">{spec.description}</p>
                                     <span
                                         onClick={() => deleteSpec(i)}
-                                        className="text-red-600 hover:bg-red-200 bg-red-100 p-1 rounded-full cursor-pointer"
+                                        className="text-red-400 hover:bg-red-900/40 bg-red-900/20 p-1 rounded-full cursor-pointer transition-all duration-200"
                                     >
                                         <DeleteIcon />
                                     </span>
@@ -435,13 +527,13 @@ const CreateProduct = () => {
                             ))}
                         </div>
 
-                        <h2 className="font-medium">
+                        <h2 className="font-medium text-indigo-300">
                             Product Images{" "}
-                            <span className="ml-2 text-xs text-gray-500">
+                            <span className="ml-2 text-xs text-gray-400">
                                 (1-4 images, max 500KB each)
                             </span>
                         </h2>
-                        <div className="flex gap-2 overflow-x-auto h-32 border rounded">
+                        <div className="flex gap-2 overflow-x-auto h-32 border border-gray-700 rounded bg-gray-900">
                             {imagesPreview.map((image, i) => (
                                 <img
                                     draggable="false"
@@ -452,7 +544,7 @@ const CreateProduct = () => {
                                 />
                             ))}
                         </div>
-                        <label className="rounded font-medium bg-primaryBlue text-center cursor-pointer text-white p-2 shadow hover:shadow-lg my-2">
+                        <label className="rounded font-medium bg-indigo-600 text-center cursor-pointer text-white p-2 shadow hover:shadow-lg my-2 transition-all duration-200">
                             <input
                                 type="file"
                                 name="images"
@@ -468,7 +560,7 @@ const CreateProduct = () => {
                             <input
                                 form="mainForm"
                                 type="submit"
-                                className="bg-orange uppercase w-full p-3 text-white font-medium rounded shadow hover:shadow-lg cursor-pointer"
+                                className="bg-gradient-to-r from-orange-600 to-yellow-500 border-2 border-yellow-400 hover:from-orange-700 hover:to-yellow-600 uppercase w-full p-3 text-white font-medium rounded shadow-lg cursor-pointer transition-all duration-200"
                                 value="Submit"
                             />
                         </div>

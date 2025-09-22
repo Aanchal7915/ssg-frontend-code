@@ -6,37 +6,40 @@ import { useAuth } from "../../context/auth"; // Adjust path as needed
 
 // Delivery Agent Card (memoized)
 const AgentCard = React.memo(({ agent, onEdit, onDelete, onViewOrders }) => (
-    <div className="border rounded-md p-4 mb-4 bg-white shadow flex flex-col gap-2">
+    <div className="border border-gray-800 rounded-xl p-4 mb-4 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 shadow flex flex-col gap-2 text-gray-100">
         <div className="flex justify-between items-center">
             <div>
-                <span className="font-bold text-lg">{agent.name}</span>
-                <span className="ml-2 text-gray-500">{agent.phone}</span>
+                <span className="font-bold text-lg text-indigo-300">{agent.name}</span>
+                <span className="ml-2 text-gray-400">{agent.phone}</span>
             </div>
             <div className="flex gap-2">
                 <button
-                    className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+                    className="px-3 py-1 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition-all"
                     onClick={() => onEdit(agent)}
                 >
                     Edit
                 </button>
                 <button
-                    className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+                    className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition-all"
                     onClick={() => onDelete(agent._id)}
                 >
                     Delete
                 </button>
                 <button
-                    className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
+                    className="px-3 py-1 bg-gray-800 text-indigo-200 rounded hover:bg-gray-700 transition-all"
                     onClick={() => onViewOrders(agent)}
                 >
                     Orders
                 </button>
             </div>
         </div>
-        <div className="text-sm text-gray-600">Email: {agent.email}</div>
-        <div className="text-sm text-gray-600">Address: {agent.address}</div>
-        <div className="text-sm text-gray-600">
-            Status: {agent.isActive ? "Active" : "Inactive"}
+        <div className="text-sm text-gray-400">Email: {agent.email}</div>
+        <div className="text-sm text-gray-400">Address: {agent.address}</div>
+        <div className="text-sm">
+            Status:{" "}
+            <span className={agent.isActive ? "text-green-400" : "text-red-400"}>
+                {agent.isActive ? "Active" : "Inactive"}
+            </span>
         </div>
     </div>
 ));
@@ -78,10 +81,10 @@ const AgentForm = React.memo(({ initial, onSave, onCancel }) => {
     );
 
     return (
-        <form className="bg-white p-4 rounded shadow mb-4" onSubmit={handleSubmit}>
+        <form className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 p-4 rounded-xl shadow border border-gray-800 mb-4 text-gray-100" onSubmit={handleSubmit}>
             <button
                 type="button"
-                className="mb-4 px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 flex items-center"
+                className="mb-4 px-3 py-1 bg-gray-800 text-indigo-200 rounded hover:bg-gray-700 flex items-center transition-all"
                 onClick={onCancel}
             >
                 ← Back
@@ -93,7 +96,7 @@ const AgentForm = React.memo(({ initial, onSave, onCancel }) => {
                     onChange={handleChange}
                     placeholder="Agent Name"
                     required
-                    className="border p-2 rounded"
+                    className="border border-gray-700 p-2 rounded bg-gray-900 text-indigo-200"
                 />
                 <input
                     name="phone"
@@ -101,7 +104,7 @@ const AgentForm = React.memo(({ initial, onSave, onCancel }) => {
                     onChange={handleChange}
                     placeholder="Phone"
                     required
-                    className="border p-2 rounded"
+                    className="border border-gray-700 p-2 rounded bg-gray-900 text-indigo-200"
                 />
                 <input
                     name="email"
@@ -109,7 +112,7 @@ const AgentForm = React.memo(({ initial, onSave, onCancel }) => {
                     onChange={handleChange}
                     placeholder="Email"
                     required
-                    className="border p-2 rounded"
+                    className="border border-gray-700 p-2 rounded bg-gray-900 text-indigo-200"
                 />
                 <input
                     name="address"
@@ -117,13 +120,13 @@ const AgentForm = React.memo(({ initial, onSave, onCancel }) => {
                     onChange={handleChange}
                     placeholder="Address"
                     required
-                    className="border p-2 rounded"
+                    className="border border-gray-700 p-2 rounded bg-gray-900 text-indigo-200"
                 />
                 <select
                     name="status"
                     value={form.status}
                     onChange={handleChange}
-                    className="border p-2 rounded"
+                    className="border border-gray-700 p-2 rounded bg-gray-900 text-indigo-200"
                 >
                     <option value="Active">Active</option>
                     <option value="Inactive">Inactive</option>
@@ -132,13 +135,13 @@ const AgentForm = React.memo(({ initial, onSave, onCancel }) => {
             <div className="flex gap-2 mt-4">
                 <button
                     type="submit"
-                    className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+                    className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-all"
                 >
                     Save
                 </button>
                 <button
                     type="button"
-                    className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+                    className="px-4 py-2 bg-gray-700 text-indigo-200 rounded hover:bg-gray-800 transition-all"
                     onClick={onCancel}
                 >
                     Cancel
@@ -150,44 +153,44 @@ const AgentForm = React.memo(({ initial, onSave, onCancel }) => {
 
 // Orders List for Agent (memoized)
 const AgentOrders = React.memo(({ agent, orders, onBack }) => (
-    <div className="bg-white p-4 rounded shadow mb-4">
+    <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 p-4 rounded-xl shadow border border-gray-800 mb-4 text-gray-100">
         <button
             type="button"
-            className="mb-4 px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 flex items-center"
+            className="mb-4 px-3 py-1 bg-gray-800 text-indigo-200 rounded hover:bg-gray-700 flex items-center transition-all"
             onClick={onBack}
         >
             ← Back
         </button>
-        <h3 className="text-xl font-bold mb-4">
+        <h3 className="text-xl font-bold mb-4 text-indigo-300">
             Orders for {agent.name}
         </h3>
         <div className="grid grid-cols-1 gap-4">
             {orders.length === 0 ? (
-                <div className="text-gray-500">No orders found.</div>
+                <div className="text-gray-400">No orders found.</div>
             ) : (
                 orders.map((order) => (
-                    <div key={order._id} className="border rounded p-3 bg-gray-50">
+                    <div key={order._id} className="border border-gray-700 rounded p-3 bg-gray-900 text-gray-100">
                         <div className="flex justify-between">
-                            <span className="font-semibold">Order #{order._id}</span>
+                            <span className="font-semibold text-indigo-200">Order #{order._id}</span>
                             <span
                                 className={`px-2 py-1 rounded text-xs ${
                                     order.status === "Pending"
-                                        ? "bg-yellow-100 text-yellow-800"
+                                        ? "bg-yellow-900 text-yellow-300"
                                         : order.status === "Delivered"
-                                        ? "bg-green-100 text-green-800"
-                                        : "bg-red-100 text-red-800"
+                                        ? "bg-green-900 text-green-300"
+                                        : "bg-red-900 text-red-300"
                                 }`}
                             >
                                 {order.status}
                             </span>
                         </div>
-                        <div className="text-sm text-gray-600">
+                        <div className="text-sm text-gray-400">
                             Customer: {order.customerName}
                         </div>
-                        <div className="text-sm text-gray-600">
+                        <div className="text-sm text-gray-400">
                             Total: ₹{order.total}
                         </div>
-                        <div className="text-xs text-gray-400">
+                        <div className="text-xs text-gray-500">
                             {new Date(order.createdAt).toLocaleString()}
                         </div>
                     </div>
@@ -351,8 +354,8 @@ const Delivery = () => {
     }, []);
 
     return (
-        <div className="max-w-3xl mx-auto py-8 p-2">
-            <h2 className="text-2xl font-bold mb-6">Manage Delivery Agents</h2>
+        <div className=" mx-auto py-8 p-2 min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 text-gray-100">
+            <h2 className="text-2xl font-bold mb-6 text-indigo-300">Manage Delivery Agents</h2>
             {loading && <div className="text-center py-4">Loading...</div>}
             {!loading && (
                 <>
@@ -374,13 +377,13 @@ const Delivery = () => {
                     ) : (
                         <>
                             <button
-                                className="mb-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-600"
+                                className="mb-4 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition-all"
                                 onClick={handleAddNew}
                             >
                                 + Add New Agent
                             </button>
                             {memoizedAgents.length === 0 ? (
-                                <div className="text-gray-500">No agents found.</div>
+                                <div className="text-gray-400">No agents found.</div>
                             ) : (
                                 memoizedAgents.map((agent) => (
                                     <AgentCard

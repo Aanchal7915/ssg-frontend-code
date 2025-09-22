@@ -79,43 +79,43 @@ const UpdateOrders = () => {
             <SeoData title="Order Details | Flipkart" />
 
             <MinCategory />
-            <main className="w-full py-2 sm:py-8">
+            <main className="w-full py-2 sm:py-8 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 min-h-screen text-gray-100">
                 {loading ? (
                     <Spinner />
                 ) : (
                     <>
                         <div className="flex flex-col gap-4 max-w-6xl mx-auto">
-                            <div className="flex flex-col sm:flex-row bg-white shadow rounded-sm min-w-full">
-                                <div className="sm:w-1/2 border-r">
+                            <div className="flex flex-col sm:flex-row bg-gradient-to-br from-gray-900/80 via-gray-800/80 to-gray-950/80 shadow rounded-xl min-w-full border border-gray-800">
+                                <div className="sm:w-1/2 border-r border-gray-800">
                                     <div className="flex flex-col gap-3 my-8 mx-10">
-                                        <h3 className=" text-md font-[600]">
+                                        <h3 className="text-md font-[600] text-indigo-300">
                                             Delivery Address
                                         </h3>
-                                        <h4 className="font-medium">
+                                        <h4 className="font-medium text-indigo-200">
                                             {buyer?.name}
                                         </h4>
-                                        <p className="text-sm">{`${shippingInfo?.address}, ${shippingInfo?.city}, ${shippingInfo?.state} - ${shippingInfo?.pincode}`}</p>
+                                        <p className="text-sm text-gray-300">{`${shippingInfo?.address}, ${shippingInfo?.city}, ${shippingInfo?.state} - ${shippingInfo?.pincode}`}</p>
                                         <div className="flex gap-2 text-sm">
-                                            <p className="font-medium">Email</p>
-                                            <p>{buyer?.email}</p>
+                                            <p className="font-medium text-indigo-300">Email</p>
+                                            <p className="text-gray-300">{buyer?.email}</p>
                                         </div>
                                         <div className="flex gap-2 text-sm">
-                                            <p className="font-medium">
+                                            <p className="font-medium text-indigo-300">
                                                 Phone Number
                                             </p>
-                                            <p>{shippingInfo?.phoneNo}</p>
+                                            <p className="text-gray-300">{shippingInfo?.phoneNo}</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="w-full sm:w-1/2">
                                     <div className="flex flex-col gap-5 my-8 mx-10">
                                         <div className="flex items-center justify-between">
-                                            <h3 className=" text-md font-[600]">
+                                            <h3 className="text-md font-[600] text-indigo-300">
                                                 Update Status
                                             </h3>
                                             <Link
                                                 to="/admin/orders"
-                                                className="ml-1 flex items-center gap-0 font-medium text-primaryBlue uppercase"
+                                                className="ml-1 flex items-center gap-0 font-medium text-indigo-400 uppercase"
                                             >
                                                 <ArrowBackIosIcon
                                                     sx={{ fontSize: "14px" }}
@@ -133,10 +133,10 @@ const UpdateOrders = () => {
                                                 className="flex flex-col gap-3 items-start justify-between"
                                             >
                                                 <div className="flex gap-2">
-                                                    <p className="text-sm font-medium">
+                                                    <p className="text-sm font-medium text-indigo-300">
                                                         Current Status:
                                                     </p>
-                                                    <p className="text-sm">
+                                                    <p className="text-sm text-gray-300">
                                                         {orderStatus}
                                                     </p>
                                                 </div>
@@ -144,7 +144,7 @@ const UpdateOrders = () => {
                                                     fullWidth
                                                     sx={{ marginTop: 1 }}
                                                 >
-                                                    <InputLabel id="order-status-select-label">
+                                                    <InputLabel id="order-status-select-label" sx={{ color: "#6366f1" }}>
                                                         Status
                                                     </InputLabel>
                                                     <Select
@@ -157,7 +157,12 @@ const UpdateOrders = () => {
                                                                 e.target.value
                                                             )
                                                         }
-                                                        className="w-[50%]"
+                                                        className="w-[50%] text-indigo-200"
+                                                        sx={{
+                                                            color: "#e0e7ef",
+                                                            background: "#23272f",
+                                                            borderRadius: 2,
+                                                        }}
                                                     >
                                                         <MenuItem
                                                             value={"Shipped"}
@@ -182,7 +187,7 @@ const UpdateOrders = () => {
                                                 </FormControl>
                                                 <button
                                                     type="submit"
-                                                    className="bg-orange px-4 py-2 text-[14px] text-white hover:font-medium rounded shadow hover:shadow-lg"
+                                                    className="bg-gradient-to-r from-orange-600 to-yellow-500 border-2 border-yellow-400 hover:from-orange-700 hover:to-yellow-600 px-4 py-2 text-[14px] text-white hover:font-medium rounded shadow hover:shadow-lg transition-all duration-300"
                                                 >
                                                     Update
                                                 </button>
@@ -205,20 +210,20 @@ const UpdateOrders = () => {
 
                                 return (
                                     <div
-                                        className="flex flex-col sm:flex-row min-w-full shadow rounded-sm bg-white px-2 py-5"
+                                        className="flex flex-col sm:flex-row min-w-full shadow rounded-xl bg-gradient-to-br from-gray-900/80 via-gray-800/80 to-gray-950/80 px-2 py-5 border border-gray-800"
                                         key={_id}
                                     >
                                         <div className="flex flex-col sm:flex-row sm:w-1/2 gap-2">
                                             <div className="w-full sm:w-32 h-20">
                                                 <img
                                                     draggable="false"
-                                                    className="h-full w-full object-contain"
+                                                    className="h-full w-full object-contain rounded"
                                                     src={image}
                                                     alt={name}
                                                 />
                                             </div>
                                             <div className="flex flex-col gap-1 overflow-hidden">
-                                                <p className="text-sm">
+                                                <p className="text-sm text-indigo-200 font-medium">
                                                     {name.length > 60
                                                         ? `${name.substring(
                                                               0,
@@ -226,19 +231,19 @@ const UpdateOrders = () => {
                                                           )}...`
                                                         : name}
                                                 </p>
-                                                <p className="text-xs text-gray-600 mt-2">
+                                                <p className="text-xs text-gray-400 mt-2">
                                                     Quantity: {quantity}
                                                 </p>
-                                                <p className="text-xs text-gray-600">
+                                                <p className="text-xs text-gray-400">
                                                     Seller: {seller?.name}
                                                 </p>
-                                                <span className="font-medium">
+                                                <span className="font-medium text-indigo-300">
                                                     ₹
                                                     {(
                                                         quantity * (price-discountPrice)
                                                     ).toLocaleString()}
                                                 </span>
-                                                <span className="text-xs text-gray-600">
+                                                <span className="text-xs text-gray-400">
                                                     Payment Id: {paymentId}
                                                 </span>
                                             </div>

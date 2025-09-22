@@ -18,20 +18,15 @@ const OrderDetails = () => {
     const { auth } = useAuth();
 
     useEffect(() => {
-        // fetch order detail from server
         const fetchOrders = async () => {
             try {
                 setLoading(true);
                 const response = await axios.get(
-                    `${import.meta.env.VITE_SERVER_URL
-                    }/api/v1/user/order-detail?orderId=${orderId}`,
+                    `${import.meta.env.VITE_SERVER_URL}/api/v1/user/order-detail?orderId=${orderId}`,
                     {
-                        headers: {
-                            Authorization: auth?.token,
-                        },
+                        headers: { Authorization: auth?.token },
                     }
                 );
-                console.log(...response.data.orderDetails);
                 if (response?.data?.orderDetails) {
                     setOrderDetails(...response.data.orderDetails);
                     setLoading(false);
@@ -57,130 +52,109 @@ const OrderDetails = () => {
             <SeoData title="Order Details | Flipkart" />
 
             <MinCategory />
-            <main className="w-full py-2 sm:py-8">
+            <main className="w-full py-2 sm:py-8 bg-gray-900 text-gray-200">
                 {loading ? (
                     <Spinner />
                 ) : (
-                    <>
-                        <div className="flex flex-col gap-4 max-w-6xl mx-auto">
-                            <div className="flex flex-col sm:flex-row bg-white shadow rounded-sm min-w-full">
-                                <div className="sm:w-1/2 border-r">
-                                    <div className="flex flex-col gap-3 my-8 mx-10">
-                                        <h3 className=" text-md font-[600]">
-                                            Delivery Address
-                                        </h3>
-                                        <h4 className="font-medium">
-                                            {buyer?.name}
-                                        </h4>
-                                        <p className="text-sm">{`${shippingInfo?.address}, ${shippingInfo?.city}, ${shippingInfo?.state} - ${shippingInfo?.pincode}`}</p>
-                                        <div className="flex gap-2 text-sm">
-                                            <p className="font-medium">Email</p>
-                                            <p>{buyer?.email}</p>
-                                        </div>
-                                        <div className="flex gap-2 text-sm">
-                                            <p className="font-medium">
-                                                Phone Number
-                                            </p>
-                                            <p>{shippingInfo?.phoneNo}</p>
-                                        </div>
+                    <div className="flex flex-col gap-4 max-w-6xl mx-auto">
+                        <div className="flex flex-col sm:flex-row bg-gray-800 shadow rounded-sm min-w-full border border-gray-700">
+                            <div className="sm:w-1/2 border-r border-gray-700">
+                                <div className="flex flex-col gap-3 my-8 mx-10">
+                                    <h3 className="text-md font-[600] text-indigo-300">
+                                        Delivery Address
+                                    </h3>
+                                    <h4 className="font-medium text-gray-100">
+                                        {buyer?.name}
+                                    </h4>
+                                    <p className="text-sm text-gray-300">{`${shippingInfo?.address}, ${shippingInfo?.city}, ${shippingInfo?.state} - ${shippingInfo?.pincode}`}</p>
+                                    <div className="flex gap-2 text-sm">
+                                        <p className="font-medium text-gray-200">Email</p>
+                                        <p className="text-gray-300">{buyer?.email}</p>
                                     </div>
-                                </div>
-                                <div className="w-full sm:w-1/2">
-                                    <div className="flex flex-col gap-3 my-8 mx-10">
-                                        <h3 className=" text-md font-[600]">
-                                            More Actions
-                                        </h3>
-                                        <div className="flex items-center justify-between">
-                                            <button
-                                                onClick={() => generateInvoice({orderItems, buyer, shippingInfo, createdAt})}
-                                                className="px-4 py-2 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition-all"
-                                            >
-                                                Download Invoice
-                                            </button>
-                                        </div>
+                                    <div className="flex gap-2 text-sm">
+                                        <p className="font-medium text-gray-200">
+                                            Phone Number
+                                        </p>
+                                        <p className="text-gray-300">{shippingInfo?.phoneNo}</p>
                                     </div>
                                 </div>
                             </div>
+                            <div className="w-full sm:w-1/2">
+                                <div className="flex flex-col gap-3 my-8 mx-10">
+                                    <h3 className="text-md font-[600] text-indigo-300">
+                                        More Actions
+                                    </h3>
+                                    <div className="flex items-center justify-between">
+                                        <button
+                                            onClick={() => generateInvoice({orderItems, buyer, shippingInfo, createdAt})}
+                                            className="px-4 py-2 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition-all"
+                                        >
+                                            Download Invoice
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                            {orderItems?.map((item) => {
-                                const {
-                                    _id,
-                                    image,
-                                    name,
-                                    discountPrice,
-                                    quantity,
-                                    seller,
-                                    price
-                                } = item;
+                        {orderItems?.map((item) => {
+                            const {_id, image, name, discountPrice, quantity, seller, price } = item;
 
-                                return (
-                                    <div
-                                        className="flex flex-col sm:flex-row min-w-full shadow rounded-sm bg-white px-2 py-5"
-                                        key={_id}
-                                    >
-                                        <div className="flex flex-col sm:flex-row sm:w-1/2 gap-2">
-                                            <div className="w-full sm:w-32 h-20">
-                                                <img
-                                                    draggable="false"
-                                                    className="h-full w-full object-contain"
-                                                    src={image}
-                                                    alt={name}
-                                                />
-                                            </div>
-                                            <div className="flex flex-col gap-1 overflow-hidden">
-                                                <p className="text-sm">
-                                                    {name.length > 60
-                                                        ? `${name.substring(
-                                                            0,
-                                                            60
-                                                        )}...`
-                                                        : name}
-                                                </p>
-                                                <p className="text-xs text-gray-600 mt-2">
-                                                    Quantity: {quantity}
-                                                </p>
-                                                <p className="text-xs text-gray-600">
-                                                    Seller: {seller?.name}
-                                                </p>
-                                                <span className="font-medium">
-                                                    ₹
-                                                    {(
-                                                        quantity * price
-                                                    ).toLocaleString()}
-                                                </span>
-                                                <span className="text-xs text-gray-600">
-                                                    Payment Id: {paymentId}
-                                                </span>
-                                                <span className="text-xs text-gray-600">
-                                                    Order Date:{" "}
-                                                    {new Date(
-                                                        createdAt
-                                                    ).toDateString()}
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                        <div className="flex flex-col w-full sm:w-1/2">
-                                            <Tracker
-                                                orderOn={createdAt}
-                                                activeStep={
-                                                    orderStatus === "Delivered"
-                                                        ? 3
-                                                        : orderStatus ===
-                                                            "Out For Delivery"
-                                                            ? 2
-                                                            : orderStatus ===
-                                                                "Shipped"
-                                                                ? 1
-                                                                : 0
-                                                }
+                            return (
+                                <div
+                                    className="flex flex-col sm:flex-row min-w-full shadow rounded-sm bg-gray-800 border border-gray-700 px-2 py-5"
+                                    key={_id}
+                                >
+                                    <div className="flex flex-col sm:flex-row sm:w-1/2 gap-2">
+                                        <div className="w-full sm:w-32 h-20">
+                                            <img
+                                                draggable="false"
+                                                className="h-full w-full object-contain"
+                                                src={image}
+                                                alt={name}
                                             />
                                         </div>
+                                        <div className="flex flex-col gap-1 overflow-hidden">
+                                            <p className="text-sm text-gray-100">
+                                                {name.length > 60
+                                                    ? `${name.substring(0, 60)}...`
+                                                    : name}
+                                            </p>
+                                            <p className="text-xs text-gray-400 mt-2">
+                                                Quantity: {quantity}
+                                            </p>
+                                            <p className="text-xs text-gray-400">
+                                                Seller: {seller?.name}
+                                            </p>
+                                            <span className="font-medium text-gray-100">
+                                                ₹{(quantity * price).toLocaleString()}
+                                            </span>
+                                            <span className="text-xs text-gray-400">
+                                                Payment Id: {paymentId}
+                                            </span>
+                                            <span className="text-xs text-gray-400">
+                                                Order Date: {new Date(createdAt).toDateString()}
+                                            </span>
+                                        </div>
                                     </div>
-                                );
-                            })}
-                        </div>
-                    </>
+
+                                    <div className="flex flex-col w-full sm:w-1/2">
+                                        <Tracker
+                                            orderOn={createdAt}
+                                            activeStep={
+                                                orderStatus === "Delivered"
+                                                    ? 3
+                                                    : orderStatus === "Out For Delivery"
+                                                        ? 2
+                                                        : orderStatus === "Shipped"
+                                                            ? 1
+                                                            : 0
+                                            }
+                                        />
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
                 )}
             </main>
         </>

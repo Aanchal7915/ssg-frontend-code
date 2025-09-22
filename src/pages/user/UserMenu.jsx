@@ -75,7 +75,7 @@ const UserMenu = ({ toggleMenu }) => {
                                 Manage Addresses
                             </div>
                         </NavLink>
-                        <NavLink
+                        {/* <NavLink
                             to="./pan"
                             onClick={scrollToTop}
                             className={({ isActive }) =>
@@ -87,7 +87,7 @@ const UserMenu = ({ toggleMenu }) => {
                             <div className="h-[40px] px-[60px] flex items-center hover:text-indigo-400 hover:bg-gray-800 rounded">
                                 Pan Card
                             </div>
-                        </NavLink>
+                        </NavLink> */}
                     </div>
                 </div>
 
@@ -125,7 +125,7 @@ const UserMenu = ({ toggleMenu }) => {
                                 My Wishlist
                             </div>
                         </NavLink>
-                        <NavLink
+                        {/* <NavLink
                             to="./payment-cards"
                             onClick={scrollToTop}
                             className={({ isActive }) =>
@@ -137,7 +137,7 @@ const UserMenu = ({ toggleMenu }) => {
                             <div className="h-[40px] px-[60px] flex items-center hover:text-indigo-400 hover:bg-gray-800 rounded">
                                 Saved Cards
                             </div>
-                        </NavLink>
+                        </NavLink> */}
                         <NavLink
                             to="./user-review"
                             onClick={scrollToTop}
