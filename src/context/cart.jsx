@@ -1,3 +1,5 @@
+//TODO: fix clearcartItem
+
 import { useContext, createContext, useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -72,10 +74,25 @@ const CartProvider = ({ children }) => {
         updateServerCart({ product: product.productId, type: "remove", list: "savedForLater" });
     };
 
+    const clearCartItems=async()=>{
+         try {
+            const res = await axios.post(
+                `${import.meta.env.VITE_SERVER_URL}/api/v1/user/clear-cart`,
+                { headers: { Authorization: auth.token } }
+            );
+            console.log("Updated cart later:", res.data);
+            setCartItems([]);
+        } catch (err) {
+            console.error(err);
+            // toast.error("Something went wrong!");
+        }
+        
+    }
+
     return (
         <CartContext.Provider value={[
             cartItems,
-            setCartItems,
+            clearCartItems,
             addItems,
             removeItems,
             saveLaterItems,

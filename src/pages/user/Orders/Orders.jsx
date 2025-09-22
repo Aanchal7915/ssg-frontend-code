@@ -41,7 +41,7 @@ const Orders = () => {
 
     return (
         <>
-            <SeoData title="My Orders | Flipkart" />
+            <SeoData title="My Orders | SSG" />
             <MinCategory />
             <main className="w-full min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 px-4 sm:px-10 py-4 text-gray-100">
                 <div className="flex gap-3.5 w-full">

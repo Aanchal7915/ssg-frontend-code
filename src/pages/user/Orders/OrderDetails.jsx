@@ -49,10 +49,10 @@ const OrderDetails = () => {
 
     return (
         <>
-            <SeoData title="Order Details | Flipkart" />
+            <SeoData title="Order Details | SSG" />
 
             <MinCategory />
-            <main className="w-full py-2 sm:py-8 bg-gray-900 text-gray-200">
+            <main className="w-full h-[90vh] py-2 sm:py-8 bg-gray-900 text-gray-200 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950">
                 {loading ? (
                     <Spinner />
                 ) : (

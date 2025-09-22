@@ -16,21 +16,39 @@ const categories = [
 
 const MinCategory = () => {
     return (
-        <section className="hidden sm:block bg-white w-full px-2 sm:p-0 overflow-hidden border-b">
-            <div className="flex items-center justify-between p-0.5">
+        <section className="hidden sm:block w-full px-2 sm:p-0 overflow-hidden border-b border-gray-800 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 shadow">
+            <div
+                className="flex items-center gap-1 p-0.5 overflow-x-auto scrollbar-hide"
+                style={{
+                    WebkitOverflowScrolling: "touch",
+                    scrollbarWidth: "none",
+                    msOverflowStyle: "none",
+                }}
+            >
                 {categories.map((el, i) => (
                     <Link
-                        to="/products"
+                        to={`/products?category=${el}`}
                         key={i}
-                        className="text-sm p-2 text-gray-800 font-medium hover:text-primaryBlue flex items-center gap-0.5 group"
+                        className="text-xs sm:text-sm px-2 py-2 text-indigo-200 font-semibold hover:text-yellow-300 flex items-center gap-0.5 group rounded-lg transition-all duration-150 hover:bg-gray-800/60 whitespace-nowrap"
                     >
                         {el}
-                        <span className="text-gray-400 group-hover:text-primaryBlue group-hover:rotate-180 transition-all ease-out">
+                        <span className="text-indigo-400 group-hover:text-yellow-300 group-hover:rotate-180 transition-all ease-out">
                             <ExpandMoreIcon sx={{ fontSize: "16px" }} />
                         </span>
                     </Link>
                 ))}
             </div>
+            <style>
+                {`
+                .scrollbar-hide::-webkit-scrollbar {
+                    display: none;
+                }
+                .scrollbar-hide {
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
+                }
+                `}
+            </style>
         </section>
     );
 };
