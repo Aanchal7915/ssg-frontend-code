@@ -5,7 +5,7 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import { GiCrossMark } from "react-icons/gi";
 
-const AdminMenu = ({ toggleMenu }) => {
+const UserMenu = ({ toggleMenu }) => {
     const { auth, setAuth, LogOut } = useAuth();
     const navigate = useNavigate();
     const handleLogout = () => {
@@ -20,7 +20,7 @@ const AdminMenu = ({ toggleMenu }) => {
     };
     return (
         <div className="flex flex-col gap-4 w-full">
-            <div className="flex relative items-start gap-4 p-3 bg-white rounded-sm shadow-md">
+            <div className="flex gap-4 p-3 bg-white rounded-sm shadow-md">
                 <img
                     src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/profile-pic-male_4811a1.svg"
                     alt="user svg"
@@ -28,7 +28,7 @@ const AdminMenu = ({ toggleMenu }) => {
 
                 <div className="flex flex-col justify-center p-1">
                     <div className="text-[14px]">Hello,</div>
-                    <div className="font-[600] text-[16px] ">
+                    <div className="font-[600] text-[16px]">
                         {auth?.user?.name}
                     </div>
                 </div>
@@ -40,7 +40,7 @@ const AdminMenu = ({ toggleMenu }) => {
                 </div>
             </div>
 
-            <div className="bg-white flex flex-col justify-center rounded-sm sm:shadow-md overflow-y-auto">
+            <div className="bg-white flex flex-col justify-center rounded-sm sm:shadow-md">
                 <div className="flex flex-col justify-center border-b-[1px]">
                     <div className="flex flex-row items-center gap-6 pl-[10px] py-[8px]">
                         <PersonIcon className="text-primaryBlue text-[16px]" />
@@ -102,7 +102,7 @@ const AdminMenu = ({ toggleMenu }) => {
                     </div>
                     <div className="flex flex-col  text-black font-[300] text-[14px] mb-2 mt-0 ">
                         <NavLink
-                            to="/admin/orders "
+                            to="/user/orders "
                             onClick={scrollToTop}
                             className={({ isActive }) =>
                                 isActive
@@ -111,12 +111,12 @@ const AdminMenu = ({ toggleMenu }) => {
                             }
                         >
                             <div className=" h-[40px] px-[60px] flex items-center hover:text-primaryBlue hover:bg-[#f1f3f5]">
-                                Orders
+                                My Orders
                             </div>
                         </NavLink>
 
                         <NavLink
-                            to="./delivery"
+                            to="/user/wishlist"
                             onClick={scrollToTop}
                             className={({ isActive }) =>
                                 isActive
@@ -125,12 +125,12 @@ const AdminMenu = ({ toggleMenu }) => {
                             }
                         >
                             <div className=" h-[40px] px-[60px] flex items-center hover:text-primaryBlue hover:bg-[#f1f3f5]">
-                                Delivery
+                                My Wishlist
                             </div>
                         </NavLink>
 
                         <NavLink
-                            to="./all-products"
+                            to="./payment-cards"
                             onClick={scrollToTop}
                             className={({ isActive }) =>
                                 isActive
@@ -139,12 +139,12 @@ const AdminMenu = ({ toggleMenu }) => {
                             }
                         >
                             <div className=" h-[40px] px-[60px] flex items-center hover:text-primaryBlue hover:bg-[#f1f3f5]">
-                                Products
+                                Saved Cards
                             </div>
                         </NavLink>
 
                         <NavLink
-                            to="./add-product"
+                            to="./user-review"
                             onClick={scrollToTop}
                             className={({ isActive }) =>
                                 isActive
@@ -153,21 +153,7 @@ const AdminMenu = ({ toggleMenu }) => {
                             }
                         >
                             <div className=" h-[40px] px-[60px] flex items-center hover:text-primaryBlue hover:bg-[#f1f3f5]">
-                                Add Product
-                            </div>
-                        </NavLink>
-
-                        <NavLink
-                            to="./users"
-                            onClick={scrollToTop}
-                            className={({ isActive }) =>
-                                isActive
-                                    ? "font-[600] text-primaryBlue bg-[#f1f3f5]"
-                                    : ""
-                            }
-                        >
-                            <div className=" h-[40px] px-[60px] flex items-center hover:text-primaryBlue hover:bg-[#f1f3f5]">
-                                Users
+                                My Reviews
                             </div>
                         </NavLink>
                     </div>
@@ -190,7 +176,7 @@ const AdminMenu = ({ toggleMenu }) => {
                     </span>
                     <div className="flex gap-2.5 text-xs text-gray-500">
                         <Link to="/forgot-password">Change Password</Link>
-                        <Link to="/admin/orders">Track Order</Link>
+                        <Link to="/user/orders">Track Order</Link>
                         <Link to="/">Help Center</Link>
                     </div>
                 </div>
@@ -199,4 +185,4 @@ const AdminMenu = ({ toggleMenu }) => {
     );
 };
 
-export default AdminMenu;
+export default UserMenu;

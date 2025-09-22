@@ -5,10 +5,13 @@ import { getDeliveryDate, getDiscount } from "../../../utils/functions";
 import { Link } from "react-router-dom";
 import { useCart } from "../../../context/cart";
 import { useState } from "react";
+import RemoveIcon from "@mui/icons-material/Remove";
+import AddIcon from "@mui/icons-material/Add";
+import SaveIcon from "@mui/icons-material/BookmarkBorder";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const CartItem = ({ product, inCart }) => {
     const [, , addItems, removeItems, , addLater] = useCart();
-    // console.log(product);
     const [quantity, setQuantity] = useState(product?.quantity);
 
     const increaseQuantity = (product) => {
@@ -37,10 +40,7 @@ const CartItem = ({ product, inCart }) => {
     };
 
     const saveForLaterHandler = (product) => {
-        // dispatch(saveForLater(id));
         addLater(product);
-        // console.log("Save for later clicked");
-        // enqueueSnackbar("Saved For Later", { variant: "success" });
     };
 
     return (
@@ -49,7 +49,7 @@ const CartItem = ({ product, inCart }) => {
                 to={`/product/${product?.productId}`}
                 className="flex flex-col sm:flex-row gap-5 items-stretch w-full "
             >
-                {/* <!-- product image --> */}
+                {/* product image */}
                 <div className="w-full sm:w-1/6 h-28 flex-shrink-0">
                     <img
                         draggable="false"
@@ -58,11 +58,8 @@ const CartItem = ({ product, inCart }) => {
                         alt={product?.name}
                     />
                 </div>
-                {/* <!-- product image --> */}
-
-                {/* <!-- description --> */}
+                {/* description */}
                 <div className="flex flex-col sm:gap-5 w-full ">
-                    {/* <!-- product title --> */}
                     <div className="flex flex-col sm:flex-row justify-between items-start pr-5 gap-1 sm:gap-0">
                         <div className="flex flex-col gap-0.5 group sm:w-3/5">
                             <p className="group-hover:text-primaryBlue">
@@ -74,7 +71,6 @@ const CartItem = ({ product, inCart }) => {
                                 Seller: {product?.brandName}
                             </span>
                         </div>
-
                         <div className="flex flex-col sm:gap-2 w-[50%]">
                             <p className="text-sm">
                                 Delivery by {getDeliveryDate()} |{" "}
@@ -83,9 +79,6 @@ const CartItem = ({ product, inCart }) => {
                             </p>
                         </div>
                     </div>
-                    {/* <!-- product title --> */}
-
-                    {/* <!-- price desc --> */}
                     <div className="flex items-baseline gap-2 text-xl font-medium">
                         <span className="text-sm text-gray-500 line-through font-normal">
                             ₹
@@ -99,7 +92,6 @@ const CartItem = ({ product, inCart }) => {
                                (product?.price - product?.discountPrice) * product?.quantity
                             ).toLocaleString()}
                         </span>
-
                         <span className="text-sm font-[600] text-primaryGreen">
                             {getDiscount(
                                 product?.price,
@@ -108,52 +100,51 @@ const CartItem = ({ product, inCart }) => {
                             %&nbsp;off
                         </span>
                     </div>
-                    {/* <!-- price desc --> */}
                 </div>
-                {/* <!-- description --> */}
             </Link>
-
-            {/* <!-- save for later --> */}
             <div className="flex justify-between pr-4 sm:pr-0 sm:justify-start sm:gap-6">
-                {/* <!-- quantity --> */}
+                {/* quantity */}
                 <div className="flex gap-2 items-center justify-between w-[130px]">
-                    <span
+                    <button
                         onClick={() => decreaseQuantity(product)}
-                        className="w-7 h-7 text-3xl font-light select-none bg-gray-50 rounded-full border flex items-center justify-center cursor-pointer hover:bg-gray-200"
+                        className="w-7 h-7 flex items-center justify-center rounded-full border border-gray-700 bg-gray-900 text-indigo-300 hover:bg-indigo-950 transition-all duration-200"
+                        aria-label="Decrease"
                     >
-                        <p>-</p>
-                    </span>
+                        <RemoveIcon fontSize="small" />
+                    </button>
                     <input
-                        className="w-11 border outline-none text-center select-none rounded-sm py-0.5 text-gray-700 font-medium text-sm qtyInput"
+                        className="w-11 border border-gray-700 outline-none text-center select-none rounded-sm py-0.5 bg-gray-900 text-indigo-200 font-medium text-sm qtyInput"
                         value={quantity}
                         disabled
                     />
-                    <span
+                    <button
                         onClick={() => increaseQuantity(product)}
-                        className="w-7 h-7 text-xl font-light select-none bg-gray-50 rounded-full border flex items-center justify-center cursor-pointer hover:bg-gray-200"
+                        className="w-7 h-7 flex items-center justify-center rounded-full border border-gray-700 bg-gray-900 text-indigo-300 hover:bg-indigo-950 transition-all duration-200"
+                        aria-label="Increase"
                     >
-                        +
-                    </span>
+                        <AddIcon fontSize="small" />
+                    </button>
                 </div>
-                {/* <!-- quantity --> */}
+                {/* save for later & remove */}
                 {inCart && (
                     <>
                         <button
                             onClick={() => saveForLaterHandler(product)}
-                            className="sm:ml-4 font-medium hover:text-primaryBlue"
+                            className="sm:ml-4 font-medium text-indigo-400 hover:text-indigo-300 flex items-center gap-1 border border-indigo-500 rounded px-3 py-1 transition-all duration-200 bg-gray-900 hover:bg-indigo-950 shadow"
                         >
+                            <SaveIcon sx={{ fontSize: "18px" }} />
                             SAVE FOR LATER
                         </button>
                         <button
                             onClick={() => removeCartItem(product)}
-                            className="font-medium hover:text-red-600"
+                            className="font-medium text-red-400 hover:text-red-300 flex items-center gap-1 border border-red-500 rounded px-3 py-1 transition-all duration-200 bg-gray-900 hover:bg-red-950 shadow"
                         >
+                            <DeleteIcon sx={{ fontSize: "18px" }} />
                             REMOVE
                         </button>
                     </>
                 )}
             </div>
-            {/* <!-- save for later --> */}
         </div>
     );
 };

@@ -157,7 +157,7 @@ const Header = () => {
                                                 to={`${
                                                     auth?.user?.role === 1
                                                         ? "/admin"
-                                                        : "/user"
+                                                        : auth?.user?.role === 0?"/user":"/delivery-agent"
                                                 }/dashboard`}
                                                 className="flex items-center gap-3"
                                             >

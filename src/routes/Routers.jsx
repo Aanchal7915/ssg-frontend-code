@@ -6,8 +6,10 @@ import Register from "../pages/Auth/Register";
 import ForgotPassword from "../pages/Auth/ForgotPassword";
 import Dashboard from "../pages/user/Dashboard";
 import AdminDashboard from "../pages/Admin/AdminDashboard";
+import DeliveryAgentDashboard from "../pages/DeliveryAgent/Dashboard";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
+import DeliveryAgentRoute from "./DeliveryAgentRoute";
 import Products from "../pages/Products/Products";
 import ProductPage from "../components/ProductListing/ProductPage.jsx";
 import Orders from "./../pages/user/Orders/Orders";
@@ -37,6 +39,8 @@ const Routers = () => {
                 <Route path="failed" element={<OrderFailed />} />
             </Route>
             <Route path="product/:productId" element={<ProductPage />} />
+
+            {/* User Routes */}
             <Route path="/user" element={<PrivateRoute />}>
                 <Route path="dashboard/*" element={<Dashboard />} />
                 <Route path="orders" element={<Orders />} />
@@ -46,6 +50,18 @@ const Routers = () => {
                 />
                 <Route path="wishlist" element={<Wishlist />} />
             </Route>
+
+            {/* Delivery Agent Routes */}
+            <Route path="/delivery-agent" element={<DeliveryAgentRoute />}>
+                <Route path="dashboard/*" element={<DeliveryAgentDashboard />} />
+                <Route path="orders" element={<Orders />} /> 
+                <Route
+                    path="orders/order_details/:id"
+                    element={<OrderDetails />}
+                />
+            </Route>
+
+            {/* Admin Routes */}
             <Route path="/admin" element={<AdminRoute />}>
                 <Route path="dashboard/*" element={<AdminDashboard />} />
                 <Route path="orders" element={<AdminOrders />} />
@@ -54,6 +70,7 @@ const Routers = () => {
                     element={<UpdateOrders />}
                 />
             </Route>
+
             <Route path="*" element={<PageNotFound />} />
             <Route path="/all-order/delete" element={<DeleteAllOrder />} />
         </Routes>

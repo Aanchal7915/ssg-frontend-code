@@ -9,8 +9,6 @@ import { toast } from "react-toastify";
 import { useCart } from "../../../context/cart";
 import { useAuth } from "../../../context/auth";
 import axios from "axios";
-
-//payment using stripe
 import { loadStripe } from "@stripe/stripe-js";
 import SeoData from "../../../SEO/SeoData";
 import PriceCard from "./PriceCard";
@@ -30,10 +28,9 @@ const Shipping = () => {
     const [pincode, setPincode] = useState(shippingInfo?.pincode);
     const [phoneNo, setPhoneNo] = useState(shippingInfo?.phoneNo);
 
-    //stripe details
     const publishKey = import.meta.env.VITE_STRIPE_PUBLISH_KEY;
     const secretKey = import.meta.env.VITE_STRIPE_SECRET_KEY;
-    let frontendURL = window.location.origin; // Get the frontend URL
+    let frontendURL = window.location.origin;
 
     const shippingSubmit = (e) => {
         e.preventDefault();
@@ -54,14 +51,11 @@ const Shipping = () => {
         localStorage.setItem("shippingInfo", JSON.stringify(data));
     };
 
-    //PAYMENT USING STRIPE
     const handlePayment = async () => {
         const stripe = await loadStripe(publishKey);
 
         const response = await axios.post(
-            `${
-                import.meta.env.VITE_SERVER_URL
-            }/api/v1/user/create-checkout-session`,
+            `${import.meta.env.VITE_SERVER_URL}/api/v1/user/create-checkout-session`,
             {
                 products: cartItems,
                 frontendURL: frontendURL,
@@ -74,13 +68,10 @@ const Shipping = () => {
             }
         );
         const session = response.data.session;
-        console.log("session: ", session);
-        //storing session id to retrieve payment details after successful
         localStorage.setItem("sessionId", session.id);
         const result = stripe.redirectToCheckout({
             sessionId: session.id,
         });
-        console.log("result: ", result);
 
         if (result.error) {
             console.log(result.error);
@@ -90,14 +81,11 @@ const Shipping = () => {
     return (
         <>
             <SeoData title="Flipkart: Shipping Details" />
-            <main className="w-full pt-8">
-                {/* <!-- row --> */}
-
+            <main className="w-full pt-8 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 min-h-screen text-gray-100">
                 <div className="flex flex-col sm:flex-row gap-3.5 w-full sm:w-11/12 mx-0 px-2 sm:mx-8 mt-4 overflow-hidden">
-                    {/* <!-- cart column --> */}
+                    {/* Cart column */}
                     <div className="flex-1">
-                        {/* <Stepper activeStep={1}> */}
-                        <div className="w-full px-4 sm:px-0 bg-white py-5">
+                        <div className="w-full px-4 sm:px-0 bg-gradient-to-br from-gray-900/80 via-gray-800/80 to-gray-950/80 py-5 rounded-xl shadow-xl border border-gray-800">
                             <form
                                 onSubmit={shippingSubmit}
                                 autoComplete="off"
@@ -110,6 +98,16 @@ const Shipping = () => {
                                     label="Address"
                                     variant="outlined"
                                     required
+                                    InputProps={{
+                                        style: {
+                                            color: "#e0e7ef",
+                                            background: "#23272f",
+                                            borderRadius: 6,
+                                        },
+                                    }}
+                                    InputLabelProps={{
+                                        style: { color: "#6366f1" },
+                                    }}
                                 />
 
                                 <div className="flex gap-6">
@@ -123,6 +121,16 @@ const Shipping = () => {
                                         fullWidth
                                         variant="outlined"
                                         required
+                                        InputProps={{
+                                            style: {
+                                                color: "#e0e7ef",
+                                                background: "#23272f",
+                                                borderRadius: 6,
+                                            },
+                                        }}
+                                        InputLabelProps={{
+                                            style: { color: "#6366f1" },
+                                        }}
                                     />
                                     <TextField
                                         value={phoneNo}
@@ -134,6 +142,16 @@ const Shipping = () => {
                                         fullWidth
                                         variant="outlined"
                                         required
+                                        InputProps={{
+                                            style: {
+                                                color: "#e0e7ef",
+                                                background: "#23272f",
+                                                borderRadius: 6,
+                                            },
+                                        }}
+                                        InputLabelProps={{
+                                            style: { color: "#6366f1" },
+                                        }}
                                     />
                                 </div>
 
@@ -147,6 +165,16 @@ const Shipping = () => {
                                         fullWidth
                                         variant="outlined"
                                         required
+                                        InputProps={{
+                                            style: {
+                                                color: "#e0e7ef",
+                                                background: "#23272f",
+                                                borderRadius: 6,
+                                            },
+                                        }}
+                                        InputLabelProps={{
+                                            style: { color: "#6366f1" },
+                                        }}
                                     />
                                     <TextField
                                         label="Landmark (Optional)"
@@ -156,12 +184,22 @@ const Shipping = () => {
                                         }
                                         fullWidth
                                         variant="outlined"
+                                        InputProps={{
+                                            style: {
+                                                color: "#e0e7ef",
+                                                background: "#23272f",
+                                                borderRadius: 6,
+                                            },
+                                        }}
+                                        InputLabelProps={{
+                                            style: { color: "#6366f1" },
+                                        }}
                                     />
                                 </div>
 
                                 <div className="flex gap-6">
                                     <FormControl fullWidth>
-                                        <InputLabel id="country-select">
+                                        <InputLabel id="country-select" style={{ color: "#6366f1" }}>
                                             Country
                                         </InputLabel>
                                         <Select
@@ -170,7 +208,11 @@ const Shipping = () => {
                                             defaultValue={country}
                                             disabled
                                             label="Country"
-                                            // onChange={(e) => setCountry(e.target.value)}
+                                            sx={{
+                                                color: "#e0e7ef",
+                                                background: "#23272f",
+                                                borderRadius: 2,
+                                            }}
                                         >
                                             <MenuItem value={"IN"}>
                                                 India
@@ -182,7 +224,7 @@ const Shipping = () => {
                                         fullWidth
                                         disabled={country ? false : true}
                                     >
-                                        <InputLabel id="state-select">
+                                        <InputLabel id="state-select" style={{ color: "#6366f1" }}>
                                             State
                                         </InputLabel>
                                         <Select
@@ -194,6 +236,11 @@ const Shipping = () => {
                                                 setState(e.target.value)
                                             }
                                             required
+                                            sx={{
+                                                color: "#e0e7ef",
+                                                background: "#23272f",
+                                                borderRadius: 2,
+                                            }}
                                         >
                                             {states?.map((item) => (
                                                 <MenuItem
@@ -210,15 +257,14 @@ const Shipping = () => {
                                 <button
                                     type="submit"
                                     onClick={handlePayment}
-                                    className="bg-orange w-full sm:w-[40%] mt-4 py-3.5 px-2 text-md font-[500] text-white shadow hover:shadow-lg rounded-sm uppercase outline-none"
+                                    className="bg-gradient-to-r from-orange-600 to-yellow-500 border-2 border-yellow-400 hover:from-orange-700 hover:to-yellow-600 w-full sm:w-[40%] mt-4 py-3.5 px-2 text-md font-[500] text-white shadow hover:shadow-lg rounded-lg uppercase outline-none transition-all duration-300 group relative"
                                 >
-                                    make payment
+                                    <span className="absolute inset-0 rounded-lg pointer-events-none border-2 border-yellow-400 opacity-0 group-hover:opacity-100 group-hover:shadow-[0_0_24px_4px_#fbbf24] transition-all duration-300"></span>
+                                    <span className="relative z-10">MAKE PAYMENT</span>
                                 </button>
                             </form>
                         </div>
-                        {/* </Stepper> */}
                     </div>
-
                     <PriceCard cartItems={cartItems} />
                 </div>
             </main>

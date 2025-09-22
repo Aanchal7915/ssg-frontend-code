@@ -42,20 +42,17 @@ const Orders = () => {
     return (
         <>
             <SeoData title="My Orders | Flipkart" />
-
             <MinCategory />
-            <main className="w-full px-4 sm:px-10 py-4 ">
-                {/* <!-- row --> */}
-                {/* <!-- orders column --> */}
-                <div className="flex gap-3.5 w-full ">
+            <main className="w-full min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 px-4 sm:px-10 py-4 text-gray-100">
+                <div className="flex gap-3.5 w-full">
                     {loading ? (
                         <Spinner />
                     ) : (
                         <div className="flex flex-col gap-3 w-full pb-5 overflow-hidden">
-                            {/* <!-- searchbar --> */}
+                            {/* searchbar */}
                             <form
                                 // onSubmit={searchOrders}
-                                className="flex items-center justify-between mx-auto w-[100%] sm:w-10/12 bg-white border rounded mb-2 hover:shadow-md"
+                                className="flex items-center justify-between mx-auto w-[100%] sm:w-10/12 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-950 border border-gray-800 rounded-lg mb-2 hover:shadow-md"
                             >
                                 <input
                                     value={search}
@@ -63,11 +60,11 @@ const Orders = () => {
                                     type="search"
                                     name="search"
                                     placeholder="Search your orders here"
-                                    className="p-2 text-sm outline-none flex-1 rounded-l "
+                                    className="p-2 text-sm outline-none flex-1 rounded-l bg-gray-900 text-indigo-200"
                                 />
                                 <button
                                     type="submit"
-                                    className="h-full text-sm px-1 sm:px-4 py-2.5 text-white bg-primaryBlue hover:bg-blue-600 rounded-r flex items-center gap-1"
+                                    className="h-full text-sm px-1 sm:px-4 py-2.5 text-white bg-indigo-600 hover:bg-indigo-700 rounded-r flex items-center gap-1"
                                 >
                                     <SearchIcon sx={{ fontSize: "20px" }} />
                                     <p className="text-[10px] sm:text-[14px]">
@@ -75,24 +72,28 @@ const Orders = () => {
                                     </p>
                                 </button>
                             </form>
-                            {/* <!-- search bar --> */}
+                            {/* search bar */}
 
                             {orders?.length === 0 && (
-                                <div className="flex items-center flex-col gap-2 p-10 bg-white rounded-sm shadow-md">
+                                <div className="flex items-center flex-col gap-2 p-10 bg-gradient-to-br from-gray-900/80 via-gray-800/80 to-gray-950/80 rounded-xl shadow-xl border border-gray-800">
                                     <img
                                         draggable="false"
-                                        src="https://rukminim1.flixcart.com/www/100/100/promos/23/08/2020/c5f14d2a-2431-4a36-b6cb-8b5b5e283d4f.png"
+                                        src="https://cdn-icons-png.flaticon.com/512/2748/2748558.png"
                                         alt="Empty Orders"
+                                        className="w-32 h-32 object-contain mb-2"
                                     />
-                                    <span className="text-lg font-medium">
+                                    <span className="text-lg font-medium text-indigo-300">
                                         Sorry, no orders found
                                     </span>
-                                    <p>Place a new order from here</p>
+                                    <p className="text-sm text-gray-400">
+                                        Place a new order from here
+                                    </p>
                                     <Link
                                         to="/products"
-                                        className="bg-primaryBlue py-2 px-4 mt-1 text-white uppercase shadow hover:shadow-lg rounded-sm text-sm"
+                                        className="bg-gradient-to-r from-indigo-600 to-indigo-400 py-2 px-4 mt-1 text-white uppercase shadow hover:shadow-lg rounded-lg text-sm border-2 border-indigo-400 transition-all duration-300 group relative"
                                     >
-                                        Products
+                                        <span className="absolute inset-0 rounded-lg pointer-events-none border-2 border-indigo-400 opacity-0 group-hover:opacity-100 group-hover:shadow-[0_0_16px_2px_#6366f1] transition-all duration-300"></span>
+                                        <span className="relative z-10">Products</span>
                                     </Link>
                                 </div>
                             )}

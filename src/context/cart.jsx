@@ -43,15 +43,15 @@ const CartProvider = ({ children }) => {
             setSaveLaterItems(res.data.savedForLater || []);
         } catch (err) {
             console.error(err);
-            toast.error("Something went wrong!");
+            // toast.error("Something went wrong!");
         }
     };
 
     const addItems = async (product, quantity = 1) => {
         const isInCart = cartItems.find((item) => item.productId === product.productId);
         await updateServerCart({ product: product.productId, type: "add", list: "cart", quantity, seller: product.seller });
-        if(!isInCart)
-            toast.success("Product Added To Cart", { style:{ top:"40px" } });
+        // if(!isInCart)
+        //     toast.success("Product Added To Cart", { style:{ top:"40px" } });
     };
 
     const removeItems = (product) => {

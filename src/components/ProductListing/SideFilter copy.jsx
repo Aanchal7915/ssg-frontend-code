@@ -29,6 +29,7 @@ const SideFilter = ({
             clearTimeout(debounceTimeout.current);
         }
         debounceTimeout.current = setTimeout(() => {
+            // Round the price values to the nearest multiple of 1000
             let newVal = [
                 Math.round(newPrice[0] / 1000) * 1000,
                 Math.round(newPrice[1] / 1000) * 1000,
@@ -39,6 +40,7 @@ const SideFilter = ({
 
     useEffect(() => {
         return () => {
+            // Clean up the timeout when the component unmounts
             if (debounceTimeout.current) {
                 clearTimeout(debounceTimeout.current);
             }
@@ -53,12 +55,12 @@ const SideFilter = ({
 
     return (
         <div className="hidden sm:flex flex-col w-1/5 px-1">
-            <div className="flex flex-col bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 rounded-xl shadow-xl border border-gray-800 text-gray-100">
-                <div className="flex items-center justify-between gap-5 px-4 py-2 border-b border-gray-800">
-                    <p className="text-lg font-semibold text-indigo-300">Filters</p>
+            <div className="flex flex-col bg-white rounded-sm shadow">
+                <div className="flex items-center justify-between gap-5 px-4 py-2 border-b">
+                    <p className="text-lg font-medium">Filters</p>
                     <span
-                        className="uppercase text-indigo-400 text-xs cursor-pointer font-medium"
-                        onClick={clearFilters}
+                        className="uppercase text-primaryBlue text-xs cursor-pointer font-medium"
+                        onClick={() => clearFilters()}
                     >
                         clear all
                     </span>
@@ -66,8 +68,9 @@ const SideFilter = ({
 
                 <div className="flex flex-col gap-2 py-3 text-sm overflow-hidden">
                     {/* Price slider filter */}
-                    <div className="flex flex-col gap-2 border-b border-gray-800 px-4">
-                        <span className="font-medium text-xs text-indigo-200">PRICE</span>
+                    <div className="flex flex-col gap-2 border-b px-4">
+                        <span className="font-medium text-xs">PRICE</span>
+
                         <Slider
                             value={price}
                             onChange={priceHandler}
@@ -75,42 +78,45 @@ const SideFilter = ({
                             getAriaLabel={() => "Price range slider"}
                             min={0}
                             max={200000}
-                            sx={{
-                                color: "#6366f1",
-                            }}
                         />
+
                         <div className="flex gap-3 items-center mb-2">
-                            <span className="flex-1 min-w-[70px] border border-gray-700 px-4 py-1 rounded-sm text-indigo-300 bg-gray-900">
+                            <span className="flex-1 min-w-[70px] border px-4 py-1 rounded-sm text-gray-800 bg-gray-50">
                                 ₹{price[0].toLocaleString()}
                             </span>
-                            <span className="font-medium text-gray-400">to</span>
-                            <span className="flex-1 min-w-[70px] border border-gray-700 px-4 py-1 rounded-sm text-indigo-300 bg-gray-900">
+                            <span className="font-medium text-gray-400">
+                                to
+                            </span>
+                            <span className="flex-1 min-w-[70px] border px-4 py-1 rounded-sm text-gray-800 bg-gray-50">
                                 ₹{price[1].toLocaleString()}
                             </span>
                         </div>
                     </div>
 
                     {/* Category filter */}
-                    <div className="flex flex-col border-b border-gray-800 px-4">
+                    <div className="flex flex-col border-b px-4">
                         <div
                             className="flex justify-between cursor-pointer py-2 pb-4 items-center"
                             onClick={() => setCategoryToggle(!categoryToggle)}
                         >
-                            <p className="font-medium text-xs uppercase text-indigo-200">
+                            <p className="font-medium text-xs uppercase">
                                 Category
                             </p>
                             {categoryToggle ? (
-                                <ExpandLessIcon sx={{ fontSize: "20px", color: "#6366f1" }} />
+                                <ExpandLessIcon sx={{ fontSize: "20px" }} />
                             ) : (
-                                <ExpandMoreIcon sx={{ fontSize: "20px", color: "#6366f1" }} />
+                                <ExpandMoreIcon sx={{ fontSize: "20px" }} />
                             )}
                         </div>
+
                         {categoryToggle && (
                             <div className="flex flex-col pb-1">
                                 <FormControl>
                                     <RadioGroup
                                         aria-labelledby="category-radio-buttons-group"
-                                        onChange={(e) => setCategory(e.target.value)}
+                                        onChange={(e) =>
+                                            setCategory(e.target.value)
+                                        }
                                         name="category-radio-buttons"
                                         value={category}
                                     >
@@ -118,9 +124,12 @@ const SideFilter = ({
                                             <FormControlLabel
                                                 value={el}
                                                 key={i}
-                                                control={<Radio size="small" sx={{ color: "#6366f1" }} />}
+                                                control={<Radio size="small" />}
                                                 label={
-                                                    <span className="text-sm text-gray-100" key={i}>
+                                                    <span
+                                                        className="text-sm"
+                                                        key={i}
+                                                    >
                                                         {el}
                                                     </span>
                                                 }
@@ -133,26 +142,29 @@ const SideFilter = ({
                     </div>
 
                     {/* Ratings filter */}
-                    <div className="flex flex-col border-b border-gray-800 px-4 -mb-4">
+                    <div className="flex flex-col border-b px-4 -mb-4">
                         <div
                             className="flex justify-between cursor-pointer py-2 pb-4 items-center"
                             onClick={() => setRatingsToggle(!ratingsToggle)}
                         >
-                            <p className="font-medium text-xs uppercase text-indigo-200">
+                            <p className="font-medium text-xs uppercase">
                                 Ratings
                             </p>
                             {ratingsToggle ? (
-                                <ExpandLessIcon sx={{ fontSize: "20px", color: "#6366f1" }} />
+                                <ExpandLessIcon sx={{ fontSize: "20px" }} />
                             ) : (
-                                <ExpandMoreIcon sx={{ fontSize: "20px", color: "#6366f1" }} />
+                                <ExpandMoreIcon sx={{ fontSize: "20px" }} />
                             )}
                         </div>
+
                         {ratingsToggle && (
                             <div className="flex flex-col pb-1">
                                 <FormControl>
                                     <RadioGroup
                                         aria-labelledby="ratings-radio-buttons-group"
-                                        onChange={(e) => setRatings(e.target.value)}
+                                        onChange={(e) =>
+                                            setRatings(e.target.value)
+                                        }
                                         value={ratings}
                                         name="ratings-radio-buttons"
                                     >
@@ -160,18 +172,18 @@ const SideFilter = ({
                                             <FormControlLabel
                                                 value={el}
                                                 key={i}
-                                                control={<Radio size="small" sx={{ color: "#6366f1" }} />}
+                                                control={<Radio size="small" />}
                                                 label={
-                                                    <span className="flex items-center text-sm text-gray-100">
+                                                    <span className="flex items-center text-sm">
                                                         {el}
                                                         <StarIcon
                                                             sx={{
-                                                                fontSize: "12px",
+                                                                fontSize:
+                                                                    "12px",
                                                                 mx: 0.5,
-                                                                color: "#facc15",
                                                             }}
                                                         />
-                                                        &nbsp;and above
+                                                        & above
                                                     </span>
                                                 }
                                             />

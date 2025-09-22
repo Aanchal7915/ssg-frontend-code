@@ -10,9 +10,9 @@ import SeoData from "../../SEO/SeoData";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useEffect, useState } from "react";
 
-const Dashboard = () => {
+const DeliveryAgentDashboard = () => {
     const navigate = useNavigate();
-    const [isMenuOpen, setIsMenuOpen] = useState(false); // State to manage menu visibility
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     useEffect(() => {
         if (window.location.pathname === "/user/dashboard")
@@ -26,51 +26,41 @@ const Dashboard = () => {
     return (
         <>
             <SeoData title="User Dashboard" />
-            <div className=" py-[5px]">
+            <main className="w-full min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 pt-2 pb-8 text-gray-100">
                 <div className="flex items-start justify-between text-[14px] px-2 sm:px-[50px] py-2 sm:py-[40px] gap-5">
                     <div
                         className={`sm:w-[30%] ${
                             isMenuOpen
-                                ? "w-full h-full bg-white relative"
+                                ? "w-full h-full bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 border border-gray-800 rounded-xl shadow-xl relative"
                                 : "hidden"
-                        } sm:inline-block `}
+                        } sm:inline-block`}
                     >
                         <UserMenu toggleMenu={toggleMenu} />
                     </div>
                     <div
-                        className={`w-full sm:w-[70%] bg-white shadow-md rounded-sm ${
+                        className={`w-full sm:w-[70%] bg-gradient-to-br from-gray-900/80 via-gray-800/80 to-gray-950/80 shadow-md rounded-xl border border-gray-800 ${
                             isMenuOpen ? "hidden" : "block"
                         }`}
                     >
                         <button
                             onClick={toggleMenu}
-                            className="sm:hidden text-blue-400 underline rounded px-2 text-lg py-2"
+                            className="sm:hidden text-indigo-400 underline rounded px-2 text-lg py-2"
                         >
                             {isMenuOpen ? "Close" : <GiHamburgerMenu />}
                         </button>
                         <Routes>
-                            {/* <Route path="" element={<UserProfile />} /> */}
                             <Route path="profile" element={<UserProfile />} />
-                            <Route
-                                path="address"
-                                element={<AddressComponent />}
-                            />
+                            <Route path="address" element={<AddressComponent />} />
                             <Route path="pan" element={<PanCardComponent />} />
-                            <Route
-                                path="payment-cards"
-                                element={<PaymentCards />}
-                            />
+                            <Route path="payment-cards" element={<PaymentCards />} />
                             <Route path="user-review" element={<Reviews />} />
-                            <Route
-                                path="profile/deactivate"
-                                element={<Deactivate />}
-                            />
+                            <Route path="profile/deactivate" element={<Deactivate />} />
                         </Routes>
                     </div>
                 </div>
-            </div>
+            </main>
         </>
     );
 };
 
-export default Dashboard;
+export default DeliveryAgentDashboard;

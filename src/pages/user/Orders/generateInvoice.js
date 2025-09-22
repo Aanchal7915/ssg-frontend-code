@@ -22,8 +22,9 @@ const generateInvoice = ({orderItems:order, buyer:customer, shippingInfo:shippin
     doc.setFontSize(12);
     doc.text("Bill To:", 14, 40);
     doc.text(`  Name: ${customer?.name || ""}`, 14, 46);
-    doc.text(`  Email: ${customer.customer?.email || ""}`, 14, 52);
-    doc.text(`  Address: ${shipping?.address || ""}, ${shipping?.city || ""}`, 14, 58);
+    doc.text(`  Email: ${customer?.email || ""}`, 14, 52);
+    doc.text(`  Phone Nu: ${customer?.phone || ""}`, 14, 58);
+    doc.text(`  Address: ${shipping?.address || ""}, ${shipping?.city || ""}`, 14, 64);
 
     // Products table
     const tableColumn = ["Product", "Qty", "Price", "Discount", "Total"];

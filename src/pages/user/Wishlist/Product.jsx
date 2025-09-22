@@ -20,7 +20,6 @@ const Product = (props) => {
     const deleteProduct = async () => {
         setIsDeleting(true);
         try {
-            // Make the delete request here
             await func(_id);
         } catch (error) {
             // Handle any errors if necessary
@@ -28,12 +27,11 @@ const Product = (props) => {
             setIsDeleting(false);
         }
     };
-    // Check if 'images' is defined before rendering
     const shouldRenderImage = images && images.length > 0;
 
     return (
-        <div className="flex gap-4 border-b p-4 sm:pb-8 w-full group overflow-hidden">
-            <div className="w-1/6 h-28 flex-shrink-0">
+        <div className="flex gap-4 p-4 sm:pb-8 w-full group overflow-hidden bg-gradient-to-br from-gray-900/80 via-gray-800/80 to-gray-950/80 rounded-xl shadow border border-gray-800 mb-4">
+            <div className="w-1/6 h-28 flex-shrink-0 bg-gray-900 rounded-lg border border-gray-800 flex items-center justify-center">
                 <img
                     draggable="false"
                     className="h-full w-full object-contain"
@@ -41,23 +39,22 @@ const Product = (props) => {
                     alt={name}
                 />
             </div>
-
-            {/* <!-- description --> */}
+            {/* Description */}
             <div className="flex flex-col gap-5 w-full p-1">
-                {/* <!-- product title --> */}
+                {/* Product title */}
                 <div className="flex justify-between items-start sm:pr-5">
                     <Link
                         to={`/product/${_id}`}
                         className="flex flex-col gap-0.5"
                     >
-                        <p className="group-hover:text-primary-blue w-56 sm:w-full truncate">
+                        <p className="group-hover:text-indigo-400 w-56 sm:w-full truncate font-semibold text-indigo-200">
                             {name?.length > 70
                                 ? `${name?.substring(0, 70)}...`
                                 : name}
                         </p>
-                        {/* <!-- rating badge --> */}
-                        <span className="text-sm text-gray-500 font-medium flex gap-2 items-center">
-                            <span className="text-xs px-1.5 py-0.5 bg-[#22ba20] rounded-sm text-white flex items-center gap-0.5">
+                        {/* Rating badge */}
+                        <span className="text-sm text-gray-400 font-medium flex gap-2 items-center">
+                            <span className="text-xs px-1.5 py-0.5 bg-indigo-600 rounded-sm text-white flex items-center gap-0.5">
                                 {ratings} <StarIcon sx={{ fontSize: "14px" }} />
                             </span>
                             <span>({numOfReviews?.toLocaleString()})</span>
@@ -70,30 +67,27 @@ const Product = (props) => {
                                 />
                             </span>
                         </span>
-                        {/* <!-- rating badge --> */}
                     </Link>
                     <button
                         onClick={deleteProduct}
-                        className="text-gray-400 hover:text-red-500"
+                        className="text-gray-400 hover:text-red-400 border border-gray-700 hover:border-red-400 rounded-lg p-2 transition-all duration-200 bg-gray-900"
+                        disabled={isDeleting}
                     >
-                        <span>
-                            <DeleteIcon />
-                        </span>
+                        <DeleteIcon />
                     </button>
                 </div>
-                {/* <!-- product title --> */}
-
-                {/* <!-- price desc --> */}
+                {/* Price desc */}
                 <div className="flex items-center gap-2 text-2xl font-medium">
-                    <span>₹{discountPrice?.toLocaleString()}</span>
+                    <span className="text-white">
+                        ₹{(price - discountPrice)?.toLocaleString()}
+                    </span>
                     <span className="text-sm text-gray-500 line-through font-normal mt-1">
                         ₹{price?.toLocaleString()}
                     </span>
-                    <span className="text-sm text-[#22ba20] mt-1">
+                    <span className="text-sm text-green-400 mt-1">
                         {getDiscount(price, discountPrice)}%&nbsp;off
                     </span>
                 </div>
-                {/* <!-- price desc --> */}
             </div>
             {/* <!-- description --> */}
         </div>
