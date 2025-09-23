@@ -1,5 +1,7 @@
 import React from "react";
 
+
+
 const products = [
 	{
 		id: 1,
@@ -108,23 +110,23 @@ const partners = [
 	},
 ];
 
-const blogPosts = [
-	{
-		title: "How to Choose the Best Headphones for Your Needs",
-		image: "https://cdn.pixabay.com/photo/2017/01/06/19/15/headphones-1954636_1280.jpg",
-		link: "#",
-	},
-	{
-		title: "Top 5 Tech Gadgets Every Business Needs in 2025",
-		image: "https://cdn.pixabay.com/photo/2016/11/29/09/32/technology-1869236_1280.jpg",
-		link: "#",
-	},
-	{
-		title: "Why Buy Wholesale? The Benefits for Retailers",
-		image: "https://cdn.pixabay.com/photo/2017/08/06/00/03/people-2581913_1280.jpg",
-		link: "#",
-	},
-];
+// const blogPosts = [
+// 	{
+// 		title: "How to Choose the Best Headphones for Your Needs",
+// 		image: "https://cdn.pixabay.com/photo/2017/01/06/19/15/headphones-1954636_1280.jpg",
+// 		link: "#",
+// 	},
+// 	{
+// 		title: "Top 5 Tech Gadgets Every Business Needs in 2025",
+// 		image: "https://cdn.pixabay.com/photo/2016/11/29/09/32/technology-1869236_1280.jpg",
+// 		link: "#",
+// 	},
+// 	{
+// 		title: "Why Buy Wholesale? The Benefits for Retailers",
+// 		image: "https://cdn.pixabay.com/photo/2017/08/06/00/03/people-2581913_1280.jpg",
+// 		link: "#",
+// 	},
+// ];
 
 const Home = () => {
 	return (
@@ -149,14 +151,14 @@ const Home = () => {
 				</div>
 				{/* Hero Content */}
 				<div className="z-10 max-w-xl md:w-1/2 space-y-7 animate-fadeIn">
-					<div className="flex items-center gap-3 mb-2">
+					{/* <div className="flex items-center gap-3 mb-2">
 						<img
 							src="https://cdn-icons-png.flaticon.com/512/1042/1042330.png"
 							alt="logo"
 							className="w-12 h-12 rounded-full shadow-lg border-2 border-indigo-500 bg-gray-900"
 						/>
 						<span className="text-2xl font-bold text-indigo-300 tracking-wide">ElectroWholesale</span>
-					</div>
+					</div> */}
 					<h1 className="text-5xl md:text-6xl font-extrabold text-indigo-200 drop-shadow-lg mb-2 leading-tight">
 						<span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-blue-400 to-indigo-200 animate-gradient">
 							Premium Electronics, Wholesale Prices
@@ -169,8 +171,7 @@ const Home = () => {
 						<span className="bg-blue-700/40 text-blue-200 px-3 py-1 rounded-full text-xs font-semibold shadow animate-pulse">Trusted Support</span>
 					</div>
 					<p className="text-lg md:text-xl text-indigo-200/80 font-medium mt-4">
-						Discover unbeatable deals on headphones, earbuds, smart gadgets, and more. Shop the latest electronics with lightning-fast shipping and dedicated support for your business.
-					</p>
+						We specialize in supplying businesses, retailers, and distributors with the latest products at wholesale prices. With a focus on reliability, quality, and speed, we empower your business to scale without the hassle.</p>
 					<a
 						href="#products"
 						className="inline-block mt-6 px-8 py-3 bg-gradient-to-r from-indigo-600 to-blue-500 text-white font-semibold rounded-full shadow-lg hover:scale-105 hover:bg-indigo-700 transition-all duration-300 animate-bounce"
@@ -202,7 +203,7 @@ const Home = () => {
 			</header>
 
 			{/* Partners/Brands Section */}
-			<section className="py-8 px-4 bg-gradient-to-r from-gray-950 via-gray-900 to-gray-950">
+			{/* <section className="py-8 px-4 bg-gradient-to-r from-gray-950 via-gray-900 to-gray-950">
 				<h3 className="text-xl font-bold text-indigo-200 text-center mb-6">Our Trusted Brands</h3>
 				<div className="flex flex-wrap justify-center gap-8 items-center">
 					{partners.map((brand) => (
@@ -212,7 +213,7 @@ const Home = () => {
 						</div>
 					))}
 				</div>
-			</section>
+			</section> */}
 
 			{/* Animated Banner Section */}
 			<section className="relative py-8 px-4 flex justify-center items-center bg-gradient-to-r from-indigo-900 via-indigo-800 to-blue-900 overflow-hidden">
@@ -239,7 +240,7 @@ const Home = () => {
 					/>
 					<div>
 						<h2 className="text-2xl md:text-3xl font-bold text-indigo-100 mb-2">
-							<span className="text-blue-400">Biggest</span> Electronics Wholesale Platform
+							<span className="text-blue-400">Biggest</span> Wholesale Platform
 						</h2>
 						<p className="text-indigo-300 text-lg">
 							Trusted by 10,000+ businesses. Get exclusive access to the latest tech, unbeatable prices, and a seamless wholesale experience.
@@ -301,8 +302,8 @@ const Home = () => {
 					))}
 				</div>
 			</section>
-
-			{/* Blog/Guides Section */}
+{/* 
+			Blog/Guides Section
 			<section className="py-14 px-6 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950">
 				<h2 className="text-2xl md:text-3xl font-bold text-indigo-200 mb-8 text-center">
 					Latest Guides & Tips
@@ -322,35 +323,71 @@ const Home = () => {
 						</a>
 					))}
 				</div>
-			</section>
+			</section> */}
 
-			{/* About Section */}
-			<section className="py-16 px-6 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 animate-fadeIn">
-				<div className="max-w-4xl mx-auto">
-					<h2 className="text-2xl md:text-3xl font-bold text-indigo-200 mb-6 text-center">
-						Why Choose Us?
-					</h2>
-					<ul className="space-y-4 text-lg text-indigo-300 font-medium">
-						<li className="flex items-center gap-2">
-							<span className="text-indigo-400 text-xl">✓</span> Bulk discounts for wholesalers
-						</li>
-						<li className="flex items-center gap-2">
-							<span className="text-indigo-400 text-xl">✓</span> Latest electronic gadgets
-						</li>
-						<li className="flex items-center gap-2">
-							<span className="text-indigo-400 text-xl">✓</span> Fast shipping & secure payments
-						</li>
-						<li className="flex items-center gap-2">
-							<span className="text-indigo-400 text-xl">✓</span> Dedicated customer support
-						</li>
-						<li className="flex items-center gap-2">
-							<span className="text-indigo-400 text-xl">✓</span> Trusted by 10,000+ businesses
-						</li>
-					</ul>
+			
+      {/* About Section - This section incorporates the JSX you provided */}
+      <section className="py-16 px-6 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 animate-fadeIn">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold text-indigo-200 mb-6 text-center">
+            About Us
+          </h2>
+          {/* Detailed paragraphs to provide more context */}
+          <div className="text-gray-300 text-lg space-y-4 mb-8">
+            <p>
+              We're committed to helping your business thrive. That's why we offer <strong className="text-indigo-400">bulk discounts for wholesalers</strong>, ensuring you get the best possible prices. Our catalog is constantly updated with the <strong className="text-indigo-400">latest electronic gadgets</strong>, so you can provide your customers with the most innovative products on the market.
+            </p>
+            <p>
+              We know that in business, every moment counts. Our <strong className="text-indigo-400">fast shipping & secure payments</strong> options ensure a smooth, worry-free process from order to delivery. Should you have any questions or need assistance, our <strong className="text-indigo-400">dedicated customer support</strong> team is always ready to help. We're here to be your partner, not just another supplier.
+            </p>
+            <p>
+              Our commitment to quality and service has earned the trust of businesses just like yours. We're proud to be <strong className="text-indigo-400">trusted by over 10,000 businesses</strong>—a testament to our reliability and the value we bring to our partners.
+            </p>
+          </div>
+          
+          {/* The list of features you provided */}
+          <ul className="space-y-4 text-lg text-indigo-300 font-medium">
+            <li className="flex items-center gap-2">
+              <span className="text-indigo-400 text-xl">✓</span> Bulk discounts for wholesalers
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="text-indigo-400 text-xl">✓</span> Latest electronic gadgets
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="text-indigo-400 text-xl">✓</span> Fast shipping & secure payments
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="text-indigo-400 text-xl">✓</span> Dedicated customer support
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="text-indigo-400 text-xl">✓</span> Trusted by 10,000+ businesses
+            </li>
+          </ul>
 					{/* Vector Illustration */}
 					<div className="flex justify-center mt-10">
 						<img
-							src="https://cdni.iconscout.com/illustration/premium/thumb/customer-support-2161428-1815212.png"
+							src="/1.jpg"
+							alt="Support Illustration"
+							className="w-72 h-56 object-contain rounded-xl shadow-lg bg-indigo-900/10"
+						/>
+					</div>
+					<div className="flex justify-center mt-10">
+						<img
+							src="/2.jpg"
+							alt="Support Illustration"
+							className="w-72 h-56 object-contain rounded-xl shadow-lg bg-indigo-900/10"
+						/>
+					</div>
+					<div className="flex justify-center mt-10">
+						<img
+							src="/3.jpg"
+							alt="Support Illustration"
+							className="w-72 h-56 object-contain rounded-xl shadow-lg bg-indigo-900/10"
+						/>
+					</div>
+					<div className="flex justify-center mt-10">
+						<img
+							src="/4.jpg"
 							alt="Support Illustration"
 							className="w-72 h-56 object-contain rounded-xl shadow-lg bg-indigo-900/10"
 						/>
@@ -387,7 +424,7 @@ const Home = () => {
 				<div className="flex-1 flex flex-col items-center md:items-start">
 					<h3 className="text-2xl md:text-3xl font-bold text-indigo-100 mb-3">
 						Elevate Your Business with{" "}
-						<span className="text-blue-400">ElectroWholesale</span>
+						<span className="text-blue-400">Wholesale</span>
 					</h3>
 					<p className="text-indigo-300 text-lg mb-4">
 						Get exclusive access to the latest tech, unbeatable prices, and a seamless wholesale experience.
@@ -413,7 +450,7 @@ const Home = () => {
 			</section>
 
 			{/* Footer */}
-			<footer className="py-8 bg-gradient-to-r from-indigo-900 via-indigo-800 to-blue-900 text-indigo-100 text-center animate-slideUp">
+			{/* <footer className="py-8 bg-gradient-to-r from-indigo-900 via-indigo-800 to-blue-900 text-indigo-100 text-center animate-slideUp">
 				<p className="text-lg font-medium">
 					&copy; {new Date().getFullYear()} ElectroWholesale. All rights reserved.
 				</p>
@@ -422,7 +459,7 @@ const Home = () => {
 					<a href="#" className="hover:text-blue-400 transition">Privacy Policy</a>
 					<a href="#" className="hover:text-blue-400 transition">Terms of Service</a>
 				</div>
-			</footer>
+			</footer> */}
 
 			{/* Animations */}
 			<style>

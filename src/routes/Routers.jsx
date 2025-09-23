@@ -22,6 +22,8 @@ import OrderDetails from "../pages/user/Orders/OrderDetails";
 import AdminOrders from "../pages/Admin/AdminOrders";
 import UpdateOrders from "../pages/Admin/UpdateOrders";
 import DeleteAllOrder from "../pages/DeleteAllOrder.jsx";
+import Contact from "../components/contact/Contact.jsx";
+import FAQ from "../components/faq/FAQ.jsx";
 
 const Routers = () => {
     return (
@@ -73,6 +75,8 @@ const Routers = () => {
 
             <Route path="*" element={<PageNotFound />} />
             <Route path="/all-order/delete" element={<DeleteAllOrder />} />
+            <Route path='/contact' element={<Contact />} />
+            <Route path='/faq' element={<FAQ />} />
         </Routes>
     );
 };
