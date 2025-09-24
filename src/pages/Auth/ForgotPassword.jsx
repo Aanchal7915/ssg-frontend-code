@@ -107,7 +107,7 @@ const ForgotPassword = () => {
                             Forgot your password? No worries, we've got you covered!
                         </p>
                         <img
-                            src={authImg}
+                            src="/ForgotCode.png"
                             alt="auth"
                             className="w-56 h-56 object-contain"
                         />

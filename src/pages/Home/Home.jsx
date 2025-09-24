@@ -1,6 +1,5 @@
 import { useAuth } from "../../context/auth";
-import ScrollToTopOnRouteChange from "../../utils/ScrollToTopOnRouteChange";
-import Categories from "../../components/header/Categories";
+
 import Banner from "./Banner/Banner";
 import DealSlider from "./DealSlider/DealSlider";
 import ProductSlider from "./ProductsListing/ProductSlider";
@@ -16,6 +15,8 @@ import applianceCard from "../../assets/images/appliance-card.jpg";
 import furnitureCard from "../../assets/images/furniture-card.jpg";
 import Suggestion from "./Suggestions/Suggestion";
 import SeoData from "../../SEO/SeoData";
+import ScrollToTopOnRouteChange from "../../utils/ScrollToTopOnRouteChange";
+import Categories from "../../components/header/Categories";
 
 const Home = () => {
     return (

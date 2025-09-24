@@ -1,11 +1,10 @@
 import TextField from "@mui/material/TextField";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MenuItem from "@mui/material/MenuItem";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import ImageIcon from "@mui/icons-material/Image";
-import { categories } from "../../utils/constants";
 import Spinner from "../../components/Spinner";
 import axios from "axios";
 import FormData from "form-data";
@@ -13,9 +12,34 @@ import { useAuth } from "../../context/auth";
 import ScrollToTopOnRouteChange from "./../../utils/ScrollToTopOnRouteChange";
 import SeoData from "../../SEO/SeoData";
 
+const menuProps = {
+    PaperProps: {
+        sx: {
+            bgcolor: "#23272f",
+            color: "#e0e7ef",
+            "& .MuiMenuItem-root": {
+                "&.Mui-selected": {
+                    bgcolor: "#6366f1",
+                    color: "#fff",
+                },
+                "&:hover": {
+                    bgcolor: "#3730a3",
+                    color: "#fff",
+                },
+            },
+        },
+    },
+};
+
 const CreateProduct = () => {
     const { auth } = useAuth();
     const navigate = useNavigate();
+
+    // Category & Subcategory state
+    const [categoryList, setCategoryList] = useState([]);
+    const [category, setCategory] = useState("");
+    const [subcategory, setSubcategory] = useState("");
+    const [subcategoryList, setSubcategoryList] = useState([]);
 
     const [highlights, setHighlights] = useState([]);
     const [highlightInput, setHighlightInput] = useState("");
@@ -29,22 +53,39 @@ const CreateProduct = () => {
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState();
     const [discountPrice, setDiscountPrice] = useState();
-    const [category, setCategory] = useState("");
     const [stock, setStock] = useState();
     const [warranty, setWarranty] = useState();
     const [brand, setBrand] = useState("");
     const [images, setImages] = useState([]);
     const [imagesPreview, setImagesPreview] = useState([]);
-
     const [logo, setLogo] = useState("");
     const [logoPreview, setLogoPreview] = useState("");
-
-    //for submit state
     const [isSubmit, setIsSubmit] = useState(false);
 
-    // max image size 500kb
     const MAX_IMAGE_SIZE = 500 * 1024;
-    const MAX_IMAGES_COUNT = 4; // Maximum number of allowed images
+    const MAX_IMAGES_COUNT = 4;
+
+    // Fetch categories and subcategories from backend
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const res = await axios.get(
+                    `${import.meta.env.VITE_SERVER_URL}/api/v1/product/get-category`
+                );
+                setCategoryList(res.data.categories || []);
+            } catch (err) {
+                setCategoryList([]);
+            }
+        };
+        fetchCategories();
+    }, []);
+
+    // Update subcategory list when category changes (use _id)
+    useEffect(() => {
+        const selected = categoryList.find((cat) => cat._id === category);
+        setSubcategoryList(selected?.subcategories || []);
+        setSubcategory(""); // Reset subcategory when category changes
+    }, [category, categoryList]);
 
     const handleSpecsChange = (e) => {
         setSpecsInput({ ...specsInput, [e.target.name]: e.target.value });
@@ -127,7 +168,6 @@ const CreateProduct = () => {
         });
         setIsSubmit(true);
         try {
-            // required field checks
             if (!logo) {
                 toast.warning("Please Add Brand Logo");
                 return;
@@ -140,6 +180,14 @@ const CreateProduct = () => {
                 toast.warning("Please Add Product Images");
                 return;
             }
+            if (!category) {
+                toast.warning("Please select a category");
+                return;
+            }
+            if (!subcategory) {
+                toast.warning("Please select a subcategory");
+                return;
+            }
 
             const formData = new FormData();
 
@@ -148,6 +196,7 @@ const CreateProduct = () => {
             formData.append("price", price);
             formData.append("discountPrice", discountPrice);
             formData.append("category", category);
+            formData.append("subcategory", subcategory);
             formData.append("stock", stock);
             formData.append("warranty", warranty);
             formData.append("brandName", brand);
@@ -174,15 +223,13 @@ const CreateProduct = () => {
                     },
                 }
             );
-            // on success->
             response.status === 201 &&
                 toast.success("Product Added Successfully!");
             navigate("/admin/dashboard/all-products");
         } catch (error) {
             console.error("Error:", error);
             setIsSubmit(false);
-            //server error
-            error.response.status === 500 &&
+            error.response?.status === 500 &&
                 toast.error("Something went wrong! Please try after sometime.");
         }
     };
@@ -300,6 +347,9 @@ const CreateProduct = () => {
                                 required
                                 value={category}
                                 onChange={(e) => setCategory(e.target.value)}
+                                SelectProps={{
+                                    MenuProps: menuProps,
+                                }}
                                 InputProps={{
                                     style: {
                                         color: "#e0e7ef",
@@ -311,9 +361,39 @@ const CreateProduct = () => {
                                     style: { color: "#6366f1" },
                                 }}
                             >
-                                {categories.map((el, i) => (
-                                    <MenuItem value={el} key={i}>
-                                        {el}
+                                {categoryList.map((cat) => (
+                                    <MenuItem value={cat._id} key={cat._id}>
+                                        {cat.name}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+                            <TextField
+                                label="Subcategory"
+                                select
+                                fullWidth
+                                variant="outlined"
+                                size="small"
+                                required
+                                value={subcategory}
+                                onChange={(e) => setSubcategory(e.target.value)}
+                                SelectProps={{
+                                    MenuProps: menuProps,
+                                }}
+                                InputProps={{
+                                    style: {
+                                        color: "#e0e7ef",
+                                        background: "#23272f",
+                                        borderRadius: 6,
+                                    },
+                                }}
+                                InputLabelProps={{
+                                    style: { color: "#6366f1" },
+                                }}
+                                disabled={!category}
+                            >
+                                {subcategoryList.map((sub) => (
+                                    <MenuItem value={sub._id} key={sub._id}>
+                                        {sub.name}
                                     </MenuItem>
                                 ))}
                             </TextField>

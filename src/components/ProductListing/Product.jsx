@@ -83,7 +83,7 @@ const Product = ({
     return (
         <>
             <ScrollToTopOnRouteChange />
-            <div className="relative p-2 animate-fadeIn">
+            <div className="relative p-1 sm:p-2 animate-fadeIn">
                 {/* Wishlist badge */}
                 <span
                     onClick={addToWishlistHandler}
@@ -91,62 +91,54 @@ const Product = ({
                         ? "text-red-400"
                         : "hover:text-red-400 text-gray-400"
                     } ${isAdmin ? "hidden" : ""}
-                    absolute z-10 top-3 right-4 cursor-pointer transition-colors duration-200`}
+                    absolute z-10 top-2 right-3 sm:top-3 sm:right-4 cursor-pointer transition-colors duration-200`}
                 >
-                    <FavoriteIcon sx={{ fontSize: "22px" }} />
+                    <FavoriteIcon sx={{ fontSize: "20px" }} />
                 </span>
                 {/* Share badge */}
                 <span
                     onClick={handleShareProduct}
-                    className="absolute z-10 top-3 right-12 cursor-pointer text-indigo-400 hover:text-indigo-600 bg-gray-900 rounded-full w-8 h-8 flex items-center justify-center shadow"
+                    className="absolute z-10 top-2 right-10 sm:top-3 sm:right-12 cursor-pointer text-indigo-400 hover:text-indigo-600 bg-gray-900 rounded-full w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center shadow"
                     title="Share this product"
                 >
-                    <ShareIcon sx={{ fontSize: "18px" }} />
+                    <ShareIcon sx={{ fontSize: "14px" }} />
                 </span>
                 {/* Product Card */}
-                <div className="relative group w-full">
+                <div className="relative group w-full mx-w-[500px]">
                     {/* Glowing border */}
-                    <div className="absolute inset-0 rounded-2xl pointer-events-none border-2 border-gray-800 transition-all duration-300 group-hover:border-indigo-500 group-hover:shadow-[0_0_24px_4px_#6366f1]"></div>
-                    <div className="flex flex-col items-center gap-2 w-full px-4 py-6 shadow-xl relative rounded-2xl bg-gradient-to-br from-gray-900/90 via-gray-800/90 to-gray-950/90 backdrop-blur-md transition-all duration-300">
+                    <div className="absolute inset-0 rounded-xl pointer-events-none transition-all duration-300 group-hover:border-indigo-500 group-hover:shadow-[0_0_5px_2px_#6366f1]"></div>
+                    <div className="border border-gray-600 overflow-hidden flex flex-col items-center gap-2 w-full  shadow-2xl relative rounded-xl bg-gradient-to-br from-gray-900/90 via-gray-800/90 to-gray-950/90 backdrop-blur-md transition-all duration-300">
                         {/* Image & product title */}
                         <Link
                             to={`/product/${_id}`}
                             className="flex flex-col items-center w-full text-center group"
                         >
-                            <div className="w-40 h-44 sm:w-44 sm:h-48 flex items-center justify-center">
+                            <div className="w-full aspect-[5/5] flex items-center justify-center bg-red-500 rounded-md overflow-hidden">
                                 <img
                                     draggable="false"
-                                    className="w-full h-full object-contain rounded-lg bg-gray-800"
+                                    className="w-full h-full object-cover rounded-md bg-gray-800"
                                     src={images && images[0]?.url}
                                     alt={name}
                                 />
                             </div>
                         </Link>
                         {/* Product description */}
-                        <div className="flex flex-col gap-2 items-start w-full">
-                            <h2 className="text-base leading-6 font-semibold mt-4 group-hover:text-indigo-400 text-left text-gray-100">
-                                {name.length > 25
-                                    ? `${name.substring(0, 25)}...`
-                                    : name}
+                        <div className="flex flex-col gap-1 items-start w-full px-1.5 py-3 sm:px-3 sm:py-4 pt-0">
+                            <h2 className="w-full text-[12px] xs:text-sm sm:text-base md:text-base leading-5 font-semibold mt-1 sm:mt-2 group-hover:text-indigo-400 text-left text-gray-100 truncate"
+                                title={name}
+                            >
+                                {name}
                             </h2>
                             {/* Rating badge */}
-                            <span className="text-sm text-gray-400 font-medium flex gap-2 items-center justify-between">
-                                <span className="text-xs px-1.5 py-0.5 bg-indigo-600 rounded-sm text-white flex items-center gap-0.5">
+                            <span className="text-xs xs:text-sm text-gray-400 font-medium flex gap-2 items-center justify-between w-full">
+                                <span className="text-xs px-1 py-0.5 bg-indigo-600 rounded-sm text-white flex items-center gap-0.5">
                                     {ratings.toFixed(1)}
-                                    <StarIcon sx={{ fontSize: "14px" }} />
+                                    <StarIcon sx={{ fontSize: "12px" }} />
                                 </span>
                                 <span>({numOfReviews})</span>
-                                {/* <span>
-                                    <img
-                                        draggable="false"
-                                        className="w-[60px] h-[20px] ml-4 object-contain"
-                                        src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/fa_62673a.png"
-                                        alt={name}
-                                    />
-                                </span> */}
                             </span>
                             {/* Price container */}
-                            <div className="flex items-center gap-2 text-lg font-medium">
+                            <div className="flex flex-wrap items-center gap-1 text-sm xs:text-base font-medium w-full">
                                 <span className="text-indigo-300">
                                     ₹{(price - discountPrice).toLocaleString()}
                                 </span>
@@ -170,13 +162,10 @@ const Product = ({
                             from { opacity: 0; transform: translateY(30px);}
                             to { opacity: 1; transform: translateY(0);}
                         }
-                        @keyframes glowBorder {
-                            0% { box-shadow: 0 0 0 0 #6366f1; }
-                            50% { box-shadow: 0 0 16px 4px #6366f1; }
-                            100% { box-shadow: 0 0 0 0 #6366f1; }
-                        }
-                        .group-hover\\:before\\:animate-glowBorder:hover:before {
-                            animation: glowBorder 0.8s ease-in-out;
+                        @media (max-width: 640px) {
+                            .text-xs { font-size: 11px !important; }
+                            .text-sm { font-size: 12px !important; }
+                            .text-base { font-size: 14px !important; }
                         }
                     `}
                 </style>

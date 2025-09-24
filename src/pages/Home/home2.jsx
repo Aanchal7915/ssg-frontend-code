@@ -1,6 +1,9 @@
 import React from "react";
 
-
+import SeoData from "../../SEO/SeoData";
+import ScrollToTopOnRouteChange from "../../utils/ScrollToTopOnRouteChange";
+import Categories from "../../components/header/Categories";
+import MinCategory from "../../components/MinCategory";
 
 const products = [
 	{
@@ -129,8 +132,14 @@ const partners = [
 // ];
 
 const Home = () => {
-	return (
+	return (<>
+
+		<SeoData title="Online Wholesaler Site for Mobiles, Electronics, Furniture, Grocery, Lifestyle, Books & More. Best Offers!" />
+		<ScrollToTopOnRouteChange />
+		<MinCategory/>
+		{/* <Categories /> */}
 		<div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-indigo-100 font-sans overflow-x-hidden">
+
 			{/* Hero Section */}
 			<header className="relative flex flex-col md:flex-row items-center justify-between px-6 py-16 md:py-24 overflow-hidden">
 				{/* Animated Banner Vector */}
@@ -302,7 +311,7 @@ const Home = () => {
 					))}
 				</div>
 			</section>
-{/* 
+			{/* 
 			Blog/Guides Section
 			<section className="py-14 px-6 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950">
 				<h2 className="text-2xl md:text-3xl font-bold text-indigo-200 mb-8 text-center">
@@ -325,44 +334,44 @@ const Home = () => {
 				</div>
 			</section> */}
 
-			
-      {/* About Section - This section incorporates the JSX you provided */}
-      <section className="py-16 px-6 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 animate-fadeIn">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-indigo-200 mb-6 text-center">
-            About Us
-          </h2>
-          {/* Detailed paragraphs to provide more context */}
-          <div className="text-gray-300 text-lg space-y-4 mb-8">
-            <p>
-              We're committed to helping your business thrive. That's why we offer <strong className="text-indigo-400">bulk discounts for wholesalers</strong>, ensuring you get the best possible prices. Our catalog is constantly updated with the <strong className="text-indigo-400">latest electronic gadgets</strong>, so you can provide your customers with the most innovative products on the market.
-            </p>
-            <p>
-              We know that in business, every moment counts. Our <strong className="text-indigo-400">fast shipping & secure payments</strong> options ensure a smooth, worry-free process from order to delivery. Should you have any questions or need assistance, our <strong className="text-indigo-400">dedicated customer support</strong> team is always ready to help. We're here to be your partner, not just another supplier.
-            </p>
-            <p>
-              Our commitment to quality and service has earned the trust of businesses just like yours. We're proud to be <strong className="text-indigo-400">trusted by over 10,000 businesses</strong>—a testament to our reliability and the value we bring to our partners.
-            </p>
-          </div>
-          
-          {/* The list of features you provided */}
-          <ul className="space-y-4 text-lg text-indigo-300 font-medium">
-            <li className="flex items-center gap-2">
-              <span className="text-indigo-400 text-xl">✓</span> Bulk discounts for wholesalers
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="text-indigo-400 text-xl">✓</span> Latest electronic gadgets
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="text-indigo-400 text-xl">✓</span> Fast shipping & secure payments
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="text-indigo-400 text-xl">✓</span> Dedicated customer support
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="text-indigo-400 text-xl">✓</span> Trusted by 10,000+ businesses
-            </li>
-          </ul>
+
+			{/* About Section - This section incorporates the JSX you provided */}
+			<section className="py-16 px-6 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 animate-fadeIn">
+				<div className="max-w-4xl mx-auto">
+					<h2 className="text-2xl md:text-3xl font-bold text-indigo-200 mb-6 text-center">
+						About Us
+					</h2>
+					{/* Detailed paragraphs to provide more context */}
+					<div className="text-gray-300 text-lg space-y-4 mb-8">
+						<p>
+							We're committed to helping your business thrive. That's why we offer <strong className="text-indigo-400">bulk discounts for wholesalers</strong>, ensuring you get the best possible prices. Our catalog is constantly updated with the <strong className="text-indigo-400">latest electronic gadgets</strong>, so you can provide your customers with the most innovative products on the market.
+						</p>
+						<p>
+							We know that in business, every moment counts. Our <strong className="text-indigo-400">fast shipping & secure payments</strong> options ensure a smooth, worry-free process from order to delivery. Should you have any questions or need assistance, our <strong className="text-indigo-400">dedicated customer support</strong> team is always ready to help. We're here to be your partner, not just another supplier.
+						</p>
+						<p>
+							Our commitment to quality and service has earned the trust of businesses just like yours. We're proud to be <strong className="text-indigo-400">trusted by over 10,000 businesses</strong>—a testament to our reliability and the value we bring to our partners.
+						</p>
+					</div>
+
+					{/* The list of features you provided */}
+					<ul className="space-y-4 text-lg text-indigo-300 font-medium">
+						<li className="flex items-center gap-2">
+							<span className="text-indigo-400 text-xl">✓</span> Bulk discounts for wholesalers
+						</li>
+						<li className="flex items-center gap-2">
+							<span className="text-indigo-400 text-xl">✓</span> Latest electronic gadgets
+						</li>
+						<li className="flex items-center gap-2">
+							<span className="text-indigo-400 text-xl">✓</span> Fast shipping & secure payments
+						</li>
+						<li className="flex items-center gap-2">
+							<span className="text-indigo-400 text-xl">✓</span> Dedicated customer support
+						</li>
+						<li className="flex items-center gap-2">
+							<span className="text-indigo-400 text-xl">✓</span> Trusted by 10,000+ businesses
+						</li>
+					</ul>
 					{/* Vector Illustration */}
 					<div className="flex justify-center mt-10">
 						<img
@@ -504,6 +513,7 @@ const Home = () => {
         `}
 			</style>
 		</div>
+	</>
 	);
 };
 

@@ -78,6 +78,9 @@ const AllProducts = () => {
             headerName: "Category",
             minWidth: 100,
             flex: 0.1,
+            renderCell: (params) => {
+                return <span>{params.row.category?.name}</span>;
+            }
         },
         {
             field: "stock",

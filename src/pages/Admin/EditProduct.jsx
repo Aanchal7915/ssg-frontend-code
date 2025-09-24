@@ -1,3 +1,4 @@
+//make it horizontal scorllbale if overflow the area which contain form
 import TextField from "@mui/material/TextField";
 import { useState, useEffect } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -5,7 +6,6 @@ import MenuItem from "@mui/material/MenuItem";
 import { toast } from "react-toastify";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import ImageIcon from "@mui/icons-material/Image";
-import { categories } from "../../utils/constants";
 import Spinner from "../../components/Spinner";
 import axios from "axios";
 import FormData from "form-data";
@@ -18,29 +18,32 @@ const EditProduct = () => {
     const navigate = useNavigate();
     const { productId } = useParams();
     const [loading, setLoading] = useState(true);
-    const [highlights, setHighlights] = useState([]);
-    const [highlightInput, setHighlightInput] = useState();
-    const [specs, setSpecs] = useState([]);
-    const [specsInput, setSpecsInput] = useState({
-        title: "",
-        description: "",
-    });
 
+    // Add these state hooks:
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
-    const [price, setPrice] = useState();
-    const [discountPrice, setDiscountPrice] = useState();
-    const [category, setCategory] = useState("");
-    const [stock, setStock] = useState();
-    const [warranty, setWarranty] = useState();
+    const [price, setPrice] = useState("");
+    const [discountPrice, setDiscountPrice] = useState("");
+    const [stock, setStock] = useState("");
+    const [warranty, setWarranty] = useState("");
     const [brand, setBrand] = useState("");
+    const [highlights, setHighlights] = useState([]);
+    const [highlightInput, setHighlightInput] = useState("");
+    const [specs, setSpecs] = useState([]);
+    const [specsInput, setSpecsInput] = useState({ title: "", description: "" });
     const [images, setImages] = useState([]);
     const [imagesPreview, setImagesPreview] = useState([]);
     const [oldImages, setOldImages] = useState([]);
-    const [oldLogo, setOldLogo] = useState();
     const [removedImages, setRemovedImages] = useState([]);
     const [logo, setLogo] = useState(null);
     const [logoPreview, setLogoPreview] = useState("");
+    const [oldLogo, setOldLogo] = useState(null);
+
+    // Category & Subcategory state
+    const [categoryList, setCategoryList] = useState([]);
+    const [category, setCategory] = useState("");
+    const [subcategory, setSubcategory] = useState("");
+    const [subcategoryList, setSubcategoryList] = useState([]);
 
     //for submit state
     const [isSubmit, setIsSubmit] = useState(false);
@@ -140,6 +143,13 @@ const EditProduct = () => {
             validationErrors.push("Please Add Atleast 1 Product Image");
         }
 
+        if (!category) {
+            validationErrors.push("Please select a category");
+        }
+        if (!subcategory) {
+            validationErrors.push("Please select a subcategory");
+        }
+
         if (validationErrors.length > 0) {
             validationErrors.forEach((error) => toast.warning(error));
             setIsSubmit(false); // Disable submission due to validation errors
@@ -153,6 +163,7 @@ const EditProduct = () => {
             formData.append("price", price);
             formData.append("discountPrice", discountPrice);
             formData.append("category", category);
+            formData.append("subcategory", subcategory);
             formData.append("stock", stock);
             formData.append("warranty", warranty);
             formData.append("brandName", brand);
@@ -211,17 +222,14 @@ const EditProduct = () => {
         const fetchData = async () => {
             try {
                 const res = await axios.get(
-                    `${
-                        import.meta.env.VITE_SERVER_URL
-                    }/api/v1/product/${productId}`
+                    `${import.meta.env.VITE_SERVER_URL}/api/v1/product/${productId}`
                 );
-
-                // Update state with fetched product data
                 setName(res.data.product.name);
                 setDescription(res.data.product.description);
                 setPrice(res.data.product.price);
                 setDiscountPrice(res.data.product.discountPrice);
-                setCategory(res.data.product.category);
+                setCategory(res.data.product.category?._id || "");
+                setSubcategory(res.data.product.subcategory?._id || "");
                 setStock(res.data.product.stock);
                 setWarranty(res.data.product.warranty);
                 setBrand(res.data.product.brand.name);
@@ -256,6 +264,90 @@ const EditProduct = () => {
         // Initial call to fetch data from the server
         fetchData();
     }, [productId]);
+
+    // Fetch categories and subcategories from backend
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const res = await axios.get(
+                    `${import.meta.env.VITE_SERVER_URL}/api/v1/product/get-category`
+                );
+                setCategoryList(res.data.categories || []);
+            } catch (err) {
+                setCategoryList([]);
+            }
+        };
+        fetchCategories();
+    }, []);
+
+    // Update subcategory list when category changes (use _id)
+    useEffect(() => {
+        const selected = categoryList.find((cat) => cat._id === category);
+        setSubcategoryList(selected?.subcategories || []);
+        setSubcategory(""); // Reset subcategory when category changes
+    }, [category, categoryList]);
+
+    // When fetching product, set category and subcategory to _id
+    useEffect(() => {
+        // Request for prefilled values from the server
+        const fetchData = async () => {
+            try {
+                const res = await axios.get(
+                    `${import.meta.env.VITE_SERVER_URL}/api/v1/product/${productId}`
+                );
+                setName(res.data.product.name);
+                setDescription(res.data.product.description);
+                setPrice(res.data.product.price);
+                setDiscountPrice(res.data.product.discountPrice);
+                setCategory(res.data.product.category?._id || "");
+                setSubcategory(res.data.product.subcategory?._id || "");
+                setStock(res.data.product.stock);
+                setWarranty(res.data.product.warranty);
+                setBrand(res.data.product.brand.name);
+                setHighlights(res.data.product.highlights || []);
+                setSpecs(res.data.product.specifications || []);
+                setOldLogo(() => {
+                    return {
+                        url: res.data.product.brand.logo.url,
+                        public_id: res.data.product.brand.logo.public_id,
+                    };
+                });
+                {
+                    res.data.product.images.map((image) => {
+                        setOldImages((prevImages) => [
+                            ...prevImages,
+                            { url: image.url, public_id: image.public_id },
+                        ]);
+                    });
+                }
+                setLoading(false);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                error.response?.status === 500 &&
+                    toast.error("Something went wrong! Please try again later.");
+            }
+        };
+        fetchData();
+    }, [productId]);
+
+    const menuProps = {
+        PaperProps: {
+            sx: {
+                bgcolor: "#23272f",
+                color: "#e0e7ef",
+                "& .MuiMenuItem-root": {
+                    "&.Mui-selected": {
+                        bgcolor: "#6366f1",
+                        color: "#fff",
+                    },
+                    "&:hover": {
+                        bgcolor: "#3730a3",
+                        color: "#fff",
+                    },
+                },
+            },
+        },
+    };
 
     return (
         <>
@@ -370,6 +462,9 @@ const EditProduct = () => {
                                 required
                                 value={category}
                                 onChange={(e) => setCategory(e.target.value)}
+                                SelectProps={{
+                                    MenuProps: menuProps,
+                                }}
                                 InputProps={{
                                     style: {
                                         color: "#e0e7ef",
@@ -381,9 +476,41 @@ const EditProduct = () => {
                                     style: { color: "#6366f1" },
                                 }}
                             >
-                                {categories.map((el, i) => (
-                                    <MenuItem value={el} key={i}>
-                                        {el}
+                                {categoryList.map((cat) => (
+                                    <MenuItem value={cat._id} key={cat._id}>
+                                        {cat.name}
+                                    </MenuItem>
+                                ))}
+                            </TextField>{
+                                // console.log("subcateg:",subcategory )
+                            }
+                            <TextField
+                                label="Subcategory"
+                                select
+                                fullWidth
+                                variant="outlined"
+                                size="small"
+                                required
+                                value={subcategory}
+                                onChange={(e) => setSubcategory(e.target.value)}
+                                SelectProps={{
+                                    MenuProps: menuProps,
+                                }}
+                                InputProps={{
+                                    style: {
+                                        color: "#e0e7ef",
+                                        background: "#23272f",
+                                        borderRadius: 6,
+                                    },
+                                }}
+                                InputLabelProps={{
+                                    style: { color: "#6366f1" },
+                                }}
+                                disabled={!category}
+                            >
+                                {subcategoryList.map((sub) => (
+                                    <MenuItem value={sub._id} key={sub._id}>
+                                        {sub.name}
                                     </MenuItem>
                                 ))}
                             </TextField>

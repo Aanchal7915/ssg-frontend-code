@@ -11,12 +11,14 @@ import { categories } from "../../utils/constants";
 import { useState, useRef, useEffect } from "react";
 
 const SideFilter = ({
+    subcategoryList,
     price,
-    category,
+    subcategory,
     ratings,
     setPrice,
-    setCategory,
+    setSubcategory,
     setRatings,
+    floating = false,
 }) => {
     const [categoryToggle, setCategoryToggle] = useState(true);
     const [ratingsToggle, setRatingsToggle] = useState(true);
@@ -47,24 +49,41 @@ const SideFilter = ({
 
     const clearFilters = () => {
         setPrice([0, 200000]);
-        setCategory("");
+        setSubcategory("");
         setRatings(0);
     };
 
     return (
-        <div className="hidden sm:flex flex-col w-1/5 px-1">
-            <div className="flex flex-col bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 rounded-xl shadow-xl border border-gray-800 text-gray-100">
-                <div className="flex items-center justify-between gap-5 px-4 py-2 border-b border-gray-800">
-                    <p className="text-lg font-semibold text-indigo-300">Filters</p>
-                    <span
-                        className="uppercase text-indigo-400 text-xs cursor-pointer font-medium"
-                        onClick={clearFilters}
-                    >
-                        clear all
-                    </span>
-                </div>
-
-                <div className="flex flex-col gap-2 py-3 text-sm overflow-hidden">
+        <div
+            className={`w-full max-w-xs flex flex-col px-1 ${
+                floating ? "h-full" : "sm:w-1/2 md:w-1/3 lg:w-64"
+            }`}
+            style={{
+                maxHeight: floating ? "100vh" : "100vh",
+                height: floating ? "100%" : "100vh",
+            }}
+        >
+            <div className="flex flex-col bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 rounded-xl shadow-xl border border-gray-800 text-gray-100 h-full">
+                {/* Only show header if not floating (handled by parent in floating mode) */}
+                {!floating && (
+                    <div className="flex items-center justify-between gap-5 px-4 py-2 border-b border-gray-800">
+                        <p className="text-lg font-semibold text-indigo-300">Filters</p>
+                        <span
+                            className="uppercase text-indigo-400 text-xs cursor-pointer font-medium"
+                            onClick={clearFilters}
+                        >
+                            clear all
+                        </span>
+                    </div>
+                )}
+                <div
+                    className="flex flex-col gap-2 py-3 text-sm overflow-y-auto scrollbar-hide"
+                    style={{
+                        flex: 1,
+                        minHeight: 0,
+                        maxHeight: floating ? "calc(100vh - 56px)" : "calc(100vh - 56px)",
+                    }}
+                >
                     {/* Price slider filter */}
                     <div className="flex flex-col gap-2 border-b border-gray-800 px-4">
                         <span className="font-medium text-xs text-indigo-200">PRICE</span>
@@ -89,7 +108,6 @@ const SideFilter = ({
                             </span>
                         </div>
                     </div>
-
                     {/* Category filter */}
                     <div className="flex flex-col border-b border-gray-800 px-4">
                         <div
@@ -98,6 +116,8 @@ const SideFilter = ({
                         >
                             <p className="font-medium text-xs uppercase text-indigo-200">
                                 Category
+
+
                             </p>
                             {categoryToggle ? (
                                 <ExpandLessIcon sx={{ fontSize: "20px", color: "#6366f1" }} />
@@ -110,18 +130,18 @@ const SideFilter = ({
                                 <FormControl>
                                     <RadioGroup
                                         aria-labelledby="category-radio-buttons-group"
-                                        onChange={(e) => setCategory(e.target.value)}
+                                        onChange={(e) => setSubcategory(e.target.value)}
                                         name="category-radio-buttons"
-                                        value={category}
-                                    >
-                                        {categories.map((el, i) => (
+                                        value={subcategory}
+                                    >   
+                                        {subcategoryList.map((el, i) => (
                                             <FormControlLabel
-                                                value={el}
-                                                key={i}
+                                                value={el._id}
+                                                key={el._id}
                                                 control={<Radio size="small" sx={{ color: "#6366f1" }} />}
                                                 label={
-                                                    <span className="text-sm text-gray-100" key={i}>
-                                                        {el}
+                                                    <span className="text-sm text-gray-100" key={el._id}>
+                                                        {el.name}
                                                     </span>
                                                 }
                                             />
@@ -131,7 +151,6 @@ const SideFilter = ({
                             </div>
                         )}
                     </div>
-
                     {/* Ratings filter */}
                     <div className="flex flex-col border-b border-gray-800 px-4 -mb-4">
                         <div
@@ -183,6 +202,17 @@ const SideFilter = ({
                     </div>
                 </div>
             </div>
+            <style>
+                {`
+                .scrollbar-hide::-webkit-scrollbar {
+                    display: none;
+                }
+                .scrollbar-hide {
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
+                }
+                `}
+            </style>
         </div>
     );
 };
