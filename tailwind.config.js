@@ -9,6 +9,7 @@ export default {
                 orange: "#fb641b",
                 primaryBg: "#f1f3f6",
                 textHover: "#666666",
+                
                 cream: {
                     DEFAULT: "#f8f5f1",
           light: "#fdfaf6",
