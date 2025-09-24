@@ -24,6 +24,7 @@ const Wishlist = () => {
         const fetchWishlist = async (page) => {
             try {
                 setIsLoading(true);
+                console.log("Fetching wishlist page:", page);
                 const res = await axios.get(
                     `${
                         import.meta.env.VITE_SERVER_URL

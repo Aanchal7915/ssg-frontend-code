@@ -14,7 +14,7 @@ import { useAuth } from "../../context/auth";
 const Products = () => {
     // Use useSearchParams to get category from URL
     const [searchParams] = useSearchParams();
-    const category = searchParams.get("category") || "";
+    const category = searchParams.get("category") || "68d32a5528bd1c6bc2577be6";
 
     const { auth, isAdmin } = useAuth();
     const [loading, setLoading] = useState(true);
@@ -58,11 +58,9 @@ const Products = () => {
                 const catObj = res.data
                     
                 // Pick the first subcategory's _id if exists
-                console.log("a",catObj);
-                console.log("b",catObj.subCategories);
-                console.log("c",catObj.subCategories.length);
+                
                 if (catObj && catObj.subCategories && catObj.subCategories.length > 0) {
-                    console.log("d",catObj.subCategories);
+                    
                     setSubcategoryList(catObj.subCategories);
                     setSubcategory(catObj.subCategories[0]._id);
                 } else {

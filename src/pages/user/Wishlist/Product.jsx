@@ -58,14 +58,14 @@ const Product = (props) => {
                                 {ratings} <StarIcon sx={{ fontSize: "14px" }} />
                             </span>
                             <span>({numOfReviews?.toLocaleString()})</span>
-                            <span>
+                            {/* <span>
                                 <img
                                     draggable="false"
                                     className="w-[60px] h-[20px] ml-4 object-contain"
                                     src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/fa_62673a.png"
                                     alt={name}
                                 />
-                            </span>
+                            </span> */}
                         </span>
                     </Link>
                     <button
