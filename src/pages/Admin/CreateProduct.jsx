@@ -1,54 +1,32 @@
+
+/* eslint-disable react/jsx-key */
 import TextField from "@mui/material/TextField";
 import { useState, useEffect } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MenuItem from "@mui/material/MenuItem";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import ImageIcon from "@mui/icons-material/Image";
 import Spinner from "../../components/Spinner";
 import axios from "axios";
 import FormData from "form-data";
 import { useAuth } from "../../context/auth";
-import ScrollToTopOnRouteChange from "./../../utils/ScrollToTopOnRouteChange";
+import ScrollToTopOnRouteChange from "../../utils/ScrollToTopOnRouteChange";
 import SeoData from "../../SEO/SeoData";
-
-const menuProps = {
-    PaperProps: {
-        sx: {
-            bgcolor: "#23272f",
-            color: "#e0e7ef",
-            "& .MuiMenuItem-root": {
-                "&.Mui-selected": {
-                    bgcolor: "#6366f1",
-                    color: "#fff",
-                },
-                "&:hover": {
-                    bgcolor: "#3730a3",
-                    color: "#fff",
-                },
-            },
-        },
-    },
-};
+import "react-toastify/dist/ReactToastify.css";
 
 const CreateProduct = () => {
     const { auth } = useAuth();
     const navigate = useNavigate();
 
-    // Category & Subcategory state
     const [categoryList, setCategoryList] = useState([]);
     const [category, setCategory] = useState("");
     const [subcategory, setSubcategory] = useState("");
     const [subcategoryList, setSubcategoryList] = useState([]);
-
     const [highlights, setHighlights] = useState([]);
     const [highlightInput, setHighlightInput] = useState("");
     const [specs, setSpecs] = useState([]);
-    const [specsInput, setSpecsInput] = useState({
-        title: "",
-        description: "",
-    });
-
+    const [specsInput, setSpecsInput] = useState({ title: "", description: "" });
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState();
@@ -65,7 +43,6 @@ const CreateProduct = () => {
     const MAX_IMAGE_SIZE = 500 * 1024;
     const MAX_IMAGES_COUNT = 4;
 
-    // Fetch categories and subcategories from backend
     useEffect(() => {
         const fetchCategories = async () => {
             try {
@@ -80,11 +57,10 @@ const CreateProduct = () => {
         fetchCategories();
     }, []);
 
-    // Update subcategory list when category changes (use _id)
     useEffect(() => {
         const selected = categoryList.find((cat) => cat._id === category);
         setSubcategoryList(selected?.subcategories || []);
-        setSubcategory(""); // Reset subcategory when category changes
+        setSubcategory("");
     }, [category, categoryList]);
 
     const handleSpecsChange = (e) => {
@@ -113,46 +89,35 @@ const CreateProduct = () => {
 
     const handleLogoChange = (e) => {
         const file = e.target.files[0];
-
         if (file.size > MAX_IMAGE_SIZE) {
-            toast.warning("Logo image size exceeds 500 KB!");
+            toast.warning("Logo image size exceeds 500 KB!", { toastClassName: "custom-toast" });
             return;
         }
         const reader = new FileReader();
-
         reader.onload = () => {
             if (reader.readyState === 2) {
                 setLogoPreview(reader.result);
                 setLogo(reader.result);
             }
         };
-
         reader.readAsDataURL(file);
     };
 
     const handleProductImageChange = (e) => {
         const files = Array.from(e.target.files);
-        // if more than 4 images then show warning
         if (files.length > MAX_IMAGES_COUNT) {
-            toast.warning("You can only upload up to 4 images");
+            toast.warning("You can only upload up to 4 images", { toastClassName: "custom-toast" });
             return;
         }
-
         files.forEach((file) => {
-            // check for image size
             if (file.size > MAX_IMAGE_SIZE) {
-                toast.warning("One of the product images exceeds 500 KB");
-                // Skip the file if it exceeds the size limit
+                toast.warning("One of the product images exceeds 500 KB", { toastClassName: "custom-toast" });
                 return;
             }
             const reader = new FileReader();
-
             reader.onload = () => {
                 if (reader.readyState === 2) {
-                    setImagesPreview((oldImages) => [
-                        ...oldImages,
-                        reader.result,
-                    ]);
+                    setImagesPreview((oldImages) => [...oldImages, reader.result]);
                     setImages((oldImages) => [...oldImages, reader.result]);
                 }
             };
@@ -162,35 +127,35 @@ const CreateProduct = () => {
 
     const newProductSubmitHandler = async (e) => {
         e.preventDefault();
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-        });
+        window.scrollTo({ top: 0, behavior: "smooth" });
         setIsSubmit(true);
         try {
             if (!logo) {
-                toast.warning("Please Add Brand Logo");
+                toast.warning("Please Add Brand Logo", { toastClassName: "custom-toast" });
+                setIsSubmit(false);
                 return;
             }
             if (specs.length <= 1) {
-                toast.warning("Please Add Minimum 2 Specifications");
+                toast.warning("Please Add Minimum 2 Specifications", { toastClassName: "custom-toast" });
+                setIsSubmit(false);
                 return;
             }
             if (images.length <= 0) {
-                toast.warning("Please Add Product Images");
+                toast.warning("Please Add Product Images", { toastClassName: "custom-toast" });
+                setIsSubmit(false);
                 return;
             }
             if (!category) {
-                toast.warning("Please select a category");
+                toast.warning("Please select a category", { toastClassName: "custom-toast" });
+                setIsSubmit(false);
                 return;
             }
             if (!subcategory) {
-                toast.warning("Please select a subcategory");
+                toast.warning("Please select a subcategory", { toastClassName: "custom-toast" });
+                setIsSubmit(false);
                 return;
             }
-
             const formData = new FormData();
-
             formData.append("name", name);
             formData.append("description", description);
             formData.append("price", price);
@@ -201,15 +166,12 @@ const CreateProduct = () => {
             formData.append("warranty", warranty);
             formData.append("brandName", brand);
             formData.append("logo", logo);
-
             images.forEach((image) => {
                 formData.append("images", image);
             });
-
             highlights.forEach((h) => {
                 formData.append("highlights", h);
             });
-
             specs.forEach((s) => {
                 formData.append("specifications", JSON.stringify(s));
             });
@@ -224,21 +186,51 @@ const CreateProduct = () => {
                 }
             );
             response.status === 201 &&
-                toast.success("Product Added Successfully!");
+                toast.success("Product Added Successfully!", { toastClassName: "custom-toast" });
             navigate("/admin/dashboard/all-products");
         } catch (error) {
             console.error("Error:", error);
             setIsSubmit(false);
             error.response?.status === 500 &&
-                toast.error("Something went wrong! Please try after sometime.");
+                toast.error("Something went wrong! Please try after sometime.", { toastClassName: "custom-toast" });
         }
+    };
+
+    const menuProps = {
+        PaperProps: {
+            sx: {
+                bgcolor: "#FFFFFF",
+                color: "#333333",
+                "& .MuiMenuItem-root": {
+                    "&.Mui-selected": {
+                        bgcolor: "#54B1CE",
+                        color: "#FFFFFF",
+                    },
+                    "&:hover": {
+                        bgcolor: "#3A8AA3",
+                        color: "#FFFFFF",
+                    },
+                },
+            },
+        },
     };
 
     return (
         <>
+            <ToastContainer
+                position="top-center"
+                autoClose={3000}
+                hideProgressBar
+                newestOnTop
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
             <SeoData title="New Product | Flipkart" />
             <ScrollToTopOnRouteChange />
-
             {isSubmit ? (
                 <div className="relative h-full">
                     <Spinner />
@@ -247,7 +239,7 @@ const CreateProduct = () => {
                 <form
                     onSubmit={newProductSubmitHandler}
                     encType="multipart/form-data"
-                    className="flex flex-col w-full sm:flex-row bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 rounded-lg shadow-xl p-4 border border-gray-800 text-gray-100"
+                    className="w-full bg-[#FFFFFF] rounded-lg shadow-xl p-4 border border-[#54B1CE] text-[#333333] overflow-x-auto min-w-[600px]"
                     id="mainForm"
                 >
                     <div className="flex flex-col mx-auto py-2 gap-3 m-2 w-[90%]">
@@ -260,13 +252,14 @@ const CreateProduct = () => {
                             onChange={(e) => setName(e.target.value)}
                             InputProps={{
                                 style: {
-                                    color: "#e0e7ef",
-                                    background: "#23272f",
+                                    color: "#333333",
+                                    background: "#F5F7FA",
                                     borderRadius: 6,
+                                    borderColor: "#54B1CE",
                                 },
                             }}
                             InputLabelProps={{
-                                style: { color: "#6366f1" },
+                                style: { color: "#54B1CE" },
                             }}
                         />
                         <TextField
@@ -280,13 +273,14 @@ const CreateProduct = () => {
                             onChange={(e) => setDescription(e.target.value)}
                             InputProps={{
                                 style: {
-                                    color: "#e0e7ef",
-                                    background: "#23272f",
+                                    color: "#333333",
+                                    background: "#F5F7FA",
                                     borderRadius: 6,
+                                    borderColor: "#54B1CE",
                                 },
                             }}
                             InputLabelProps={{
-                                style: { color: "#6366f1" },
+                                style: { color: "#54B1CE" },
                             }}
                         />
                         <div className="flex gap-2 justify-between">
@@ -296,20 +290,19 @@ const CreateProduct = () => {
                                 variant="outlined"
                                 size="small"
                                 InputProps={{
-                                    inputProps: {
-                                        min: 0,
-                                    },
+                                    inputProps: { min: 0 },
                                     style: {
-                                        color: "#e0e7ef",
-                                        background: "#23272f",
+                                        color: "#333333",
+                                        background: "#F5F7FA",
                                         borderRadius: 6,
+                                        borderColor: "#54B1CE",
                                     },
                                 }}
                                 required
                                 value={price}
                                 onChange={(e) => setPrice(e.target.value)}
                                 InputLabelProps={{
-                                    style: { color: "#6366f1" },
+                                    style: { color: "#54B1CE" },
                                 }}
                             />
                             <TextField
@@ -318,22 +311,19 @@ const CreateProduct = () => {
                                 variant="outlined"
                                 size="small"
                                 InputProps={{
-                                    inputProps: {
-                                        min: 0,
-                                    },
+                                    inputProps: { min: 0 },
                                     style: {
-                                        color: "#e0e7ef",
-                                        background: "#23272f",
+                                        color: "#333333",
+                                        background: "#F5F7FA",
                                         borderRadius: 6,
+                                        borderColor: "#54B1CE",
                                     },
                                 }}
                                 required
                                 value={discountPrice}
-                                onChange={(e) =>
-                                    setDiscountPrice(e.target.value)
-                                }
+                                onChange={(e) => setDiscountPrice(e.target.value)}
                                 InputLabelProps={{
-                                    style: { color: "#6366f1" },
+                                    style: { color: "#54B1CE" },
                                 }}
                             />
                         </div>
@@ -347,18 +337,17 @@ const CreateProduct = () => {
                                 required
                                 value={category}
                                 onChange={(e) => setCategory(e.target.value)}
-                                SelectProps={{
-                                    MenuProps: menuProps,
-                                }}
+                                SelectProps={{ MenuProps: menuProps }}
                                 InputProps={{
                                     style: {
-                                        color: "#e0e7ef",
-                                        background: "#23272f",
+                                        color: "#333333",
+                                        background: "#F5F7FA",
                                         borderRadius: 6,
+                                        borderColor: "#54B1CE",
                                     },
                                 }}
                                 InputLabelProps={{
-                                    style: { color: "#6366f1" },
+                                    style: { color: "#54B1CE" },
                                 }}
                             >
                                 {categoryList.map((cat) => (
@@ -376,18 +365,17 @@ const CreateProduct = () => {
                                 required
                                 value={subcategory}
                                 onChange={(e) => setSubcategory(e.target.value)}
-                                SelectProps={{
-                                    MenuProps: menuProps,
-                                }}
+                                SelectProps={{ MenuProps: menuProps }}
                                 InputProps={{
                                     style: {
-                                        color: "#e0e7ef",
-                                        background: "#23272f",
+                                        color: "#333333",
+                                        background: "#F5F7FA",
                                         borderRadius: 6,
+                                        borderColor: "#54B1CE",
                                     },
                                 }}
                                 InputLabelProps={{
-                                    style: { color: "#6366f1" },
+                                    style: { color: "#54B1CE" },
                                 }}
                                 disabled={!category}
                             >
@@ -403,20 +391,19 @@ const CreateProduct = () => {
                                 variant="outlined"
                                 size="small"
                                 InputProps={{
-                                    inputProps: {
-                                        min: 0,
-                                    },
+                                    inputProps: { min: 0 },
                                     style: {
-                                        color: "#e0e7ef",
-                                        background: "#23272f",
+                                        color: "#333333",
+                                        background: "#F5F7FA",
                                         borderRadius: 6,
+                                        borderColor: "#54B1CE",
                                     },
                                 }}
                                 required
                                 value={stock}
                                 onChange={(e) => setStock(e.target.value)}
                                 InputLabelProps={{
-                                    style: { color: "#6366f1" },
+                                    style: { color: "#54B1CE" },
                                 }}
                             />
                             <TextField
@@ -425,55 +412,50 @@ const CreateProduct = () => {
                                 variant="outlined"
                                 size="small"
                                 InputProps={{
-                                    inputProps: {
-                                        min: 0,
-                                    },
+                                    inputProps: { min: 0 },
                                     style: {
-                                        color: "#e0e7ef",
-                                        background: "#23272f",
+                                        color: "#333333",
+                                        background: "#F5F7FA",
                                         borderRadius: 6,
+                                        borderColor: "#54B1CE",
                                     },
                                 }}
                                 required
                                 value={warranty}
                                 onChange={(e) => setWarranty(e.target.value)}
                                 InputLabelProps={{
-                                    style: { color: "#6366f1" },
+                                    style: { color: "#54B1CE" },
                                 }}
                             />
                         </div>
-
                         <div className="flex flex-col gap-2">
-                            <div className="flex justify-between items-center border border-gray-700 rounded bg-gray-900">
+                            <div className="flex justify-between items-center border border-[#54B1CE] rounded bg-[#FFFFFF]">
                                 <input
                                     value={highlightInput}
-                                    onChange={(e) =>
-                                        setHighlightInput(e.target.value)
-                                    }
+                                    onChange={(e) => setHighlightInput(e.target.value)}
                                     type="text"
                                     placeholder="Highlight"
-                                    className="px-2 flex-1 outline-none border-none bg-transparent text-indigo-200"
+                                    className="px-2 flex-1 outline-none border-none bg-transparent text-[#333333]"
                                 />
                                 <span
                                     onClick={() => addHighlight()}
-                                    className="py-2 px-6 bg-indigo-600 text-white rounded-r hover:shadow-lg cursor-pointer transition-all duration-200"
+                                    className="py-2 px-6 bg-[#54B1CE] text-[#FFFFFF] rounded-r hover:bg-[#3A8AA3] cursor-pointer transition-all duration-200"
                                 >
                                     Add
                                 </span>
                             </div>
-
                             <div className="flex flex-col gap-1.5">
                                 {highlights.map((h, i) => (
                                     <div
                                         key={i}
-                                        className="flex justify-between rounded items-center py-1 px-2 bg-green-900/30 border border-green-700"
+                                        className="flex justify-between rounded items-center py-1 px-2 bg-[#F5F7FA] border border-[#54B1CE]"
                                     >
-                                        <p className="text-green-300 text-sm font-medium">
+                                        <p className="text-[#333333] text-sm font-medium">
                                             {h}
                                         </p>
                                         <span
                                             onClick={() => deleteHighlight(i)}
-                                            className="text-red-400 hover:bg-red-900/40 p-1 rounded-full cursor-pointer transition-all duration-200"
+                                            className="text-red-400 hover:bg-red-100 p-1 rounded-full cursor-pointer transition-all duration-200"
                                         >
                                             <DeleteIcon />
                                         </span>
@@ -481,8 +463,7 @@ const CreateProduct = () => {
                                 ))}
                             </div>
                         </div>
-
-                        <h2 className="font-medium text-indigo-300">Brand Details</h2>
+                        <h2 className="font-medium text-[#54B1CE]">Brand Details</h2>
                         <div className="flex flex-col sm:flex-row justify-between gap-4 items-start">
                             <TextField
                                 label="Brand"
@@ -494,18 +475,19 @@ const CreateProduct = () => {
                                 onChange={(e) => setBrand(e.target.value)}
                                 InputProps={{
                                     style: {
-                                        color: "#e0e7ef",
-                                        background: "#23272f",
+                                        color: "#333333",
+                                        background: "#F5F7FA",
                                         borderRadius: 6,
+                                        borderColor: "#54B1CE",
                                     },
                                 }}
                                 InputLabelProps={{
-                                    style: { color: "#6366f1" },
+                                    style: { color: "#54B1CE" },
                                 }}
                             />
-                            <div className="w-24 h-10 flex items-center justify-center border border-gray-700 rounded-lg relative bg-gray-900">
+                            <div className="w-24 h-10 flex items-center justify-center border border-[#54B1CE] rounded-lg relative bg-[#FFFFFF]">
                                 {!logoPreview ? (
-                                    <ImageIcon className="text-indigo-400" />
+                                    <ImageIcon className="text-[#54B1CE]" />
                                 ) : (
                                     <img
                                         draggable="false"
@@ -514,14 +496,14 @@ const CreateProduct = () => {
                                         className="w-full h-full object-contain"
                                     />
                                 )}
-                                <span className="text-red-500 absolute -top-1 -right-[90px]">
+                                <span className="text-red-400 absolute -top-1 -right-[90px]">
                                     *
-                                    <span className=" text-[10px] text-gray-500">
+                                    <span className="text-[10px] text-[#333333]">
                                         (max 500KB)
                                     </span>
                                 </span>
                             </div>
-                            <label className="rounded bg-indigo-600 text-center cursor-pointer text-white py-2 px-2.5 shadow hover:shadow-lg transition-all duration-200">
+                            <label className="rounded bg-[#54B1CE] text-center cursor-pointer text-[#FFFFFF] py-2 px-2.5 shadow hover:bg-[#3A8AA3] transition-all duration-200">
                                 <input
                                     type="file"
                                     name="logo"
@@ -532,14 +514,12 @@ const CreateProduct = () => {
                                 Choose Logo
                             </label>
                         </div>
-
-                        <h2 className="font-medium text-indigo-300">
+                        <h2 className="font-medium text-[#54B1CE]">
                             Specifications{" "}
-                            <span className="text-xs text-gray-400">
+                            <span className="text-xs text-[#333333]">
                                 (at least 2 required)
                             </span>
                         </h2>
-
                         <div className="flex justify-between gap-2 items-center">
                             <TextField
                                 value={specsInput.title}
@@ -551,13 +531,14 @@ const CreateProduct = () => {
                                 size="small"
                                 InputProps={{
                                     style: {
-                                        color: "#e0e7ef",
-                                        background: "#23272f",
+                                        color: "#333333",
+                                        background: "#F5F7FA",
                                         borderRadius: 6,
+                                        borderColor: "#54B1CE",
                                     },
                                 }}
                                 InputLabelProps={{
-                                    style: { color: "#6366f1" },
+                                    style: { color: "#54B1CE" },
                                 }}
                             />
                             <TextField
@@ -570,61 +551,60 @@ const CreateProduct = () => {
                                 size="small"
                                 InputProps={{
                                     style: {
-                                        color: "#e0e7ef",
-                                        background: "#23272f",
+                                        color: "#333333",
+                                        background: "#F5F7FA",
                                         borderRadius: 6,
+                                        borderColor: "#54B1CE",
                                     },
                                 }}
                                 InputLabelProps={{
-                                    style: { color: "#6366f1" },
+                                    style: { color: "#54B1CE" },
                                 }}
                             />
                             <span
                                 onClick={() => addSpecs()}
-                                className="py-2 px-6 bg-indigo-600 text-white rounded hover:shadow-lg cursor-pointer transition-all duration-200"
+                                className="py-2 px-6 bg-[#54B1CE] text-[#FFFFFF] rounded hover:bg-[#3A8AA3] cursor-pointer transition-all duration-200"
                             >
                                 Add
                             </span>
                         </div>
-
                         <div className="flex flex-col gap-2">
                             {specs.map((spec, i) => (
                                 <div
                                     key={i}
-                                    className="flex justify-between gap-2 sm:gap-5 items-center text-sm rounded bg-blue-900/30 border border-blue-700 py-1 px-2"
+                                    className="flex justify-between gap-2 sm:gap-5 items-center text-sm rounded bg-[#F5F7FA] border border-[#54B1CE] py-1 px-2"
                                 >
-                                    <p className="text-indigo-300 font-medium">
+                                    <p className="text-[#333333] font-medium">
                                         {spec.title}
                                     </p>
-                                    <p className="text-gray-200">{spec.description}</p>
+                                    <p className="text-[#333333]">{spec.description}</p>
                                     <span
                                         onClick={() => deleteSpec(i)}
-                                        className="text-red-400 hover:bg-red-900/40 bg-red-900/20 p-1 rounded-full cursor-pointer transition-all duration-200"
+                                        className="text-red-400 hover:bg-red-100 p-1 rounded-full cursor-pointer transition-all duration-200"
                                     >
                                         <DeleteIcon />
-                                    </span>
+                                        </span>
                                 </div>
                             ))}
                         </div>
-
-                        <h2 className="font-medium text-indigo-300">
+                        <h2 className="font-medium text-[#54B1CE]">
                             Product Images{" "}
-                            <span className="ml-2 text-xs text-gray-400">
+                            <span className="ml-2 text-xs text-[#333333]">
                                 (1-4 images, max 500KB each)
                             </span>
                         </h2>
-                        <div className="flex gap-2 overflow-x-auto h-32 border border-gray-700 rounded bg-gray-900">
+                        <div className="flex gap-2 overflow-x-auto h-32 border border-[#54B1CE] rounded bg-[#FFFFFF]">
                             {imagesPreview.map((image, i) => (
                                 <img
                                     draggable="false"
                                     src={image}
                                     alt="Product"
                                     key={i}
-                                    className="w-full h-full object-contain"
+                                    className="w-24 h-full object-contain"
                                 />
                             ))}
                         </div>
-                        <label className="rounded font-medium bg-indigo-600 text-center cursor-pointer text-white p-2 shadow hover:shadow-lg my-2 transition-all duration-200">
+                        <label className="rounded font-medium bg-[#54B1CE] text-center cursor-pointer text-[#FFFFFF] p-2 shadow hover:bg-[#3A8AA3] my-2 transition-all duration-200">
                             <input
                                 type="file"
                                 name="images"
@@ -635,19 +615,43 @@ const CreateProduct = () => {
                             />
                             Choose Files
                         </label>
-
                         <div className="flex justify-end">
                             <input
                                 form="mainForm"
                                 type="submit"
-                                className="bg-gradient-to-r from-orange-600 to-yellow-500 border-2 border-yellow-400 hover:from-orange-700 hover:to-yellow-600 uppercase w-full p-3 text-white font-medium rounded shadow-lg cursor-pointer transition-all duration-200"
+                                className="bg-[#54B1CE] hover:bg-[#3A8AA3] uppercase w-full p-3 text-[#FFFFFF] font-medium rounded shadow hover:shadow-lg cursor-pointer transition-all duration-300 border-2 border-[#54B1CE]"
                                 value="Submit"
                             />
                         </div>
                     </div>
+                    <style>
+                        {`
+                            .custom-toast {
+                                background-color: #FFFFFF;
+                                color: #333333;
+                                border: 2px solid #54B1CE;
+                                border-radius: 50px;
+                                padding: 10px 20px;
+                                font-size: 14px;
+                                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                                margin-top: 40px;
+                            }
+                            .Toastify__toast--success {
+                                background-color: #FFFFFF;
+                                color: #333333;
+                                border: 2px solid #54B1CE;
+                            }
+                            .Toastify__toast--error, .Toastify__toast--warning {
+                                background-color: #FFFFFF;
+                                color: #333333;
+                                border: 2px solid #ff4d4f;
+                            }
+                        `}
+                    </style>
                 </form>
             )}
         </>
     );
 };
+
 export default CreateProduct;

@@ -1,240 +1,224 @@
-/* eslint-disable no-unused-vars */
 import { useState, useRef, useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
-import logo from "../../assets/images/logo.png";
-import { BiHomeSmile } from "react-icons/bi";
-import { AiOutlineUser, AiOutlineHeart } from "react-icons/ai";
-import { BsCart2, BsBox } from "react-icons/bs";
+import { AiOutlineUser } from "react-icons/ai";
+import { BsCart2 } from "react-icons/bs";
 import { RiArrowDropDownLine } from "react-icons/ri";
-import { MdLogin, MdLogout } from "react-icons/md";
+import { FiMenu, FiX } from "react-icons/fi";
 import { useAuth } from "../../context/auth";
-import SearchBar from "./SearchBar";
 import { useCart } from "../../context/cart";
-// import { toast } from "react-toastify";
-// import LogOut from "../../pages/Auth/LogOut";
+import SearchBar from "./SearchBar";
 
 const Header = () => {
-    const [isDropdownOpen, setDropdownOpen] = useState(false);
-    const headerRef = useRef(null);
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const headerRef = useRef(null);
 
-    const {auth, setAuth, LogOut} = useAuth();
-    const [cartItems, setCartItems] = useCart();
+  const { auth, LogOut } = useAuth();
+  const [cartItems] = useCart();
 
-    let closeTimeout;
-    const toggleDropdown = () => {
-        clearTimeout(closeTimeout);
-        setDropdownOpen(true);
+  const toggleDropdown = () => setDropdownOpen(true);
+  const closeDropdown = () => setDropdownOpen(false);
+  const handleLogout = () => LogOut();
+
+  useEffect(() => {
+    const handleSticky = () => {
+      if (window.scrollY > 10) headerRef.current.classList.add("shadow-md");
+      else headerRef.current.classList.remove("shadow-md");
     };
-    const closeDropdown = () => {
-        closeTimeout = setTimeout(() => {
-            setDropdownOpen(false);
-        }, 200);
-    };
+    window.addEventListener("scroll", handleSticky);
+    return () => window.removeEventListener("scroll", handleSticky);
+  }, []);
 
-    const handleLogout = () => {
-        LogOut();
-    };
+  return (
+    <header
+      ref={headerRef}
+      className="sticky top-0 z-50 w-full bg-white border-b border-gray-200 transition-shadow duration-300"
+    >
+      {/* Top bar */}
+      <nav className="container mx-auto px-4 md:px-16 py-3 flex items-center justify-between">
+        {/* Logo */}
+        <Link to="/" className="flex items-center">
+          <img
+            src="/logo-10.png"
+            alt="logo"
+            className="w-12 h-12 rounded-full border-2 border-[#54B1CE] shadow-md hover:scale-105 transition-transform duration-300"
+          />
+        </Link>
 
-    const handleStickyHeader = () => {
-        if (
-            document.body.scrollTop > 0 ||
-            document.documentElement.scrollTop > 0
-        ) {
-            headerRef.current.classList.add("sticky__header");
-        } else {
-            headerRef.current.classList.remove("sticky__header");
-        }
-    };
+        {/* Desktop Search */}
+        <div className="hidden md:flex flex-1 mx-6">
+          <SearchBar />
+        </div>
 
-    useEffect(() => {
-        window.addEventListener("scroll", handleStickyHeader);
-        //clean up function
-        return () => {
-            window.removeEventListener("scroll", handleStickyHeader);
-        };
-    });
-    return (
-        <header ref={headerRef} className="bg-gradient-to-br from-[#e0f7fa] via-[#f1faff] to-[#f0f9ff] border-b border-[#38bdf8] shadow-md z-[50]">
-            <nav className="container px-4 md:px-[50px]">
-                <div className="flex items-center justify-between gap-3 md:gap-14 w-full flex-col md:flex-row sm:flex-row lg:flex-row">
-                    {/* primary div */}
-                    <div className="sm:h-[100px] md:h-[60px] lg:h-[60px] flex items-center justify-between w-[100%] max-w-[650px]">
-                        <div className="flex gap-[20px] items-center w-[100%] flex-col md:flex-row sm:flex-row lg:flex-row">
-                            {/* logo */}
-                           <Link to="/" className="group relative">
-                            <img
-                                src="/logo-10.png"
-                                alt="logo"
-                                className="w-[50px] object-cover rounded-full border-[1px] border-[#54B1CE] shadow-lg bg-white transition-transform duration-200 hover:scale-105"
-                                style={{
-                                    boxShadow: "0 4px 24px 0 #54B1CE33",
-                                }}
-                            />
-                        </Link>
-                            {/* search bar */}
-                            <SearchBar />
-                        </div>
-                    </div>
+        {/* Right side actions */}
+        <div className="flex items-center gap-3 md:gap-4">
+          {/* Cart */}
+          {auth?.user?.role !== 1 && (
+            <NavLink
+              to="/cart"
+              className="relative text-[#54B1CE] hover:text-[#3a9cb8] transition-colors"
+            >
+              <BsCart2 className="text-2xl" />
+              {cartItems?.length > 0 && (
+                <span className="absolute -top-2 -right-2 w-5 h-5 text-[11px] text-white bg-red-500 rounded-full flex items-center justify-center">
+                  {cartItems.length}
+                </span>
+              )}
+            </NavLink>
+          )}
 
-                    {/* secondary div */}
-                    <div className="flex items-center justify-between gap-[50px] w-[70%] mb-4 md:mb-0">
-                        {/* home */}
-                        <div className="flex items-center group">
-                            <NavLink to="/" className="flex items-center gap-1">
-                                <BiHomeSmile className="text-[22px] text-[#2563eb]" />
-                                <span className="text-[18px] hidden md:block lg:block group-hover:text-[#2563eb] text-[#334155]">
-                                    Home
-                                </span>
-                            </NavLink>
-                        </div>
+          {/* Account / Auth buttons */}
+          {auth.user ? (
+            <div
+              className="relative hidden md:flex items-center gap-2 cursor-pointer"
+              onMouseEnter={toggleDropdown}
+              onMouseLeave={closeDropdown}
+            >
+              <AiOutlineUser className="text-[#54B1CE] text-2xl" />
+              <span className="font-medium">{auth.user.name.split(" ")[0]}</span>
+              <RiArrowDropDownLine className="text-[#54B1CE] text-2xl" />
 
-                        {/* Account */}
-                        <div
-                            className={`flex items-center relative cursor-pointer group ${
-                                auth.user
-                                    ? "hover:bg-[#e0f7fa]"
-                                    : "hover:bg-[#38bdf8]"
-                            } rounded-md p-1`}
-                            onMouseEnter={toggleDropdown}
-                            onMouseLeave={closeDropdown}
-                        >
-                            {auth.user ? (
-                                <div className="flex items-center gap-1 ">
-                                    <AiOutlineUser className="text-[22px] text-[#2563eb]" />
-                                    <span className="text-[18px] max-w-fit hidden md:block lg:block text-[#334155]">
-                                        <p>{auth.user.name.split(" ")[0]}</p>
-                                    </span>
-                                    <span>
-                                        <RiArrowDropDownLine className="group-hover:rotate-[180deg] transition-all text-[#2563eb]" />
-                                    </span>
-                                </div>
-                            ) : (
-                                <div className="flex items-center gap-1 w-fit">
-                                    <Link
-                                        to="/login"
-                                        className="flex gap-1 group-hover:text-white"
-                                    >
-                                        <AiOutlineUser className="text-[22px] group-hover:text-white text-[#2563eb]" />
-                                        <span className="text-[18px] max-w-fit hidden md:block lg:block text-[#334155]">
-                                            <p>Sign in</p>
-                                        </span>
-                                    </Link>
-                                    <span>
-                                        <RiArrowDropDownLine
-                                            className="group-hover:rotate-[180deg] transition-all 
-                                                    group-hover:text-white text-[#2563eb]"
-                                        />
-                                    </span>
-                                </div>
-                            )}
-
-                            {/* dropdown menu */}
-                            {isDropdownOpen && (
-                                <div
-                                    className="absolute top-[36px] -left-[2px] z-[50] bg-white border border-[#38bdf8] rounded-md p-2 w-[140px] transition-all flex flex-col shadow-xl"
-                                    onMouseEnter={toggleDropdown}
-                                    onMouseLeave={closeDropdown}
-                                >
-                                    <ul>
-                                        {!auth.user && (
-                                            <li className="p-1 hover:bg-[#e0f7fa] rounded-md">
-                                                <Link
-                                                    to="/register"
-                                                    className="flex items-center gap-3 text-[#2563eb]"
-                                                >
-                                                    <MdLogin className="text-[14px] text-[#2563eb]" />
-                                                    <span className="text-[16px] text-[#334155]">
-                                                        Sign up
-                                                    </span>
-                                                </Link>
-                                            </li>
-                                        )}
-                                        <li className="p-1 hover:bg-[#e0f7fa] rounded-md">
-                                            <Link
-                                                to={`${
-                                                    auth?.user?.role === 1
-                                                        ? "/admin"
-                                                        : "/user"
-                                                }/dashboard`}
-                                                className="flex items-center gap-3 text-[#2563eb]"
-                                            >
-                                                <AiOutlineUser className="text-[14px] text-[#2563eb]" />
-                                                <span className="text-[16px] text-[#334155]">
-                                                    My Profile
-                                                </span>
-                                            </Link>
-                                        </li>
-                                        {/* if user is not admin */}
-                                        {auth.user?.role !== 1 && (
-                                            <li className="p-1 hover:bg-[#e0f7fa] rounded-md">
-                                                <Link
-                                                    to="/user/wishlist"
-                                                    className="flex items-center gap-3 text-[#2563eb]"
-                                                >
-                                                    <AiOutlineHeart className="text-[14px] text-[#2563eb]" />
-                                                    <span className="text-[16px] text-[#334155]">
-                                                        Wishlist
-                                                    </span>
-                                                </Link>
-                                            </li>
-                                        )}
-                                        <li className="p-1 hover:bg-[#e0f7fa] rounded-md">
-                                            <Link
-                                                to={`${
-                                                    auth?.user?.role === 1
-                                                        ? "/admin"
-                                                        : "/user"
-                                                }/orders`}
-                                                className="flex items-center gap-3 text-[#2563eb]"
-                                            >
-                                                <BsBox className="text-[14px] text-[#2563eb]" />
-                                                <span className="text-[16px] text-[#334155]">
-                                                    Orders
-                                                </span>
-                                            </Link>
-                                        </li>
-
-                                        {auth.user && (
-                                            <li className="p-1 hover:bg-[#e0f7fa] rounded-md ">
-                                                <Link
-                                                    onClick={handleLogout}
-                                                    to="/login"
-                                                    className="flex items-center gap-3 text-[#2563eb]"
-                                                >
-                                                    <MdLogout className="text-[14px] text-[#2563eb]" />
-                                                    <span className="text-[16px] text-[#334155]">
-                                                        Logout
-                                                    </span>
-                                                </Link>
-                                            </li>
-                                        )}
-                                    </ul>
-                                </div>
-                            )}
-                        </div>
-
-                        {/* cart */}
-                        {auth?.user?.role !== 1 && (
-                            <div className="flex items-center gap-1 group">
-                                <NavLink
-                                    to="/cart"
-                                    className="relative flex items-center gap-1"
-                                >
-                                    <span className="absolute w-4 h-4 text-[11px] text-center font-semibold left-2 bottom-3 text-white bg-[#f87171] rounded-[50%] ">
-                                        {cartItems?.length}
-                                    </span>
-                                    <BsCart2 className="text-[22px] text-[#2563eb]" />
-                                    <span className="hidden md:block lg:block group-hover:text-[#2563eb] text-[#334155]">
-                                        <p className="text-[18px]">Cart</p>
-                                    </span>
-                                </NavLink>
-                            </div>
-                        )}
-                    </div>
+              {isDropdownOpen && (
+                <div className="absolute top-10 right-0 w-44 bg-white border border-[#54B1CE] rounded-lg shadow-lg p-3 flex flex-col gap-2">
+                  <NavLink
+                    to={`${
+                      auth.user.role === 1 ? "/admin" : "/user"
+                    }/dashboard`}
+                    className="px-3 py-2 hover:bg-[#54B1CE]/10 rounded-md"
+                  >
+                    Profile
+                  </NavLink>
+                  {auth.user.role !== 1 && (
+                    <NavLink
+                      to="/user/wishlist"
+                      className="px-3 py-2 hover:bg-[#54B1CE]/10 rounded-md"
+                    >
+                      Wishlist
+                    </NavLink>
+                  )}
+                  <NavLink
+                    to={`${
+                      auth.user.role === 1 ? "/admin" : "/user"
+                    }/orders`}
+                    className="px-3 py-2 hover:bg-[#54B1CE]/10 rounded-md"
+                  >
+                    Orders
+                  </NavLink>
+                  <button
+                    onClick={handleLogout}
+                    className="px-3 py-2 hover:bg-[#54B1CE]/10 rounded-md text-left w-full"
+                  >
+                    Logout
+                  </button>
                 </div>
-            </nav>
-        </header>
-    );
+              )}
+            </div>
+          ) : (
+            <div className="hidden md:flex items-center gap-2">
+              <NavLink
+                to="/login"
+                className="px-4 py-2 bg-[#54B1CE] text-white rounded-full font-medium hover:bg-[#3a9cb8] transition-colors"
+              >
+                Sign In
+              </NavLink>
+              <NavLink
+                to="/register"
+                className="px-4 py-2 bg-[#54B1CE] text-white rounded-full font-medium hover:bg-[#3a9cb8] transition-colors"
+              >
+                Sign Up
+              </NavLink>
+            </div>
+          )}
+
+          {/* Mobile menu toggle */}
+          <button
+            className="md:hidden text-2xl text-[#54B1CE]"
+            onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? <FiX /> : <FiMenu />}
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobile Search */}
+      <div className="block md:hidden px-4 pb-3">
+        <SearchBar />
+      </div>
+
+      {/* Mobile Dropdown Menu */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden bg-white border-t border-gray-200 shadow-inner">
+          <div className="flex flex-col gap-2 px-4 py-4">
+            <NavLink
+              to="/"
+              className="px-4 py-2 bg-[#54B1CE] text-white rounded-full text-center font-medium hover:bg-[#3a9cb8] transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Home
+            </NavLink>
+            {!auth.user && (
+              <>
+                <NavLink
+                  to="/login"
+                  className="px-4 py-2 bg-[#54B1CE] text-white rounded-full text-center font-medium hover:bg-[#3a9cb8] transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Sign In
+                </NavLink>
+                <NavLink
+                  to="/register"
+                  className="px-4 py-2 bg-[#54B1CE] text-white rounded-full text-center font-medium hover:bg-[#3a9cb8] transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Sign Up
+                </NavLink>
+              </>
+            )}
+            {auth.user && (
+              <>
+                <NavLink
+                  to={`${
+                    auth.user.role === 1 ? "/admin" : "/user"
+                  }/dashboard`}
+                  className="px-4 py-2 hover:bg-[#54B1CE]/10 rounded-md"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Profile
+                </NavLink>
+                {auth.user.role !== 1 && (
+                  <NavLink
+                    to="/user/wishlist"
+                    className="px-4 py-2 hover:bg-[#54B1CE]/10 rounded-md"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Wishlist
+                  </NavLink>
+                )}
+                <NavLink
+                  to={`${
+                    auth.user.role === 1 ? "/admin" : "/user"
+                  }/orders`}
+                  className="px-4 py-2 hover:bg-[#54B1CE]/10 rounded-md"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Orders
+                </NavLink>
+                <button
+                  onClick={() => {
+                    handleLogout();
+                    setMobileMenuOpen(false);
+                  }}
+                  className="px-4 py-2 hover:bg-[#54B1CE]/10 rounded-md text-left"
+                >
+                  Logout
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+    </header>
+  );
 };
 
 export default Header;

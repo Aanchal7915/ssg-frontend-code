@@ -18,6 +18,7 @@
     "@stripe/stripe-js": "^2.1.5",
     "axios": "^1.4.0",
     "form-data": "^4.0.0",
+    "framer-motion": "^12.23.21",
     "js-cookie": "^3.0.5",
     "jspdf": "^3.0.3",
     "jspdf-autotable": "^5.0.2",
