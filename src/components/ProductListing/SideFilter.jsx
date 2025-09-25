@@ -115,7 +115,7 @@ const SideFilter = ({
                             onClick={() => setCategoryToggle(!categoryToggle)}
                         >
                             <p className="font-medium text-xs uppercase text-indigo-200">
-                                Category
+                                Sub Category
 
 
                             </p>
