@@ -62,7 +62,7 @@ const AdminMenu = ({ toggleMenu }) => {
                                 Profile Information
                             </div>
                         </NavLink>
-                        <NavLink
+                        {/* <NavLink
                             to="./address"
                             onClick={scrollToTop}
                             className={({ isActive }) =>
@@ -87,7 +87,7 @@ const AdminMenu = ({ toggleMenu }) => {
                             <div className="h-[40px] px-[60px] flex items-center hover:text-indigo-400 hover:bg-gray-800 rounded">
                                 Pan Card
                             </div>
-                        </NavLink>
+                        </NavLink> */}
                     </div>
                 </div>
 
@@ -112,7 +112,7 @@ const AdminMenu = ({ toggleMenu }) => {
                                 Orders
                             </div>
                         </NavLink>
-                        <NavLink
+                        {/* <NavLink
                             to="./delivery"
                             onClick={scrollToTop}
                             className={({ isActive }) =>
@@ -124,7 +124,7 @@ const AdminMenu = ({ toggleMenu }) => {
                             <div className="h-[40px] px-[60px] flex items-center hover:text-indigo-400 hover:bg-gray-800 rounded">
                                 Delivery
                             </div>
-                        </NavLink>
+                        </NavLink> */}
                         <NavLink
                             to="./all-products"
                             onClick={scrollToTop}
@@ -152,7 +152,7 @@ const AdminMenu = ({ toggleMenu }) => {
                             </div>
                         </NavLink>
                         {/* <NavLink
-                            to="./users"
+                            to="./category"
                             onClick={scrollToTop}
                             className={({ isActive }) =>
                                 isActive
@@ -161,7 +161,7 @@ const AdminMenu = ({ toggleMenu }) => {
                             }
                         >
                             <div className="h-[40px] px-[60px] flex items-center hover:text-indigo-400 hover:bg-gray-800 rounded">
-                                Users
+                                category
                             </div>
                         </NavLink> */}
                     </div>
@@ -185,7 +185,7 @@ const AdminMenu = ({ toggleMenu }) => {
                     <div className="flex gap-2.5 text-xs text-gray-400">
                         <Link to="/forgot-password">Change Password</Link>
                         <Link to="/admin/orders">Track Order</Link>
-                        <Link to="/">Help Center</Link>
+                        {/* <Link to="/">Help Center</Link> */}
                     </div>
                 </div>
             </div>
