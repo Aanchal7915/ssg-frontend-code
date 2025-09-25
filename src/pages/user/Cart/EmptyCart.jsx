@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const EmptyCart = () => {
     return (
-        <div className="flex items-center flex-col gap-4 m-6 pb-10 bg-gradient-to-br from-gray-900/80 via-gray-800/80 to-gray-950/80 rounded-xl shadow-xl border border-gray-800">
+        <div className="flex items-center flex-col gap-4 m-6 pb-10 bg-gradient-to-br from-[#e0f7fa]/80 via-[#f1faff]/80 to-[#f0f9ff]/80 rounded-xl shadow-xl border border-[#bae6fd]">
             <div className="w-52 h-44 mt-6">
                 <img
                     draggable="false"

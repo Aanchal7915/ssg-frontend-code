@@ -13,7 +13,6 @@ const OrderSuccess = () => {
     const { auth } = useAuth();
     const [loading, setLoading] = useState(true);
 
-    // After order placement, remove items from cart and save details to the database
     useEffect(() => {
         const savePayment = async () => {
             try {
@@ -25,12 +24,9 @@ const OrderSuccess = () => {
                 console.log(error);
             }
         };
-
-        savePayment(); // <-- Call the function here!
-
+        savePayment();
     }, [auth?.token, cartItems, clearCartItems]);
 
-    // Timer to redirect after 3 sec
     let intervalId = useRef(null);
     useEffect(() => {
         intervalId.current = setInterval(() => {
@@ -50,23 +46,23 @@ const OrderSuccess = () => {
     return (
         <>
             <SeoData title={`Transaction Successful`} />
-            <main className="w-full min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 p-4">
+            <main className="w-full min-h-screen flex items-center justify-center bg-gradient-to-br from-[#e0f7fa] via-[#f1faff] to-[#f0f9ff] p-4">
                 {loading ? (
                     <Spinner />
                 ) : (
-                    <div className="flex flex-col gap-4 items-center justify-center w-full max-w-lg mx-auto bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 border border-gray-800 shadow-2xl rounded-2xl p-8 min-h-[50vh]">
+                    <div className="flex flex-col gap-4 items-center justify-center w-full max-w-lg mx-auto bg-white border border-[#bae6fd] shadow-2xl rounded-2xl p-8 min-h-[50vh]">
                         <div className="flex gap-4 items-center">
-                            <h1 className="text-2xl font-bold text-green-400">
+                            <h1 className="text-2xl font-bold text-green-500">
                                 Transaction Successful
                             </h1>
-                            <CheckCircleOutlineIcon className="text-green-400" fontSize="large" />
+                            <CheckCircleOutlineIcon className="text-green-500" fontSize="large" />
                         </div>
-                        <p className="mt-2 text-lg text-indigo-200 text-center">
-                            Redirecting to orders in <span className="font-semibold text-yellow-400">{time}</span> sec
+                        <p className="mt-2 text-lg text-[#2563eb] text-center">
+                            Redirecting to orders in <span className="font-semibold text-yellow-500">{time}</span> sec
                         </p>
                         <Link
                             to="/user/orders"
-                            className="bg-gradient-to-r from-green-600 to-indigo-500 hover:from-green-700 hover:to-indigo-600 text-white uppercase font-semibold py-2.5 px-8 rounded-lg shadow-lg transition-all text-base tracking-wide mt-2"
+                            className="bg-gradient-to-r from-green-400 to-[#38bdf8] hover:from-green-500 hover:to-[#0ea5e9] text-white uppercase font-semibold py-2.5 px-8 rounded-lg shadow-lg transition-all text-base tracking-wide mt-2"
                         >
                             Go to Orders
                         </Link>

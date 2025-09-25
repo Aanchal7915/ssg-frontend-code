@@ -105,7 +105,7 @@ const Products = () => {
                         toastId: "productNotFound",
                     });
                 const prod=[...res.data.products, ...res.data.products, ...res.data.products, ...res.data.products, ...res.data.products]// remove duplicate
-                res.status === 201 && setProducts(prod);
+                res.status === 201 && setProducts(res.data.products);
                 setLoading(false);
                 setProductsCount(res.data.products.length);
             } catch (error) {

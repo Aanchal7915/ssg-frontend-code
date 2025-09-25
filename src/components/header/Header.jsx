@@ -10,13 +10,15 @@ import { MdLogin, MdLogout } from "react-icons/md";
 import { useAuth } from "../../context/auth";
 import SearchBar from "./SearchBar";
 import { useCart } from "../../context/cart";
+// import { toast } from "react-toastify";
+// import LogOut from "../../pages/Auth/LogOut";
 
 const Header = () => {
     const [isDropdownOpen, setDropdownOpen] = useState(false);
     const headerRef = useRef(null);
 
-    const { auth, LogOut } = useAuth();
-    const [cartItems] = useCart();
+    const {auth, setAuth, LogOut} = useAuth();
+    const [cartItems, setCartItems] = useCart();
 
     let closeTimeout;
     const toggleDropdown = () => {
@@ -46,154 +48,161 @@ const Header = () => {
 
     useEffect(() => {
         window.addEventListener("scroll", handleStickyHeader);
+        //clean up function
         return () => {
             window.removeEventListener("scroll", handleStickyHeader);
         };
     });
-
     return (
-        <header
-            ref={headerRef}
-            className="bg-gradient-to-br from-gray-950 via-gray-900 to-gray-800 border-b border-gray-600 shadow-2xl transition-all duration-300"
-        >
+        <header ref={headerRef} className="bg-gradient-to-br from-[#e0f7fa] via-[#f1faff] to-[#f0f9ff] border-b border-[#38bdf8] shadow-md z-[50]">
             <nav className="container px-4 md:px-[50px]">
-                <div className="py-2 flex items-center justify-between gap-3 md:gap-14 w-full flex-col md:flex-row">
+                <div className="flex items-center justify-between gap-3 md:gap-14 w-full flex-col md:flex-row sm:flex-row lg:flex-row">
                     {/* primary div */}
-                    <div className="flex items-center w-full max-w-[650px] gap-4">
-                        {/* logo */}
-                        <Link to="/" className="group relative">
-                            
-                                <img
-                                    src="/logo-10.png"
-                                    alt="logo"
-                                    className="w-[60px] h-[60px] object-cover rounded-full border-[1px] border-gray-600"
-                                />
-                            
+                    <div className="sm:h-[100px] md:h-[60px] lg:h-[60px] flex items-center justify-between w-[100%] max-w-[650px]">
+                        <div className="flex gap-[20px] items-center w-[100%] flex-col md:flex-row sm:flex-row lg:flex-row">
+                            {/* logo */}
+                           <Link to="/" className="group relative">
+                            <img
+                                src="/logo-10.png"
+                                alt="logo"
+                                className="w-[50px] object-cover rounded-full border-[1px] border-[#54B1CE] shadow-lg bg-white transition-transform duration-200 hover:scale-105"
+                                style={{
+                                    boxShadow: "0 4px 24px 0 #54B1CE33",
+                                }}
+                            />
                         </Link>
-                        {/* search bar */}
-                        <div className="flex-1">
+                            {/* search bar */}
                             <SearchBar />
                         </div>
                     </div>
 
                     {/* secondary div */}
-                    <div className="flex items-center justify-between gap-8 w-full md:w-auto mt-4 md:mt-0">
+                    <div className="flex items-center justify-between gap-[50px] w-[70%] mb-4 md:mb-0">
                         {/* home */}
-                        <NavLink
-                            to="/"
-                            className="flex items-center gap-1 px-3 py-2 rounded-lg hover:bg-gray-800/70 transition group"
-                        >
-                            <BiHomeSmile className="text-[22px] text-indigo-400 group-hover:text-indigo-300" />
-                            <span className="text-[16px] hidden md:block text-gray-200 group-hover:text-indigo-300">
-                                Home
-                            </span>
-                        </NavLink>
+                        <div className="flex items-center group">
+                            <NavLink to="/" className="flex items-center gap-1">
+                                <BiHomeSmile className="text-[22px] text-[#2563eb]" />
+                                <span className="text-[18px] hidden md:block lg:block group-hover:text-[#2563eb] text-[#334155]">
+                                    Home
+                                </span>
+                            </NavLink>
+                        </div>
 
                         {/* Account */}
                         <div
-                            className={`flex items-center relative cursor-pointer group rounded-lg px-3 py-2 hover:bg-gray-800/70 transition`}
+                            className={`flex items-center relative cursor-pointer group ${
+                                auth.user
+                                    ? "hover:bg-[#e0f7fa]"
+                                    : "hover:bg-[#38bdf8]"
+                            } rounded-md p-1`}
                             onMouseEnter={toggleDropdown}
                             onMouseLeave={closeDropdown}
                         >
                             {auth.user ? (
-                                <div className="flex items-center gap-1">
-                                    <AiOutlineUser className="text-[22px] text-indigo-400" />
-                                    <span className="text-[16px] max-w-fit hidden md:block text-gray-200">
-                                        {auth.user.name.split(" ")[0]}
+                                <div className="flex items-center gap-1 ">
+                                    <AiOutlineUser className="text-[22px] text-[#2563eb]" />
+                                    <span className="text-[18px] max-w-fit hidden md:block lg:block text-[#334155]">
+                                        <p>{auth.user.name.split(" ")[0]}</p>
                                     </span>
-                                    <RiArrowDropDownLine className="text-indigo-400 group-hover:rotate-180 transition-transform" />
+                                    <span>
+                                        <RiArrowDropDownLine className="group-hover:rotate-[180deg] transition-all text-[#2563eb]" />
+                                    </span>
                                 </div>
                             ) : (
-                                <div className="flex items-center gap-1">
+                                <div className="flex items-center gap-1 w-fit">
                                     <Link
                                         to="/login"
-                                        className="flex gap-1 text-gray-200 group-hover:text-indigo-300"
+                                        className="flex gap-1 group-hover:text-white"
                                     >
-                                        <AiOutlineUser className="text-[22px] text-indigo-400 group-hover:text-indigo-300" />
-                                        <span className="text-[16px] max-w-fit hidden md:block">
-                                            Sign in
+                                        <AiOutlineUser className="text-[22px] group-hover:text-white text-[#2563eb]" />
+                                        <span className="text-[18px] max-w-fit hidden md:block lg:block text-[#334155]">
+                                            <p>Sign in</p>
                                         </span>
                                     </Link>
-                                    <RiArrowDropDownLine className="text-indigo-400 group-hover:rotate-180 transition-transform" />
+                                    <span>
+                                        <RiArrowDropDownLine
+                                            className="group-hover:rotate-[180deg] transition-all 
+                                                    group-hover:text-white text-[#2563eb]"
+                                        />
+                                    </span>
                                 </div>
                             )}
 
                             {/* dropdown menu */}
                             {isDropdownOpen && (
                                 <div
-                                    className="absolute top-[46px] -left-2 z-50 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 border border-gray-700 rounded-xl p-2 w-[170px] shadow-xl transition-all flex flex-col"
+                                    className="absolute top-[36px] -left-[2px] z-[50] bg-white border border-[#38bdf8] rounded-md p-2 w-[140px] transition-all flex flex-col shadow-xl"
                                     onMouseEnter={toggleDropdown}
                                     onMouseLeave={closeDropdown}
                                 >
                                     <ul>
                                         {!auth.user && (
-                                            <li className="p-2 hover:bg-gray-800 rounded-lg transition">
+                                            <li className="p-1 hover:bg-[#e0f7fa] rounded-md">
                                                 <Link
                                                     to="/register"
-                                                    className="flex items-center gap-3 text-gray-200"
+                                                    className="flex items-center gap-3 text-[#2563eb]"
                                                 >
-                                                    <MdLogin className="text-[18px] text-indigo-400" />
-                                                    <span className="text-[15px]">
+                                                    <MdLogin className="text-[14px] text-[#2563eb]" />
+                                                    <span className="text-[16px] text-[#334155]">
                                                         Sign up
                                                     </span>
                                                 </Link>
                                             </li>
                                         )}
-                                        <li className="p-2 hover:bg-gray-800 rounded-lg transition">
+                                        <li className="p-1 hover:bg-[#e0f7fa] rounded-md">
                                             <Link
                                                 to={`${
                                                     auth?.user?.role === 1
                                                         ? "/admin"
-                                                        : auth?.user?.role === 0
-                                                        ? "/user"
-                                                        : "/delivery-agent"
+                                                        : "/user"
                                                 }/dashboard`}
-                                                className="flex items-center gap-3 text-gray-200"
+                                                className="flex items-center gap-3 text-[#2563eb]"
                                             >
-                                                <AiOutlineUser className="text-[18px] text-indigo-400" />
-                                                <span className="text-[15px]">
+                                                <AiOutlineUser className="text-[14px] text-[#2563eb]" />
+                                                <span className="text-[16px] text-[#334155]">
                                                     My Profile
                                                 </span>
                                             </Link>
                                         </li>
                                         {/* if user is not admin */}
                                         {auth.user?.role !== 1 && (
-                                            <li className="p-2 hover:bg-gray-800 rounded-lg transition">
+                                            <li className="p-1 hover:bg-[#e0f7fa] rounded-md">
                                                 <Link
                                                     to="/user/wishlist"
-                                                    className="flex items-center gap-3 text-gray-200"
+                                                    className="flex items-center gap-3 text-[#2563eb]"
                                                 >
-                                                    <AiOutlineHeart className="text-[18px] text-pink-400" />
-                                                    <span className="text-[15px]">
+                                                    <AiOutlineHeart className="text-[14px] text-[#2563eb]" />
+                                                    <span className="text-[16px] text-[#334155]">
                                                         Wishlist
                                                     </span>
                                                 </Link>
                                             </li>
                                         )}
-                                        <li className="p-2 hover:bg-gray-800 rounded-lg transition">
+                                        <li className="p-1 hover:bg-[#e0f7fa] rounded-md">
                                             <Link
                                                 to={`${
                                                     auth?.user?.role === 1
                                                         ? "/admin"
                                                         : "/user"
                                                 }/orders`}
-                                                className="flex items-center gap-3 text-gray-200"
+                                                className="flex items-center gap-3 text-[#2563eb]"
                                             >
-                                                <BsBox className="text-[18px] text-yellow-400" />
-                                                <span className="text-[15px]">
+                                                <BsBox className="text-[14px] text-[#2563eb]" />
+                                                <span className="text-[16px] text-[#334155]">
                                                     Orders
                                                 </span>
                                             </Link>
                                         </li>
+
                                         {auth.user && (
-                                            <li className="p-2 hover:bg-gray-800 rounded-lg transition">
+                                            <li className="p-1 hover:bg-[#e0f7fa] rounded-md ">
                                                 <Link
                                                     onClick={handleLogout}
                                                     to="/login"
-                                                    className="flex items-center gap-3 text-gray-200"
+                                                    className="flex items-center gap-3 text-[#2563eb]"
                                                 >
-                                                    <MdLogout className="text-[18px] text-red-400" />
-                                                    <span className="text-[15px]">
+                                                    <MdLogout className="text-[14px] text-[#2563eb]" />
+                                                    <span className="text-[16px] text-[#334155]">
                                                         Logout
                                                     </span>
                                                 </Link>
@@ -206,18 +215,20 @@ const Header = () => {
 
                         {/* cart */}
                         {auth?.user?.role !== 1 && (
-                            <NavLink
-                                to="/cart"
-                                className="relative flex items-center gap-1 px-3 py-2 rounded-lg hover:bg-gray-800/70 transition group"
-                            >
-                                <span className="absolute w-5 h-5 text-[11px] text-center font-semibold left-4 -top-2 text-white bg-red-500 rounded-full flex items-center justify-center shadow">
-                                    {cartItems?.length}
-                                </span>
-                                <BsCart2 className="text-[22px] text-indigo-400 group-hover:text-indigo-300" />
-                                <span className="hidden md:block text-gray-200 group-hover:text-indigo-300">
-                                    <p className="text-[16px]">Cart</p>
-                                </span>
-                            </NavLink>
+                            <div className="flex items-center gap-1 group">
+                                <NavLink
+                                    to="/cart"
+                                    className="relative flex items-center gap-1"
+                                >
+                                    <span className="absolute w-4 h-4 text-[11px] text-center font-semibold left-2 bottom-3 text-white bg-[#f87171] rounded-[50%] ">
+                                        {cartItems?.length}
+                                    </span>
+                                    <BsCart2 className="text-[22px] text-[#2563eb]" />
+                                    <span className="hidden md:block lg:block group-hover:text-[#2563eb] text-[#334155]">
+                                        <p className="text-[18px]">Cart</p>
+                                    </span>
+                                </NavLink>
+                            </div>
                         )}
                     </div>
                 </div>

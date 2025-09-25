@@ -30,8 +30,8 @@ const Product = (props) => {
     const shouldRenderImage = images && images.length > 0;
 
     return (
-        <div className="flex gap-4 p-4 sm:pb-8 w-full group overflow-hidden bg-gradient-to-br from-gray-900/80 via-gray-800/80 to-gray-950/80 rounded-xl shadow border border-gray-800 mb-4">
-            <div className="w-1/6 h-28 flex-shrink-0 bg-gray-900 rounded-lg border border-gray-800 flex items-center justify-center">
+        <div className="flex gap-4 p-4 sm:pb-8 w-full group overflow-hidden bg-gradient-to-br from-[#e0f7fa]/80 via-[#f1faff]/80 to-[#f0f9ff]/80 shadow border border-[#bae6fd] mb-4">
+            <div className="w-1/6 h-28 flex-shrink-0 bg-white rounded-lg border border-[#bae6fd] flex items-center justify-center">
                 <img
                     draggable="false"
                     className="h-full w-full object-contain"
@@ -47,30 +47,22 @@ const Product = (props) => {
                         to={`/product/${_id}`}
                         className="flex flex-col gap-0.5"
                     >
-                        <p className="group-hover:text-indigo-400 w-56 sm:w-full truncate font-semibold text-indigo-200">
+                        <p className="group-hover:text-[#2563eb] w-56 sm:w-full truncate font-semibold text-[#2563eb]">
                             {name?.length > 70
                                 ? `${name?.substring(0, 70)}...`
                                 : name}
                         </p>
                         {/* Rating badge */}
-                        <span className="text-sm text-gray-400 font-medium flex gap-2 items-center">
-                            <span className="text-xs px-1.5 py-0.5 bg-indigo-600 rounded-sm text-white flex items-center gap-0.5">
+                        <span className="text-sm text-[#64748b] font-medium flex gap-2 items-center">
+                            <span className="text-xs px-1.5 py-0.5 bg-[#38bdf8] rounded-sm text-white flex items-center gap-0.5">
                                 {ratings} <StarIcon sx={{ fontSize: "14px" }} />
                             </span>
                             <span>({numOfReviews?.toLocaleString()})</span>
-                            {/* <span>
-                                <img
-                                    draggable="false"
-                                    className="w-[60px] h-[20px] ml-4 object-contain"
-                                    src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/fa_62673a.png"
-                                    alt={name}
-                                />
-                            </span> */}
                         </span>
                     </Link>
                     <button
                         onClick={deleteProduct}
-                        className="text-gray-400 hover:text-red-400 border border-gray-700 hover:border-red-400 rounded-lg p-2 transition-all duration-200 bg-gray-900"
+                        className="text-[#64748b] hover:text-[#f87171] border border-[#bae6fd] hover:border-[#f87171] rounded-lg p-2 transition-all duration-200 bg-white"
                         disabled={isDeleting}
                     >
                         <DeleteIcon />
@@ -78,13 +70,13 @@ const Product = (props) => {
                 </div>
                 {/* Price desc */}
                 <div className="flex items-center gap-2 text-2xl font-medium">
-                    <span className="text-white">
+                    <span className="text-[#2563eb]">
                         ₹{(price - discountPrice)?.toLocaleString()}
                     </span>
-                    <span className="text-sm text-gray-500 line-through font-normal mt-1">
+                    <span className="text-sm text-[#64748b] line-through font-normal mt-1">
                         ₹{price?.toLocaleString()}
                     </span>
-                    <span className="text-sm text-green-400 mt-1">
+                    <span className="text-sm text-green-500 mt-1">
                         {getDiscount(price, discountPrice)}%&nbsp;off
                     </span>
                 </div>

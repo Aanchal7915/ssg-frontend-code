@@ -737,6 +737,9 @@ const EditProduct = () => {
                                 (1-4 images, max 500KB each)
                             </span>
                         </h2>
+                        {
+                            console.log("oldimgs:", imagesPreview, "removedImgs:", oldImages)
+                        }
                         <div className="flex gap-2 overflow-x-auto h-36 border border-gray-700 rounded bg-gray-900 p-2">
                             {imagesPreview?.map((image, i) => (
                                 <img

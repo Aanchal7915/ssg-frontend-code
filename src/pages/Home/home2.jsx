@@ -829,11 +829,11 @@
 //                 <Category />
 //                 <section className="py-10 px-6">
 //                     <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-//                         <div className="flex flex-col items-center text-center bg-white rounded-2xl border-2 border-sky-200 p-8 hover:bg-sky-50 transition-colors duration-300">
+//                         <div className="flex flex-col items-center text-center bg-white rounded-2xl border-2 border-sky-100 p-8 animate-fadeIn hover:scale-105 transition-transform duration-300">
 //                             <img
 //                                 src="https://cdn-icons-png.flaticon.com/512/1042/1042330.png"
 //                                 alt="Bulk"
-//                                 className="w-16 h-16 mb-4"
+//                                 className="w-16 h-16 mb-4 animate-float"
 //                             />
 //                             <h3 className="text-xl font-bold text-sky-700 mb-2">
 //                                 Bulk Orders
@@ -843,11 +843,11 @@
 //                                 resellers.
 //                             </p>
 //                         </div>
-//                         <div className="flex flex-col items-center text-center bg-white rounded-2xl border-2 border-sky-200 p-8 hover:bg-sky-50 transition-colors duration-300">
+//                         <div className="flex flex-col items-center text-center bg-white rounded-2xl border-2 border-sky-100 p-8 animate-fadeIn hover:scale-105 transition-transform duration-300">
 //                             <img
 //                                 src="https://cdn-icons-png.flaticon.com/512/1042/1042332.png"
 //                                 alt="Warranty"
-//                                 className="w-16 h-16 mb-4"
+//                                 className="w-16 h-16 mb-4 animate-float"
 //                             />
 //                             <h3 className="text-xl font-bold text-sky-700 mb-2">
 //                                 Warranty & Support
@@ -857,11 +857,11 @@
 //                                 support.
 //                             </p>
 //                         </div>
-//                         <div className="flex flex-col items-center text-center bg-white rounded-2xl border-2 border-sky-200 p-8 hover:bg-sky-50 transition-colors duration-300">
+//                         <div className="flex flex-col items-center text-center bg-white rounded-2xl border-2 border-sky-100 p-8 animate-fadeIn hover:scale-105 transition-transform duration-300">
 //                             <img
 //                                 src="https://cdn-icons-png.flaticon.com/512/1042/1042331.png"
 //                                 alt="Shipping"
-//                                 className="w-16 h-16 mb-4"
+//                                 className="w-16 h-16 mb-4 animate-float"
 //                             />
 //                             <h3 className="text-xl font-bold text-sky-700 mb-2">
 //                                 Express Shipping
@@ -1061,6 +1061,10 @@
 
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Hero from "./Hero";
+import Testimonial from "./Testimonial"
+import MiniCategory from "../../components/MinCategory";
+// import Accessories from "./accessories";
 
 
 // Mock ProductCard component (replace with actual ProductCard)
@@ -1130,6 +1134,7 @@ const useCases = [
   },
 ];
 
+
 const HomePage = ({ searchKeyword = "" }) => {
   const navigate = useNavigate();
 
@@ -1137,7 +1142,7 @@ const HomePage = ({ searchKeyword = "" }) => {
   const sliderData = [
     {
       id: 1,
-      title: "Stock High-Quality Wires and Chargers for Your Store!",
+      title: "Stock High-Quality products with top brands are categorized!",
       offer: "Limited Time Wholesale Offer",
       buttonText1: "Shop Now",
       buttonText2: "Explore More",
@@ -1145,7 +1150,7 @@ const HomePage = ({ searchKeyword = "" }) => {
     },
     {
       id: 2,
-      title: "Upgrade Your Accessories Inventory with Earbuds & Headsets!",
+      title: "Unleash your potential using latest tech and gadgets!",
       offer: "Bulk Deals Available",
       buttonText1: "Order Now",
       buttonText2: "View Collection",
@@ -1153,7 +1158,7 @@ const HomePage = ({ searchKeyword = "" }) => {
     },
     {
       id: 3,
-      title: "Get Essential Office & Gaming Accessories in Bulk Today!",
+      title: "Explore laptops,phones,accessories,cloths,and jewellery!",
       offer: "Exclusive Wholesale Discounts",
       buttonText1: "Buy in Bulk",
       buttonText2: "Learn More",
@@ -1237,9 +1242,11 @@ const HomePage = ({ searchKeyword = "" }) => {
   );
 
   return (
-    <div className="w-full pt-16">
+    <>
+      <MiniCategory />
+    <div className="w-full">
       {/* Header Slider Section */}
-      <div className="overflow-hidden relative w-full">
+      {/* <div className="overflow-hidden relative w-full">
         <div
           className="flex transition-transform duration-700 ease-in-out"
           style={{
@@ -1298,8 +1305,8 @@ const HomePage = ({ searchKeyword = "" }) => {
             ></div>
           ))}
         </div>
-      </div>
-
+      </div> */}
+		<Hero/>
       {/* Categories Grid Section */}
       <div className="mt-12">
         <div className="text-center mb-8">
@@ -1353,7 +1360,7 @@ const HomePage = ({ searchKeyword = "" }) => {
       </div>
 
       {/* Quick Stats Section */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 bg-gray-50 rounded-lg p-6 max-w-7xl mx-auto">
+      {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 bg-gray-50 rounded-lg p-6 max-w-7xl mx-auto">
         <div className="text-center">
           <div className="text-3xl font-bold text-[#54B1CE]">1000+</div>
           <div className="text-gray-600">Products Available</div>
@@ -1366,8 +1373,8 @@ const HomePage = ({ searchKeyword = "" }) => {
           <div className="text-3xl font-bold text-[#54B1CE]">24/7</div>
           <div className="text-gray-600">Customer Support</div>
         </div>
-      </div>
-
+      </div> */}
+{/* 
       {/* Flow Diagram Section */}
       <div className="bg-white py-16 px-6 md:px-16 lg:px-32 overflow-x-hidden">
         <h2 className="text-3xl font-bold text-center text-[#54B1CE]">
@@ -1377,41 +1384,51 @@ const HomePage = ({ searchKeyword = "" }) => {
           Explore use cases and find products suited for your business
         </p>
 
-        <div className="flex flex-row md:flex-row justify-start items-center mt-12 gap-16 overflow-x-auto scrollbar-hide relative max-w-7xl mx-auto">
-          {useCases.map((useCase, index) => (
-            <div
-              key={useCase.id}
-              className="flex flex-col items-center relative group animate-fade-in"
-              style={{ animationDelay: `${index * 0.3}s` }}
-            >
-              <div className="bg-[#54B1CE] w-20 h-20 rounded-full flex items-center justify-center mb-4 overflow-hidden transform transition-transform duration-500 group-hover:scale-110 group-hover:animate-bounce">
-                <img
-                  src={useCase.icon}
-                  alt={useCase.title}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <p className="font-semibold text-lg text-[#54B1CE] text-center">
-                {useCase.title}
-              </p>
-              <p className="text-center text-gray-600 mt-2 max-w-xs">
-                {useCase.description}
-              </p>
-              {index !== useCases.length - 1 && (
-                <div className="absolute top-10 md:top-10 left-full md:left-auto md:right-[-90px] w-24 h-1 flex items-center justify-start">
-                  <div className="w-full h-1 relative overflow-hidden rounded">
-                    <div className="h-1 w-full bg-gradient-to-r from-[#54B1CE] via-white to-[#54B1CE] animate-gradient-move absolute"></div>
-                    <div className="w-4 h-4 rotate-45 border-t-2 border-r-2 border-[#54B1CE] absolute right-0 -top-1/2"></div>
-                  </div>
+        {/* Card Slider */}
+        <div className="relative mt-12 max-w-5xl mx-auto">
+          <div className="flex gap-8 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory">
+            {useCases.map((useCase, index) => (
+              <div
+                key={useCase.id}
+                className="min-w-[260px] max-w-xs bg-white border-2 border-[#54B1CE]/30 rounded-3xl shadow-lg mx-auto flex flex-col items-center p-7 snap-center transition-transform duration-500 hover:-translate-y-2 hover:shadow-2xl group animate-slideCard"
+                style={{ animationDelay: `${index * 0.15}s` }}
+              >
+                <div className="bg-[#54B1CE]/10 rounded-full w-24 h-24 flex items-center justify-center mb-4 border-2 border-[#54B1CE]/20 group-hover:scale-105 transition-transform duration-300">
+                  <img
+                    src={useCase.icon}
+                    alt={useCase.title}
+                    className="w-20 h-20 object-cover rounded-full border-4 border-white group-hover:rotate-[8deg] transition-transform duration-300"
+                  />
                 </div>
-              )}
+                <h3 className="font-bold text-lg text-[#54B1CE] text-center mb-1 group-hover:text-[#0e7490] transition-colors">
+                  {useCase.title}
+                </h3>
+                <p className="text-center text-gray-600 mt-1 text-base">
+                  {useCase.description}
+                </p>
+              </div>
+            ))}
+          </div>
+          {/* Slider hint arrows */}
+          <div className="absolute left-0 top-1/2 -translate-y-1/2 pointer-events-none hidden md:block">
+            <div className="w-10 h-10 bg-[#54B1CE]/10 rounded-full flex items-center justify-center">
+              <svg width="20" height="20" fill="#54B1CE" viewBox="0 0 20 20"><path d="M13 15l-5-5 5-5" stroke="#54B1CE" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg>
             </div>
-          ))}
+          </div>
+          <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none hidden md:block">
+            <div className="w-10 h-10 bg-[#54B1CE]/10 rounded-full flex items-center justify-center">
+              <svg width="20" height="20" fill="#54B1CE" viewBox="0 0 20 20"><path d="M7 5l5 5-5 5" stroke="#54B1CE" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg>
+            </div>
+          </div>
         </div>
       </div>
 
+	  
+
+	  
+
       {/* NewsLetter Section */}
-      <div className="relative flex flex-col items-center justify-center text-center py-20 bg-white overflow-hidden">
+      {/* <div className="relative flex flex-col items-center justify-center text-center py-20 bg-white overflow-hidden">
         <div className="absolute w-80 h-80 md:w-96 md:h-96 rounded-full bg-gradient-to-r from-[#54B1CE]/20 via-white/0 to-[#54B1CE]/20 animate-pulse-slow z-0"></div>
         <div className="relative flex flex-col items-center justify-center w-72 h-72 md:w-96 md:h-96 rounded-full bg-white border-2 border-[#54B1CE] shadow-xl z-10 p-6">
           <h1 className="text-2xl md:text-4xl font-bold text-[#054b6d] leading-snug">
@@ -1431,7 +1448,9 @@ const HomePage = ({ searchKeyword = "" }) => {
             Subscribe
           </button>
         </div>
-      </div>
+      </div> */}
+	  <Testimonial/>
+	  
 
       {/* CSS Animations */}
       <style>
@@ -1468,6 +1487,14 @@ const HomePage = ({ searchKeyword = "" }) => {
             animation: pulse-slow 8s ease-in-out infinite;
           }
 
+          @keyframes slideCard {
+            0% { opacity: 0; transform: translateY(40px) scale(0.95);}
+            100% { opacity: 1; transform: translateY(0) scale(1);}
+          }
+          .animate-slideCard {
+            animation: slideCard 0.7s cubic-bezier(.68,-0.55,.27,1.55) both;
+          }
+
           .scrollbar-hide::-webkit-scrollbar {
             display: none;
           }
@@ -1478,11 +1505,11 @@ const HomePage = ({ searchKeyword = "" }) => {
         `}
       </style>
     </div>
+    </>
   );
 };
 
 export default HomePage;
-
 
 
 

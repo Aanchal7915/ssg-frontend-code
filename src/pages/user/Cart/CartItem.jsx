@@ -44,13 +44,13 @@ const CartItem = ({ product, inCart }) => {
     };
 
     return (
-        <div className="flex flex-col gap-3 py-5 pl-2 sm:pl-6 border-b overflow-hidden">
+        <div className="flex flex-col gap-3 py-5 pl-2 sm:pl-6 border-b overflow-hidden bg-gradient-to-br from-[#e0f7fa]/80 via-[#f1faff]/80 to-[#f0f9ff]/80 rounded-xl shadow mb-4">
             <Link
                 to={`/product/${product?.productId}`}
                 className="flex flex-col sm:flex-row gap-5 items-stretch w-full "
             >
                 {/* product image */}
-                <div className="w-full sm:w-1/6 h-28 flex-shrink-0">
+                <div className="w-full sm:w-1/6 h-28 flex-shrink-0 bg-white rounded-lg border border-[#bae6fd] flex items-center justify-center">
                     <img
                         draggable="false"
                         className="h-full w-full object-contain"
@@ -107,19 +107,19 @@ const CartItem = ({ product, inCart }) => {
                 <div className="flex gap-2 items-center justify-between w-[130px]">
                     <button
                         onClick={() => decreaseQuantity(product)}
-                        className="w-7 h-7 flex items-center justify-center rounded-full border border-gray-700 bg-gray-900 text-indigo-300 hover:bg-indigo-950 transition-all duration-200"
+                        className="w-7 h-7 flex items-center justify-center rounded-full border border-[#38bdf8] bg-gradient-to-r from-[#e0f7fa] to-[#bae6fd] text-[#2563eb] hover:bg-[#bae6fd] transition-all duration-200"
                         aria-label="Decrease"
                     >
                         <RemoveIcon fontSize="small" />
                     </button>
                     <input
-                        className="w-11 border border-gray-700 outline-none text-center select-none rounded-sm py-0.5 bg-gray-900 text-indigo-200 font-medium text-sm qtyInput"
+                        className="w-11 border border-[#38bdf8] outline-none text-center select-none rounded-sm py-0.5 bg-white text-indigo-900 font-medium text-sm qtyInput"
                         value={quantity}
                         disabled
                     />
                     <button
                         onClick={() => increaseQuantity(product)}
-                        className="w-7 h-7 flex items-center justify-center rounded-full border border-gray-700 bg-gray-900 text-indigo-300 hover:bg-indigo-950 transition-all duration-200"
+                        className="w-7 h-7 flex items-center justify-center rounded-full border border-[#38bdf8] bg-gradient-to-r from-[#e0f7fa] to-[#bae6fd] text-[#2563eb] hover:bg-[#bae6fd] transition-all duration-200"
                         aria-label="Increase"
                     >
                         <AddIcon fontSize="small" />
@@ -130,14 +130,14 @@ const CartItem = ({ product, inCart }) => {
                     <>
                         <button
                             onClick={() => saveForLaterHandler(product)}
-                            className="sm:ml-4 font-medium text-indigo-400 hover:text-indigo-300 flex items-center gap-1 border border-indigo-500 rounded px-3 py-1 transition-all duration-200 bg-gray-900 hover:bg-indigo-950 shadow"
+                            className="sm:ml-4 font-medium text-[#2563eb] hover:text-[#0ea5e9] flex items-center gap-1 border border-[#38bdf8] rounded px-3 py-1 transition-all duration-200 bg-gradient-to-r from-[#e0f7fa] to-[#bae6fd] hover:bg-[#bae6fd] shadow"
                         >
                             <SaveIcon sx={{ fontSize: "18px" }} />
                             SAVE FOR LATER
                         </button>
                         <button
                             onClick={() => removeCartItem(product)}
-                            className="font-medium text-red-400 hover:text-red-300 flex items-center gap-1 border border-red-500 rounded px-3 py-1 transition-all duration-200 bg-gray-900 hover:bg-red-950 shadow"
+                            className="font-medium text-[#f87171] hover:text-[#ef4444] flex items-center gap-1 border border-[#f87171] rounded px-3 py-1 transition-all duration-200 bg-gradient-to-r from-[#fef2f2] to-[#f87171] hover:bg-[#f87171] shadow"
                         >
                             <DeleteIcon sx={{ fontSize: "18px" }} />
                             REMOVE

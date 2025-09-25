@@ -192,12 +192,12 @@ const UserProfile = () => {
                         <div className="font-[600] text-[16px] ">
                             Email Address
                         </div>
-                        <button
+                        {/* <button
                             className="text-[14px] text-primaryBlue font-[500]"
                             onClick={handleEmail}
                         >
                             {!emailSection ? "Edit" : "Cancel"}
-                        </button>
+                        </button> */}
                     </div>
                     <div className="flex gap-6 ">
                         {emailSection ? (
@@ -227,7 +227,7 @@ const UserProfile = () => {
                 {/* Mobile section */}
                 <div className="flex flex-col items-start gap-4">
                     <div className="flex gap-5">
-                        <div className="font-[600] text-[16px] ">
+                        <div className="font-[600] text-[16px]">
                             Mobile Number
                         </div>
                         <button
@@ -266,7 +266,7 @@ const UserProfile = () => {
                     </div>
                 </div>
                 {/* FAQ section */}
-                <div>
+                {/* <div>
                     <h3 className="text-[16px] font-[600] mt-4">FAQs</h3>
                     <div className="mt-4">
                         <h5 className="text-[14px] font-[500]">
@@ -301,18 +301,18 @@ const UserProfile = () => {
                             will reflect in your Seller account also.
                         </p>
                     </div>
-                </div>
+                </div> */}
                 {/* deactivate account */}
-                <div className="text-[14px] text-primaryBlue font-[500] mt-4 -mb-4">
+                {/* <div className="text-[14px] text-primaryBlue font-[500] mt-4 -mb-4">
                     <Link to="./deactivate">Deactivate Account</Link>
-                </div>
+                </div> */}
             </div>
             {/* image section */}
             <div>
-                <img
+                {/* <img
                     src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/myProfileFooter_4e9fe2.png"
                     alt="image"
-                />
+                /> */}
             </div>
         </div>
     );

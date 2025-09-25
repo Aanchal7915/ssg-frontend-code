@@ -90,20 +90,20 @@ const Wishlist = () => {
             {isLoading && page === 1 ? (
                 <Spinner />
             ) : (
-                <main className="w-full pt-5 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 min-h-screen text-gray-100">
+                <main className="w-full pt-5 bg-gradient-to-br from-[#e0f7fa] via-[#f1faff] to-[#f0f9ff] min-h-screen text-[#334155]">
                     <div className="flex gap-3.5 w-full sm:w-11/12 sm:mt-4 m-auto pb-7">
-                        <div className="flex-1 shadow-xl bg-gradient-to-br from-gray-900/80 via-gray-800/80 to-gray-950/80 rounded-xl border border-gray-800">
+                        <div className="flex-1 shadow-xl bg-white/80 rounded-xl border border-[#bae6fd]">
                             {/* Back button */}
                             <button
                                 onClick={() => navigate(-1)}
-                                className="flex items-center gap-2 px-4 py-2 mt-4 mb-2 text-indigo-300 hover:text-indigo-400 bg-gray-900 rounded-lg border border-gray-800 shadow transition-all duration-200 w-fit"
+                                className="flex items-center gap-2 px-4 py-2 mt-4 mb-2 text-[#2563eb] hover:text-[#0ea5e9] bg-white rounded-lg border border-[#bae6fd] shadow transition-all duration-200 w-fit"
                             >
                                 <ArrowBackIcon />
                                 <span className="font-medium">Back</span>
                             </button>
                             {/* Wishlist container */}
                             <div className="flex flex-col">
-                                <span className="font-medium text-lg px-4 sm:px-8 py-4 border-b border-gray-800 text-indigo-300">
+                                <span className="font-medium text-lg px-4 sm:px-8 py-4 border-b border-[#bae6fd] text-[#2563eb]">
                                     My Wishlist ({count})
                                 </span>
 
@@ -115,10 +115,10 @@ const Wishlist = () => {
                                             src="https://cdn-icons-png.flaticon.com/512/4076/4076549.png"
                                             alt="Empty Wishlist"
                                         />
-                                        <span className="text-lg font-semibold text-indigo-300 mt-6">
+                                        <span className="text-lg font-semibold text-[#2563eb] mt-6">
                                             Empty Wishlist
                                         </span>
-                                        <p className="text-sm text-gray-400">
+                                        <p className="text-sm text-[#64748b]">
                                             You have no items in your wishlist. Start
                                             adding!
                                         </p>
@@ -134,13 +134,13 @@ const Wishlist = () => {
                                 )}
 
                                 {count > wishlistItems.length && (
-                                    <span className="font-medium text-md px-4 sm:px-8 py-4 flex items-center justify-center border-b border-gray-800">
+                                    <span className="font-medium text-md px-4 sm:px-8 py-4 flex items-center justify-center border-b border-[#bae6fd]">
                                         <button
                                             onClick={handleLoadMore}
-                                            className="bg-gradient-to-r from-indigo-600 to-indigo-400 text-white px-6 py-2 rounded-lg shadow hover:shadow-lg border-2 border-indigo-400 transition-all duration-300 group relative"
+                                            className="bg-gradient-to-r from-[#38bdf8] to-[#0ea5e9] text-white px-6 py-2 rounded-lg shadow hover:shadow-lg border-2 border-[#38bdf8] transition-all duration-300 group relative"
                                             disabled={isLoadMore}
                                         >
-                                            <span className="absolute inset-0 rounded-lg pointer-events-none border-2 border-indigo-400 opacity-0 group-hover:opacity-100 group-hover:shadow-[0_0_16px_2px_#6366f1] transition-all duration-300"></span>
+                                            <span className="absolute inset-0 rounded-lg pointer-events-none border-2 border-[#38bdf8] opacity-0 group-hover:opacity-100 group-hover:shadow-[0_0_16px_2px_#38bdf8] transition-all duration-300"></span>
                                             <span className="relative z-10">
                                                 {isLoadMore
                                                     ? "Loading..."

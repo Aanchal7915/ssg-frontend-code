@@ -7,7 +7,7 @@ import { FiEdit2, FiTrash2, FiPlus } from "react-icons/fi"; // icons
 
 // Address Card Component
 const AddressCard = ({ address, onEdit, onDelete }) => (
-    <div className="relative border border-gray-700 rounded-xl p-5 mb-4 shadow-lg bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800 flex flex-col gap-2 transition-all hover:shadow-2xl">
+    <div className="relative border border-[#bae6fd] rounded-xl p-5 mb-4 shadow-lg bg-gradient-to-br from-[#e0f7fa]/80 via-[#f1faff]/80 to-[#f0f9ff]/80 flex flex-col gap-2 transition-all hover:shadow-2xl">
         <span className="absolute top-2 right-2 text-xs px-2 py-1 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-full font-semibold">
             {address.addressType}
             {address.isDefault && (
@@ -16,11 +16,11 @@ const AddressCard = ({ address, onEdit, onDelete }) => (
                 </span>
             )}
         </span>
-        <div className="text-gray-200 font-medium text-sm">
+        <div className="text-[#334155] font-medium text-sm">
             {address.fullName} &nbsp;|&nbsp; {address.phoneNumber}
             {address.alternatePhoneNumber && ` / ${address.alternatePhoneNumber}`}
         </div>
-        <div className="text-gray-400 text-sm">
+        <div className="text-[#64748b] text-sm">
             {address.streetAddress}, {address.landmark && `${address.landmark}, `}
             {address.locality}, {address.city}, {address.state}, {address.pincode}, {address.country}
         </div>
@@ -72,12 +72,12 @@ const AddressForm = ({ initial, onSave, onCancel }) => {
 
     return (
         <form
-            className="bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800 p-6 rounded-xl shadow-lg mb-6 text-gray-200 font-medium"
+            className="bg-gradient-to-br from-[#e0f7fa]/80 via-[#f1faff]/80 to-[#f0f9ff]/80 p-6 rounded-xl shadow-lg mb-6 text-[#334155] font-medium border border-[#bae6fd]"
             onSubmit={handleSubmit}
         >
             <button
                 type="button"
-                className="mb-4 px-3 py-1 bg-gray-700 rounded-lg hover:bg-gray-600 flex items-center gap-1 transition-all"
+                className="mb-4 px-3 py-1 bg-[#bae6fd] rounded-lg hover:bg-[#38bdf8] flex items-center gap-1 transition-all text-[#2563eb]"
                 onClick={onCancel}
             >
                 ← Back
@@ -89,7 +89,7 @@ const AddressForm = ({ initial, onSave, onCancel }) => {
                     onChange={handleChange}
                     placeholder="Full Name"
                     required
-                    className="border border-gray-600 p-2 rounded-lg bg-gray-900 text-gray-200 placeholder-gray-400"
+                    className="border border-[#bae6fd] p-2 rounded-lg bg-[#f0f9ff] text-[#334155] placeholder-[#64748b]"
                 />
                 <input
                     name="phoneNumber"
@@ -98,7 +98,7 @@ const AddressForm = ({ initial, onSave, onCancel }) => {
                     placeholder="Phone Number"
                     required
                     pattern="[0-9]{10}"
-                    className="border border-gray-600 p-2 rounded-lg bg-gray-900 text-gray-200 placeholder-gray-400"
+                    className="border border-[#bae6fd] p-2 rounded-lg bg-[#f0f9ff] text-[#334155] placeholder-[#64748b]"
                 />
                 <input
                     name="alternatePhoneNumber"
@@ -106,7 +106,7 @@ const AddressForm = ({ initial, onSave, onCancel }) => {
                     onChange={handleChange}
                     placeholder="Alternate Phone Number"
                     pattern="[0-9]{10}"
-                    className="border border-gray-600 p-2 rounded-lg bg-gray-900 text-gray-200 placeholder-gray-400"
+                    className="border border-[#bae6fd] p-2 rounded-lg bg-[#f0f9ff] text-[#334155] placeholder-[#64748b]"
                 />
                 <input
                     name="pincode"
@@ -114,7 +114,7 @@ const AddressForm = ({ initial, onSave, onCancel }) => {
                     onChange={handleChange}
                     placeholder="Pincode"
                     required
-                    className="border border-gray-600 p-2 rounded-lg bg-gray-900 text-gray-200 placeholder-gray-400"
+                    className="border border-[#bae6fd] p-2 rounded-lg bg-[#f0f9ff] text-[#334155] placeholder-[#64748b]"
                 />
                 <input
                     name="streetAddress"
@@ -122,14 +122,14 @@ const AddressForm = ({ initial, onSave, onCancel }) => {
                     onChange={handleChange}
                     placeholder="Street Address"
                     required
-                    className="border border-gray-600 p-2 rounded-lg bg-gray-900 text-gray-200 placeholder-gray-400"
+                    className="border border-[#bae6fd] p-2 rounded-lg bg-[#f0f9ff] text-[#334155] placeholder-[#64748b]"
                 />
                 <input
                     name="landmark"
                     value={form.landmark}
                     onChange={handleChange}
                     placeholder="Landmark"
-                    className="border border-gray-600 p-2 rounded-lg bg-gray-900 text-gray-200 placeholder-gray-400"
+                    className="border border-[#bae6fd] p-2 rounded-lg bg-[#f0f9ff] text-[#334155] placeholder-[#64748b]"
                 />
                 <input
                     name="locality"
@@ -137,7 +137,7 @@ const AddressForm = ({ initial, onSave, onCancel }) => {
                     onChange={handleChange}
                     placeholder="Locality"
                     required
-                    className="border border-gray-600 p-2 rounded-lg bg-gray-900 text-gray-200 placeholder-gray-400"
+                    className="border border-[#bae6fd] p-2 rounded-lg bg-[#f0f9ff] text-[#334155] placeholder-[#64748b]"
                 />
                 <input
                     name="city"
@@ -145,7 +145,7 @@ const AddressForm = ({ initial, onSave, onCancel }) => {
                     onChange={handleChange}
                     placeholder="City"
                     required
-                    className="border border-gray-600 p-2 rounded-lg bg-gray-900 text-gray-200 placeholder-gray-400"
+                    className="border border-[#bae6fd] p-2 rounded-lg bg-[#f0f9ff] text-[#334155] placeholder-[#64748b]"
                 />
                 <input
                     name="state"
@@ -153,7 +153,7 @@ const AddressForm = ({ initial, onSave, onCancel }) => {
                     onChange={handleChange}
                     placeholder="State"
                     required
-                    className="border border-gray-600 p-2 rounded-lg bg-gray-900 text-gray-200 placeholder-gray-400"
+                    className="border border-[#bae6fd] p-2 rounded-lg bg-[#f0f9ff] text-[#334155] placeholder-[#64748b]"
                 />
                 <input
                     name="country"
@@ -161,19 +161,19 @@ const AddressForm = ({ initial, onSave, onCancel }) => {
                     onChange={handleChange}
                     placeholder="Country"
                     required
-                    className="border border-gray-600 p-2 rounded-lg bg-gray-900 text-gray-200 placeholder-gray-400"
+                    className="border border-[#bae6fd] p-2 rounded-lg bg-[#f0f9ff] text-[#334155] placeholder-[#64748b]"
                 />
                 <select
                     name="addressType"
                     value={form.addressType}
                     onChange={handleChange}
-                    className="border border-gray-600 p-2 rounded-lg bg-gray-900 text-gray-200"
+                    className="border border-[#bae6fd] p-2 rounded-lg bg-[#f0f9ff] text-[#334155]"
                 >
                     <option value="Home">Home</option>
                     <option value="Work">Work</option>
                     <option value="Other">Other</option>
                 </select>
-                <label className="flex items-center gap-2 text-gray-200">
+                <label className="flex items-center gap-2 text-[#334155]">
                     <input
                         type="checkbox"
                         name="isDefault"
@@ -192,7 +192,7 @@ const AddressForm = ({ initial, onSave, onCancel }) => {
                 </button>
                 <button
                     type="button"
-                    className="px-5 py-2 bg-gray-700 rounded-xl hover:bg-gray-600 transition-all"
+                    className="px-5 py-2 bg-[#bae6fd] rounded-xl hover:bg-[#38bdf8] transition-all text-[#2563eb]"
                     onClick={onCancel}
                 >
                     Cancel
@@ -285,8 +285,8 @@ const AddressComponent = () => {
 
     return (
         <div className="max-w-3xl mx-auto py-8 px-4">
-            <h2 className="text-3xl font-bold mb-6 text-gray-100">Manage Addresses</h2>
-            {loading && <div className="text-center py-4 text-gray-400">Loading...</div>}
+            <h2 className="text-3xl font-bold mb-6 text-[#2563eb]">Manage Addresses</h2>
+            {loading && <div className="text-center py-4 text-[#64748b]">Loading...</div>}
             {!loading && (
                 <>
                     {showForm ? (
@@ -307,7 +307,7 @@ const AddressComponent = () => {
                                 <FiPlus /> Add New Address
                             </button>
                             {addresses.length === 0 ? (
-                                <div className="text-gray-400">No addresses found.</div>
+                                <div className="text-[#64748b]">No addresses found.</div>
                             ) : (
                                 addresses.map((address) => (
                                     <AddressCard

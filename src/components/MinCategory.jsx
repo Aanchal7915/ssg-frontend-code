@@ -92,7 +92,7 @@ const MinCategory = () => {
     }, []);
 
     return (
-        <section className="w-full px-1 sm:px-2 py-1 overflow-x-auto border-b border-gray-800 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 shadow">
+        <section className="w-full px-1 sm:px-2 py-1 overflow-x-auto border-b border-[#bae6fd] bg-gradient-to-br from-[#e0f7fa] via-[#f1faff] to-[#f0f9ff] shadow">
             <div
                 ref={scrollRef}
                 className="flex items-center gap-1 min-w-max overflow-x-auto cursor-grab select-none styled-scrollbar"
@@ -104,18 +104,18 @@ const MinCategory = () => {
                     <Link
                         to={`/products?category=${encodeURIComponent(cat._id)}`}
                         key={cat._id}
-                        className="flex items-center gap-0.5 group rounded-lg transition-all duration-150 hover:bg-gray-800/60 whitespace-nowrap
+                        className="flex items-center gap-0.5 group rounded-lg transition-all duration-150 hover:bg-[#bae6fd] whitespace-nowrap
                             px-2 py-1.5
                             text-[13px] xs:text-sm sm:text-base md:text-base
                             font-semibold
-                            text-indigo-200
-                            hover:text-yellow-300"
+                            text-[#2563eb]
+                            hover:text-[#0ea5e9]"
                         style={{
                             minWidth: "max-content",
                         }}
                     >
                         {cat.name}
-                        <span className="text-indigo-400 group-hover:text-yellow-300 group-hover:rotate-180 transition-all ease-out">
+                        <span className="text-[#38bdf8] group-hover:text-[#0ea5e9] group-hover:rotate-180 transition-all ease-out">
                             <ExpandMoreIcon sx={{ fontSize: "16px" }} />
                         </span>
                     </Link>
@@ -125,18 +125,18 @@ const MinCategory = () => {
                 {`
             .styled-scrollbar {
                 scrollbar-width: thin;
-                scrollbar-color: #6366f1 #18181b;
+                scrollbar-color: #38bdf8 #e0f7fa;
             }
             .styled-scrollbar::-webkit-scrollbar {
                 height: 6px;
-                background: #18181b;
+                background: #e0f7fa;
             }
             .styled-scrollbar::-webkit-scrollbar-thumb {
-                background: linear-gradient(90deg, #6366f1 40%, #23272f 100%);
+                background: linear-gradient(90deg, #38bdf8 40%, #bae6fd 100%);
                 border-radius: 4px;
             }
             .styled-scrollbar::-webkit-scrollbar-thumb:hover {
-                background: #818cf8;
+                background: #0ea5e9;
             }
             .styled-scrollbar::-webkit-scrollbar-corner {
                 background: transparent;

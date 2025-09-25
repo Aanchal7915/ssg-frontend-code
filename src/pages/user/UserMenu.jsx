@@ -20,45 +20,45 @@ const UserMenu = ({ toggleMenu }) => {
     };
     return (
         <div className="flex flex-col gap-4 w-full">
-            <div className="flex gap-4 p-3 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 rounded-xl shadow border border-gray-800 relative">
+            <div className="flex gap-4 p-3 bg-gradient-to-br from-[#e0f7fa] via-[#f1faff] to-[#f0f9ff] rounded-xl shadow border border-[#bae6fd] relative">
                 <img
                     src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/profile-pic-male_4811a1.svg"
                     alt="user svg"
-                    className="w-12 h-12 rounded-full border border-gray-700 bg-gray-800"
+                    className="w-12 h-12 rounded-full border border-[#bae6fd] bg-white"
                 />
                 <div className="flex flex-col justify-center p-1">
-                    <div className="text-[14px] text-gray-400">Hello,</div>
-                    <div className="font-[600] text-[16px] text-indigo-200">
+                    <div className="text-[14px] text-[#64748b]">Hello,</div>
+                    <div className="font-[600] text-[16px] text-[#2563eb]">
                         {auth?.user?.name}
                     </div>
                 </div>
                 <div
-                    className="hover:scale-[1.06] absolute right-4 top-2 cursor-pointer sm:hidden text-indigo-400"
+                    className="hover:scale-[1.06] absolute right-4 top-2 cursor-pointer sm:hidden text-[#2563eb]"
                     onClick={toggleMenu}
                 >
                     <GiCrossMark />
                 </div>
             </div>
 
-            <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 flex flex-col justify-center rounded-xl shadow border border-gray-800">
-                <div className="flex flex-col justify-center border-b border-gray-800">
+            <div className="bg-gradient-to-br from-[#e0f7fa] via-[#f1faff] to-[#f0f9ff] flex flex-col justify-center rounded-xl shadow border border-[#bae6fd]">
+                <div className="flex flex-col justify-center border-b border-[#bae6fd]">
                     <div className="flex flex-row items-center gap-6 pl-[10px] py-[8px]">
-                        <PersonIcon className="text-indigo-400 text-[16px]" />
-                        <div className="font-[600] text-[14px] text-indigo-300">
+                        <PersonIcon className="text-[#2563eb] text-[16px]" />
+                        <div className="font-[600] text-[14px] text-[#2563eb]">
                             ACCOUNT SETTINGS
                         </div>
                     </div>
-                    <div className="flex flex-col font-[300] text-[14px] mb-2 mt-0 text-gray-100">
+                    <div className="flex flex-col font-[300] text-[14px] mb-2 mt-0 text-[#334155]">
                         <NavLink
                             to="./profile"
                             onClick={scrollToTop}
                             className={({ isActive }) =>
                                 isActive
-                                    ? "font-[600] text-indigo-400 bg-gray-800"
+                                    ? "font-[600] text-[#2563eb] bg-[#f0f9ff]"
                                     : ""
                             }
                         >
-                            <div className="h-[40px] px-[60px] flex items-center hover:text-indigo-400 hover:bg-gray-800 rounded">
+                            <div className="h-[40px] px-[60px] flex items-center hover:text-[#2563eb] hover:bg-[#f0f9ff] rounded">
                                 Profile Information
                             </div>
                         </NavLink>
@@ -67,48 +67,35 @@ const UserMenu = ({ toggleMenu }) => {
                             onClick={scrollToTop}
                             className={({ isActive }) =>
                                 isActive
-                                    ? "font-[600] text-indigo-400 bg-gray-800"
+                                    ? "font-[600] text-[#2563eb] bg-[#f0f9ff]"
                                     : ""
                             }
                         >
-                            <div className="h-[40px] px-[60px] flex items-center hover:text-indigo-400 hover:bg-gray-800 rounded">
+                            <div className="h-[40px] px-[60px] flex items-center hover:text-[#2563eb] hover:bg-[#f0f9ff] rounded">
                                 Manage Addresses
                             </div>
                         </NavLink>
-                        {/* <NavLink
-                            to="./pan"
-                            onClick={scrollToTop}
-                            className={({ isActive }) =>
-                                isActive
-                                    ? "font-[600] text-indigo-400 bg-gray-800"
-                                    : ""
-                            }
-                        >
-                            <div className="h-[40px] px-[60px] flex items-center hover:text-indigo-400 hover:bg-gray-800 rounded">
-                                Pan Card
-                            </div>
-                        </NavLink> */}
                     </div>
                 </div>
 
-                <div className="flex flex-col justify-center border-b border-gray-800">
+                <div className="flex flex-col justify-center border-b border-[#bae6fd]">
                     <div className="flex flex-row items-center gap-6 pl-[10px] py-[8px]">
-                        <BarChartIcon className="text-indigo-400 text-[16px]" />
-                        <div className="font-[600] text-[14px] text-indigo-300">
+                        <BarChartIcon className="text-[#2563eb] text-[16px]" />
+                        <div className="font-[600] text-[14px] text-[#2563eb]">
                             DASHBOARD
                         </div>
                     </div>
-                    <div className="flex flex-col font-[300] text-[14px] mb-2 mt-0 text-gray-100">
+                    <div className="flex flex-col font-[300] text-[14px] mb-2 mt-0 text-[#334155]">
                         <NavLink
                             to="/user/orders"
                             onClick={scrollToTop}
                             className={({ isActive }) =>
                                 isActive
-                                    ? "font-[600] text-indigo-400 bg-gray-800"
+                                    ? "font-[600] text-[#2563eb] bg-[#f0f9ff]"
                                     : ""
                             }
                         >
-                            <div className="h-[40px] px-[60px] flex items-center hover:text-indigo-400 hover:bg-gray-800 rounded">
+                            <div className="h-[40px] px-[60px] flex items-center hover:text-[#2563eb] hover:bg-[#f0f9ff] rounded">
                                 My Orders
                             </div>
                         </NavLink>
@@ -117,62 +104,48 @@ const UserMenu = ({ toggleMenu }) => {
                             onClick={scrollToTop}
                             className={({ isActive }) =>
                                 isActive
-                                    ? "font-[600] text-indigo-400 bg-gray-800"
+                                    ? "font-[600] text-[#2563eb] bg-[#f0f9ff]"
                                     : ""
                             }
                         >
-                            <div className="h-[40px] px-[60px] flex items-center hover:text-indigo-400 hover:bg-gray-800 rounded">
+                            <div className="h-[40px] px-[60px] flex items-center hover:text-[#2563eb] hover:bg-[#f0f9ff] rounded">
                                 My Wishlist
                             </div>
                         </NavLink>
-                        {/* <NavLink
-                            to="./payment-cards"
-                            onClick={scrollToTop}
-                            className={({ isActive }) =>
-                                isActive
-                                    ? "font-[600] text-indigo-400 bg-gray-800"
-                                    : ""
-                            }
-                        >
-                            <div className="h-[40px] px-[60px] flex items-center hover:text-indigo-400 hover:bg-gray-800 rounded">
-                                Saved Cards
-                            </div>
-                        </NavLink> */}
                         <NavLink
                             to="./user-review"
                             onClick={scrollToTop}
                             className={({ isActive }) =>
                                 isActive
-                                    ? "font-[600] text-indigo-400 bg-gray-800"
+                                    ? "font-[600] text-[#2563eb] bg-[#f0f9ff]"
                                     : ""
                             }
                         >
-                            <div className="h-[40px] px-[60px] flex items-center hover:text-indigo-400 hover:bg-gray-800 rounded">
+                            <div className="h-[40px] px-[60px] flex items-center hover:text-[#2563eb] hover:bg-[#f0f9ff] rounded">
                                 My Reviews
                             </div>
                         </NavLink>
                     </div>
                 </div>
 
-                <div className="flex flex-col justify-center border-b border-gray-800">
+                <div className="flex flex-col justify-center border-b border-[#bae6fd]">
                     <div className="flex flex-row items-center gap-6 pl-[10px] py-[8px] group">
-                        <PowerSettingsNewIcon className="text-indigo-400 text-[16px]" />
+                        <PowerSettingsNewIcon className="text-[#2563eb] text-[16px]" />
                         <button
-                            className="font-[600] text-[14px] w-full h-[40px] flex items-center text-indigo-300 group-hover:text-indigo-400"
+                            className="font-[600] text-[14px] w-full h-[40px] flex items-center text-[#2563eb] group-hover:text-[#0ea5e9]"
                             onClick={handleLogout}
                         >
                             Logout
                         </button>
                     </div>
                 </div>
-                <div className="flex flex-col items-start gap-2 p-4 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 rounded-xl shadow border border-gray-800 mt-2">
-                    <span className="text-xs font-medium text-indigo-300">
+                <div className="flex flex-col items-start gap-2 p-4 bg-gradient-to-br from-[#e0f7fa] via-[#f1faff] to-[#f0f9ff] rounded-xl shadow border border-[#bae6fd] mt-2">
+                    <span className="text-xs font-medium text-[#2563eb]">
                         Frequently Visited:
                     </span>
-                    <div className="flex gap-2.5 text-xs text-gray-400">
+                    <div className="flex gap-2.5 text-xs text-[#64748b]">
                         <Link to="/forgot-password">Change Password</Link>
                         <Link to="/user/orders">Track Order</Link>
-                        <Link to="/">Help Center</Link>
                     </div>
                 </div>
             </div>

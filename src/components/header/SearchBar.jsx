@@ -42,12 +42,13 @@ const SearchBar = () => {
             <form
                 action="/search"
                 method=""
-                className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-950 border border-indigo-800 relative w-full rounded-xl shadow-lg"
+                className={`bg-gradient-to-br from-[#e0f7fa] via-[#e6e9f2] to-[#b6e0f7] border border-[#54B1CE] relative w-full rounded-xl shadow-xl
+                    ${open ? "rounded-b-none" : "rounded-xl"}`}
             >
                 <div className="flex items-center h-[44px]">
                     <div className="flex items-center px-3">
                         <button type="submit">
-                            <figure className="text-indigo-400 bg-transparent">
+                            <figure className="text-[#54B1CE] bg-transparent">
                                 <BsSearch />
                             </figure>
                         </button>
@@ -58,7 +59,7 @@ const SearchBar = () => {
                             title="Search for Products, Brands and More"
                             placeholder="Search for Products, Brands and More"
                             autoComplete="off"
-                            className="bg-transparent w-full border-none outline-none text-[15px] md:text-[17px] p-2 placeholder-gray-400 text-indigo-100 font-medium"
+                            className="bg-transparent w-full border-none outline-none text-[15px] md:text-[17px] p-2 placeholder-[#54B1CE] text-[#0ea5e9] font-semibold"
                             onChange={handleInputChange}
                             value={query}
                         />
@@ -66,19 +67,19 @@ const SearchBar = () => {
                 </div>
             </form>
             {results.length > 0 && open && (
-                <ul className="absolute top-[44px] left-0 right-0 pb-2 z-50 w-full bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 border border-indigo-800 shadow-2xl rounded-b-xl">
+                <ul className="absolute top-[44px] left-0 right-0 pb-2 z-50 w-full bg-gradient-to-br from-[#e0f7fa] via-[#e6e9f2] to-[#b6e0f7] border border-[#54B1CE] shadow-2xl rounded-b-xl">
                     {results.map((product) => (
                         <li key={product?._id}>
                             <a
                                 href={`/product/${product._id}`}
-                                className="px-5 py-4 h-[50px] hover:bg-indigo-900/30 flex gap-5 items-center rounded transition"
+                                className="px-5 py-4 h-[50px] hover:bg-[#54B1CE]/20 flex gap-5 items-center rounded transition"
                             >
                                 <img
-                                    src={product?.images[0].url}
+                                    src={product?.images[0]?.url}
                                     alt="product"
-                                    className="w-6 h-6 object-contain rounded bg-gray-900 border border-gray-700"
+                                    className="w-6 h-6 object-contain rounded bg-white border border-[#54B1CE]"
                                 />
-                                <span className="text-indigo-200 font-medium">
+                                <span className="text-[#0ea5e9] font-semibold">
                                     {product?.name?.length > 40
                                         ? `${product?.name?.substring(
                                               0,

@@ -10,7 +10,6 @@ const Reviews = () => {
     const [reviews, setReviews] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    // Fetch user's reviews
     useEffect(() => {
         const fetchReviews = async () => {
             setLoading(true);
@@ -28,7 +27,6 @@ const Reviews = () => {
         fetchReviews();
     }, [auth.token]);
 
-    // Feature: Delete review
     const handleDelete = async (id) => {
         if (!window.confirm("Are you sure you want to delete this review?")) return;
         try {
@@ -43,63 +41,62 @@ const Reviews = () => {
         }
     };
 
-    // Feature: Edit review (redirect to product page for editing)
     const handleEdit = (productId) => {
         window.location.href = `/product/${productId}`;
     };
 
     return (
-        <main className="w-full min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 pt-8 pb-8 text-gray-100">
+        <main className="w-full min-h-screen bg-gradient-to-br from-[#e0f7fa] via-[#f1faff] to-[#f0f9ff] pt-8 pb-8 text-[#334155]">
             <div className="max-w-2xl mx-auto py-8 px-2">
-                <h2 className="text-2xl font-bold mb-6 text-indigo-300">Your Ratings & Reviews</h2>
+                <h2 className="text-2xl font-bold mb-6 text-[#2563eb]">Your Ratings & Reviews</h2>
                 {loading ? (
-                    <div className="text-center py-4 text-indigo-400">Loading...</div>
+                    <div className="text-center py-4 text-[#2563eb]">Loading...</div>
                 ) : reviews.length === 0 ? (
-                    <div className="text-gray-400">You haven't reviewed any products yet.</div>
+                    <div className="text-[#64748b]">You haven't reviewed any products yet.</div>
                 ) : (
                     reviews.map((review) => (
                         <div
                             key={review._id}
-                            className="border border-gray-800 rounded-xl p-4 mb-4 bg-gradient-to-br from-gray-900/80 via-gray-800/80 to-gray-950/80 shadow"
+                            className="border border-[#bae6fd] rounded-xl p-4 mb-4 bg-gradient-to-br from-[#e0f7fa]/80 via-[#f1faff]/80 to-[#f0f9ff]/80 shadow"
                         >
                             <div className="flex items-center gap-2 mb-2">
-                                {review.product.images && review.product.images[0] && (
+                                {review.product?.images && review.product?.images[0] && (
                                     <img
-                                        src={review.product.images[0].url}
-                                        alt={review.product.name}
-                                        className="w-12 h-12 object-cover rounded border border-gray-700 mr-2 bg-gray-900"
+                                        src={review.product?.images[0].url}
+                                        alt={review.product?.name}
+                                        className="w-12 h-12 object-cover rounded border border-[#bae6fd] mr-2 bg-white"
                                     />
                                 )}
-                                <span className="font-semibold text-lg text-indigo-200">
-                                    <Link to={`/product/${review.product._id}`} className="hover:underline">
+                                <span className="font-semibold text-lg text-[#2563eb]">
+                                    <Link to={`/product/${review.product?._id}`} className="hover:underline">
                                         {review.product.name}
                                     </Link>
                                 </span>
-                                <span className="flex items-center gap-1 text-yellow-400 font-bold ml-2">
+                                <span className="flex items-center gap-1 text-yellow-500 font-bold ml-2">
                                     {review.rating}
                                     <StarIcon sx={{ fontSize: "18px" }} />
                                 </span>
                             </div>
-                            <div className="text-gray-200 mb-2">{review.comment}</div>
-                            <div className="text-xs text-gray-400 mb-2">
+                            <div className="text-[#334155] mb-2">{review.comment}</div>
+                            <div className="text-xs text-[#64748b] mb-2">
                                 {new Date(review.createdAt).toLocaleString()}
                             </div>
                             <div className="flex gap-2">
                                 <button
-                                    className="px-3 py-1 bg-indigo-600 text-white rounded hover:bg-indigo-700 border border-indigo-400 transition-all duration-200"
+                                    className="px-3 py-1 bg-[#38bdf8] text-white rounded hover:bg-[#0ea5e9] border border-[#bae6fd] transition-all duration-200"
                                     onClick={() => handleEdit(review.product._id)}
                                 >
                                     Edit
                                 </button>
                                 <button
-                                    className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 border border-red-400 transition-all duration-200"
+                                    className="px-3 py-1 bg-[#f87171] text-white rounded hover:bg-[#ef4444] border border-[#f87171] transition-all duration-200"
                                     onClick={() => handleDelete(review._id)}
                                 >
                                     Delete
                                 </button>
                                 <Link
-                                    to={`/product/${review.product._id}`}
-                                    className="px-3 py-1 bg-gray-800 text-indigo-300 rounded hover:bg-gray-900 border border-gray-700 transition-all duration-200"
+                                    to={`/product/${review.product?._id}`}
+                                    className="px-3 py-1 bg-white text-[#2563eb] rounded hover:bg-[#e0f7fa] border border-[#bae6fd] transition-all duration-200"
                                 >
                                     View Product
                                 </Link>
