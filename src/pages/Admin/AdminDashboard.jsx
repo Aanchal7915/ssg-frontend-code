@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Delivery from "./Delivery";
 import { Fade } from "@mui/material";
+import Category from "./Category";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -61,14 +62,14 @@ const AdminDashboard = () => {
             <Routes>
               <Route path="" element={<UserProfile />} />
               <Route path="profile" element={<UserProfile />} />
-              <Route path="address" element={<AddressComponent />} />
-              <Route path="pan" element={<PanCardComponent />} />
+              {/* <Route path="address" element={<AddressComponent />} /> */}
+              {/* <Route path="pan" element={<PanCardComponent />} /> */}
               <Route path="add-product" element={<CreateProduct />} />
               <Route path="all-products" element={<AllProducts />} />
-              <Route path="users" element={<Users />} />
-              <Route path="profile/deactivate" element={<Deactivate />} />
+              <Route path="category" element={<Category />} />
+              {/* <Route path="profile/deactivate" element={<Deactivate />} /> */}
               <Route path="product/:productId" element={<EditProduct />} />
-              <Route path="delivery" element={<Delivery />} />
+              {/* <Route path="delivery" element={<Delivery />} /> */}
             </Routes>
           </div>
         </div>

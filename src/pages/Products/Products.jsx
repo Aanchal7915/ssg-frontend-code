@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-key */
+
 import Pagination from "@mui/material/Pagination";
 import { useState, useEffect } from "react";
 import MinCategory from "../../components/MinCategory";
@@ -236,6 +237,7 @@ const Products = () => {
             </div>
           </div>
         </div>
+       
       </main>
     </>
   );

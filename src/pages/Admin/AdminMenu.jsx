@@ -85,6 +85,17 @@ const AdminMenu = ({ toggleMenu }) => {
               </div>
             </NavLink>
             <NavLink
+              to="./category"
+              onClick={scrollToTop}
+              className={({ isActive }) =>
+                isActive ? "font-[600] text-white bg-[#54B1CE]" : ""
+              }
+            >
+              <div className="h-[40px] px-[60px] flex items-center hover:text-white hover:bg-[#54B1CE] rounded">
+                category
+              </div>
+            </NavLink>
+            <NavLink
               to="./all-products"
               onClick={scrollToTop}
               className={({ isActive }) =>

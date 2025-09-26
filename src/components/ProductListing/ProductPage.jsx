@@ -32,6 +32,7 @@ import ScrollToTopOnRouteChange from "../../utils/ScrollToTopOnRouteChange";
 import { useCart } from "../../context/cart.jsx";
 import SeoData from "../../SEO/SeoData";
 import "react-toastify/dist/ReactToastify.css";
+import RatingReviews from "./RatingReviews.jsx";
 
 const ProductDetails = () => {
     const navigate = useNavigate();
@@ -60,6 +61,10 @@ const ProductDetails = () => {
     const { productId } = useParams();
 
     const reviewSubmitHandler = async () => {
+         if(auth?.token === undefined){
+            toast.error("Please login!", { toastClassName: "custom-toast" });
+            return;
+        }
         if (rating === 0 || !comment.trim()) {
             toast.error("Empty Review", { toastClassName: "custom-toast" });
             return;
@@ -93,6 +98,10 @@ const ProductDetails = () => {
     };
 
     const addToCartHandler = () => {
+         if(!auth?.token){
+            toast.error("Please login!", { toastClassName: "custom-toast" });
+            return;
+        }
         const item = {
             productId: product._id,
             name: product.name,
@@ -107,6 +116,10 @@ const ProductDetails = () => {
     };
 
     const handleDialogClose = () => {
+        if(auth?.token === undefined){
+            toast.error("Please login!", { toastClassName: "custom-toast" });
+            return;
+        }
         setOpen(!open);
     };
 
@@ -117,6 +130,11 @@ const ProductDetails = () => {
     };
 
     const buyNow = () => {
+        console.log("token: ",auth?.token)
+         if(!auth?.token){
+            toast.error("Please login!", { toastClassName: "custom-toast" });
+            return;
+        }
         addToCartHandler();
         navigate("/cart");
     };
@@ -253,8 +271,8 @@ const ProductDetails = () => {
                     <SeoData title={product?.name} />
                     <ScrollToTopOnRouteChange />
                     <MinCategory />
-                    <main className="w-full pt-2 pb-5 sm:mt-0 bg-[#FFFFFF] min-h-screen text-[#333333]">
-                        <div className="w-full flex flex-col lg:flex-row bg-[#FFFFFF] sm:p-2 rounded-xl shadow-xl border border-[#54B1CE]">
+                    <main className="min-w-7xl w-full pt-2 pb-5 sm:mt-0 bg-[#FFFFFF] min-h-screen text-[#333333]">
+                        <div className="w-full flex flex-col lg:flex-row bg-[#FFFFFF] sm:p-2">
                             {/* Image Section */}
                             <div className="w-full lg:w-2/5 lg:sticky top-16 lg:h-screen">
                                 <div className="flex flex-col gap-3 m-3">
@@ -521,14 +539,17 @@ const ProductDetails = () => {
                                         <div className="flex items-center border-b border-[#54B1CE]">
                                             <h1 className="px-6 py-3 text-2xl font-semibold text-[#333333]">
                                                 {product?.ratings?.toFixed(1)}{" "}
-                                                <StarIcon sx={{ color: '#54B1CE' }} />
+                                                <StarIcon sx={{ color: '#e3d233ff' }} />
                                             </h1>
                                             <p className="text-base text-[#333333]">
                                                 ({product?.numOfReviews}) Reviews
                                             </p>
                                         </div>
+                                        <div className="w-full">
+                                        <RatingReviews productId={productId} />
+                                        </div>
 
-                                        {viewAll
+                                        {/* {viewAll
                                             ? product?.reviews
                                                 ?.map((rev, i) => (
                                                     <div
@@ -577,11 +598,12 @@ const ProductDetails = () => {
                                             >
                                                 {viewAll ? "View Less" : "View All"}
                                             </button>
-                                        )}
+                                        )} */}
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        
                         <div className="flex flex-col gap-3 mt-6">
                             <ProductSlider
                                 title={"Recommendation"}
