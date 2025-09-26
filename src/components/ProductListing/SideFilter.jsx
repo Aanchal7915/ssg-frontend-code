@@ -7,10 +7,9 @@ import Slider from "@mui/material/Slider";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import StarIcon from "@mui/icons-material/Star";
-import { categories } from "../../utils/constants";
 import { useState, useRef, useEffect } from "react";
 
-const SideFilter = ({ price, category, ratings, setPrice, setCategory, setRatings }) => {
+const SideFilter = ({ price, subcategory, subcategoryList, ratings, setPrice, setSubcategory, setRatings }) => {
   const [categoryToggle, setCategoryToggle] = useState(true);
   const [ratingsToggle, setRatingsToggle] = useState(true);
 
@@ -35,18 +34,18 @@ const SideFilter = ({ price, category, ratings, setPrice, setCategory, setRating
 
   const clearFilters = () => {
     setPrice([0, 200000]);
-    setCategory("");
+    setSubcategory("");
     setRatings(0);
   };
 
   return (
-    <div className="hidden sm:flex flex-col sm:w-64 md:w-72 lg:w-80 px-3">
+    <div className="sm:flex flex-col sm:w-64 md:w-72 lg:w-80 px-3">
       <div className="flex flex-col bg-white rounded-xl shadow-lg">
         {/* Header */}
         <div className="flex items-center justify-between gap-5 px-4 py-2 border-b">
-          <p className="text-lg font-medium text-[#54B1CE]">Filters</p>
+          <p className="hidden sm:block text-lg font-medium text-[#54B1CE]">Filters</p>
           <span
-            className="uppercase text-[#54B1CE] text-xs cursor-pointer font-medium"
+            className="border p-2 rounded shadow uppercase text-[#54B1CE] text-xs cursor-pointer font-medium"
             onClick={clearFilters}
           >
             clear all
@@ -82,7 +81,7 @@ const SideFilter = ({ price, category, ratings, setPrice, setCategory, setRating
               className="flex justify-between cursor-pointer py-2 items-center"
               onClick={() => setCategoryToggle(!categoryToggle)}
             >
-              <p className="font-medium text-xs uppercase text-[#54B1CE]">Category</p>
+              <p className="font-medium text-xs uppercase text-[#54B1CE]">Sub Category</p>
               {categoryToggle ? (
                 <ExpandLessIcon sx={{ fontSize: "20px", color: "#54B1CE" }} />
               ) : (
@@ -94,16 +93,16 @@ const SideFilter = ({ price, category, ratings, setPrice, setCategory, setRating
                 <FormControl>
                   <RadioGroup
                     aria-labelledby="category-radio-buttons-group"
-                    onChange={(e) => setCategory(e.target.value)}
+                    onChange={(e) => setSubcategory(e.target.value)}
                     name="category-radio-buttons"
-                    value={category}
+                    value={subcategory}
                   >
-                    {categories.map((el, i) => (
+                    {subcategoryList.map((el, i) => (
                       <FormControlLabel
-                        value={el}
-                        key={i}
+                        value={el._id}
+                        key={el._id}
                         control={<Radio size="small" sx={{ color: "#54B1CE" }} />}
-                        label={<span className="text-sm">{el}</span>}
+                        label={<span className="text-sm">{el.name}</span>}
                       />
                     ))}
                   </RadioGroup>

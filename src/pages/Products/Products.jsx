@@ -129,6 +129,9 @@ const Products = () => {
               Filters
             </button>
           </div>
+          <h2 className="text-lg sm:text-xl font-semibold text-gray-800 mb-1 p-2 sm:p-3 border-l-4 border-[#54B1CE] bg-white shadow rounded-tr-lg rounded-br-lg">
+            Products
+          </h2>
           <div className="flex gap-3">
             {/* Sidebar for large screens */}
             <div className="hidden lg:flex">
@@ -181,7 +184,7 @@ const Products = () => {
             )}
 
             {/* Products grid */}
-            <div className="flex-1 relative">
+            <div className="flex-1 relative p-2">
               {!loading && products?.length === 0 && (
                 <div className="flex flex-col items-center justify-start gap-3 bg-white shadow rounded-xl p-6 sm:p-16 sm:min-h-[750px] md:min-h-[850px] border border-gray-300">
                   <img
@@ -190,10 +193,10 @@ const Products = () => {
                     src="/no-product-found.png"
                     alt="Search Not Found"
                   />
-                  <h1 className="text-2xl font-medium text-gray-800">
-                    Sorry, no results found!
+                  <h1 className="text-2xl font-medium text-gray-800 text-center">
+                    Sorry, no products found!
                   </h1>
-                  <p className="text-lg text-center text-[#54B1CE] max-w-md">
+                  <p className="text-base text-center text-[#54B1CE] max-w-md">
                     Please try searching for something else.
                   </p>
                 </div>
