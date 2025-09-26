@@ -114,6 +114,9 @@ const AdminOrders = () => {
             <SeoData title="Admin Orders | Flipkart" />
 
             <main className="w-full min-h-screen bg-gradient-to-br from-[#e0f7fa] via-[#f1faff] to-[#f0f9ff] px-2 sm:px-6 py-4 text-[#334155]">
+                <h2 className="max-w-6xl mx-auto text-lg sm:text-xl font-semibold text-[#1C0311] mb-1 p-2 sm:p-3 border-l-4 border-[#54B1CE] bg-white shadow rounded-tr-lg rounded-br-lg">
+                    All Orders
+                </h2>
                 <div className="flex flex-col gap-4 w-full max-w-6xl mx-auto">
                     {/* Toggle Filter Button */}
                     <div className="flex justify-end mb-2">
@@ -286,8 +289,8 @@ const AdminOrders = () => {
                                         key={i}
                                         onClick={() => handlePageChange(i + 1)}
                                         className={`px-3 py-1 rounded-lg border ${currentPage === i + 1
-                                                ? "bg-gradient-to-r from-[#38bdf8] to-[#0ea5e9] text-white border-[#38bdf8]"
-                                                : "bg-white text-[#2563eb] border-[#bae6fd] hover:bg-[#e0f7fa]"
+                                            ? "bg-gradient-to-r from-[#38bdf8] to-[#0ea5e9] text-white border-[#38bdf8]"
+                                            : "bg-white text-[#2563eb] border-[#bae6fd] hover:bg-[#e0f7fa]"
                                             } font-semibold transition`}
                                     >
                                         {i + 1}

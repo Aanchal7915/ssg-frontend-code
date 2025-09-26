@@ -61,7 +61,7 @@ const Products = () => {
   // Fetch products
   useEffect(() => {
     const fetchFilteredData = async () => {
-      if (!subcategory) return;
+      // if (!subcategory) return;
       try {
         setLoading(true);
         const res = await axios.get(
@@ -116,6 +116,9 @@ const Products = () => {
       <MinCategory />
       <main className="w-full pt-2 pb-5 sm:mt-0 bg-gradient-to-br from-white via-white/95 to-white min-h-screen">
         <div className="flex flex-col gap-3 mt-2 sm:mt-2 sm:mx-3 m-auto">
+          <h2 className="text-lg sm:text-xl font-semibold text-[#1C0311] mb-1 p-2 sm:p-3 border-l-4 border-[#54B1CE] bg-white shadow rounded-tr-lg rounded-br-lg">
+            Products
+          </h2>
           {/* Filter Button */}
           <div className="w-full flex justify-end mb-3 lg:hidden">
             <button
@@ -129,9 +132,7 @@ const Products = () => {
               Filters
             </button>
           </div>
-          <h2 className="text-lg sm:text-xl font-semibold text-gray-800 mb-1 p-2 sm:p-3 border-l-4 border-[#54B1CE] bg-white shadow rounded-tr-lg rounded-br-lg">
-            Products
-          </h2>
+          
           <div className="flex gap-3">
             {/* Sidebar for large screens */}
             <div className="hidden lg:flex">

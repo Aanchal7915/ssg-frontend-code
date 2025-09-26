@@ -355,7 +355,7 @@ const ProductDetails = () => {
                                         <span className="text-[#54B1CE] text-sm font-medium">
                                             Special Price
                                         </span>
-                                        <div className="flex items-baseline gap-2 text-3xl font-medium">
+                                        <div className="flex items-baseline gap-2 text-2xl font-medium">
                                             <span className="text-[#333333]">
                                                 ₹{(product?.price - product?.discountPrice)?.toLocaleString()}
                                             </span>
@@ -449,7 +449,7 @@ const ProductDetails = () => {
                                         <span className="text-[#333333]">{product?.description}</span>
                                     </div>
                                     <div className="w-full mt-4 pb-4 rounded-xl border border-[#54B1CE] bg-[#FFFFFF] flex flex-col">
-                                        <h1 className="px-6 py-4 border-b border-[#54B1CE] text-2xl font-[600] text-[#333333]">
+                                        <h1 className="px-6 py-4 border-b border-[#54B1CE] text-xl font-[600] text-[#333333]">
                                             Specifications
                                         </h1>
                                         <h1 className="px-6 py-3 text-lg text-[#333333]">
@@ -464,12 +464,12 @@ const ProductDetails = () => {
                                     </div>
                                     <div className="w-full mt-4 rounded-xl border border-[#54B1CE] bg-[#FFFFFF] flex flex-col">
                                         <div className="flex justify-between items-center border-b border-[#54B1CE] px-6 py-4">
-                                            <h1 className="text-2xl font-medium text-[#333333]">
+                                            <h1 className="text-lg md:text-xl font-medium text-[#333333]">
                                                 Ratings & Reviews
                                             </h1>
                                             <button
                                                 onClick={handleDialogClose}
-                                                className="shadow bg-[#54B1CE] font-[500] px-4 py-2 rounded-lg hover:shadow-md hover:bg-[#3A8AA3] border border-[#54B1CE] text-[#FFFFFF]"
+                                                className="text-sm shadow bg-[#54B1CE] font-[500] px-4 py-2 rounded-lg hover:shadow-md hover:bg-[#3A8AA3] border border-[#54B1CE] text-[#FFFFFF]"
                                             >
                                                 Rate Product
                                             </button>
@@ -519,11 +519,11 @@ const ProductDetails = () => {
                                         </Dialog>
 
                                         <div className="flex items-center border-b border-[#54B1CE]">
-                                            <h1 className="px-6 py-3 text-3xl font-semibold text-[#333333]">
+                                            <h1 className="px-6 py-3 text-2xl font-semibold text-[#333333]">
                                                 {product?.ratings?.toFixed(1)}{" "}
                                                 <StarIcon sx={{ color: '#54B1CE' }} />
                                             </h1>
-                                            <p className="text-lg text-[#333333]">
+                                            <p className="text-base text-[#333333]">
                                                 ({product?.numOfReviews}) Reviews
                                             </p>
                                         </div>

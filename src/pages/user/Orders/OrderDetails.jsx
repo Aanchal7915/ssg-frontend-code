@@ -94,6 +94,9 @@ const OrderDetails = () => {
 
             <MinCategory />
             <main className="w-full p-2 min-h-[90vh] py-2 sm:py-8 bg-gradient-to-br from-[#e0f7fa] via-[#f1faff] to-[#f0f9ff] text-[#334155]">
+                <h2 className=" max-w-6xl mx-auto text-lg sm:text-xl font-semibold text-[#1C0311] mb-1 p-2 sm:p-3 border-l-4 border-[#54B1CE] bg-white shadow rounded-tr-lg rounded-br-lg">
+                    Order Details
+                </h2>
                 {loading ? (
                     <Spinner />
                 ) : (
@@ -247,7 +250,7 @@ const OrderDetails = () => {
                                                 Seller: {seller?.name}
                                             </p>
                                             <span className="font-medium text-[#0ea5e9]">
-                                                ₹{(quantity * (price-discountPrice)).toLocaleString()}
+                                                ₹{(quantity * (price - discountPrice)).toLocaleString()}
                                             </span>
                                             <span className="text-xs text-[#64748b]">
                                                 Payment Id: {paymentId}
@@ -255,7 +258,7 @@ const OrderDetails = () => {
                                             <span className="text-xs text-[#64748b]">
                                                 Order Date: {new Date(createdAt).toDateString()}
                                             </span>
-                                            
+
                                         </div>
                                     </div>
 

@@ -100,6 +100,9 @@ const Orders = () => {
       <main className="w-full min-h-screen bg-gradient-to-br from-[#e0f7fa] via-[#f1faff] to-[#f0f9ff] px-4 sm:px-10 py-6 text-[#334155] animate-fadeIn">
         <div className="flex flex-col gap-4 w-full max-w-6xl mx-auto">
           {/* Toggle Filter Button */}
+          <h2 className="text-lg sm:text-xl font-semibold text-[#1C0311] mb-1 p-2 sm:p-3 border-l-4 border-[#54B1CE] bg-white shadow rounded-tr-lg rounded-br-lg">
+            Your orders
+          </h2>
           <div className="flex justify-end">
             <button
               type="button"

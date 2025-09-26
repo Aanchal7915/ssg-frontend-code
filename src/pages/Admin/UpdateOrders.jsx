@@ -102,6 +102,9 @@ const UpdateOrders = () => {
 
             <MinCategory />
             <main className="w-full p-2 py-2 sm:py-8 bg-gradient-to-br from-[#e0f7fa] via-[#f1faff] to-[#f0f9ff] min-h-screen text-[#334155]">
+                <h2 className="max-w-6xl mx-auto text-lg sm:text-xl font-semibold text-[#1C0311] mb-1 p-2 sm:p-3 border-l-4 border-[#54B1CE] bg-white shadow rounded-tr-lg rounded-br-lg">
+                    Order Details
+                </h2>
                 {loading ? (
                     <Spinner />
                 ) : (

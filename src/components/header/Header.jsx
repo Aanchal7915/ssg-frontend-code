@@ -16,8 +16,19 @@ const Header = () => {
   const { auth, LogOut } = useAuth();
   const [cartItems] = useCart();
 
-  const toggleDropdown = () => setDropdownOpen(true);
-  const closeDropdown = () => setDropdownOpen(false);
+  // const toggleDropdown = () => setDropdownOpen(true);
+  // const closeDropdown = () => setDropdownOpen(false);
+  let closeTimeout;
+  const toggleDropdown = () => {
+    clearTimeout(closeTimeout);
+    setDropdownOpen(true);
+  };
+  const closeDropdown = () => {
+    closeTimeout = setTimeout(() => {
+      setDropdownOpen(false);
+    }, 200);
+  };
+  
   const handleLogout = () => LogOut();
 
   useEffect(() => {
@@ -81,9 +92,8 @@ const Header = () => {
               {isDropdownOpen && (
                 <div className="absolute top-10 right-0 w-44 bg-white border border-[#54B1CE] rounded-lg shadow-lg p-3 flex flex-col gap-2">
                   <NavLink
-                    to={`${
-                      auth.user.role === 1 ? "/admin" : "/user"
-                    }/dashboard`}
+                    to={`${auth.user.role === 1 ? "/admin" : "/user"
+                      }/dashboard`}
                     className="px-3 py-2 hover:bg-[#54B1CE]/10 rounded-md"
                   >
                     Profile
@@ -97,9 +107,8 @@ const Header = () => {
                     </NavLink>
                   )}
                   <NavLink
-                    to={`${
-                      auth.user.role === 1 ? "/admin" : "/user"
-                    }/orders`}
+                    to={`${auth.user.role === 1 ? "/admin" : "/user"
+                      }/orders`}
                     className="px-3 py-2 hover:bg-[#54B1CE]/10 rounded-md"
                   >
                     Orders
@@ -177,9 +186,8 @@ const Header = () => {
             {auth.user && (
               <>
                 <NavLink
-                  to={`${
-                    auth.user.role === 1 ? "/admin" : "/user"
-                  }/dashboard`}
+                  to={`${auth.user.role === 1 ? "/admin" : "/user"
+                    }/dashboard`}
                   className="px-4 py-2 hover:bg-[#54B1CE]/10 rounded-md"
                   onClick={() => setMobileMenuOpen(false)}
                 >
@@ -195,9 +203,8 @@ const Header = () => {
                   </NavLink>
                 )}
                 <NavLink
-                  to={`${
-                    auth.user.role === 1 ? "/admin" : "/user"
-                  }/orders`}
+                  to={`${auth.user.role === 1 ? "/admin" : "/user"
+                    }/orders`}
                   className="px-4 py-2 hover:bg-[#54B1CE]/10 rounded-md"
                   onClick={() => setMobileMenuOpen(false)}
                 >

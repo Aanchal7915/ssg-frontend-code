@@ -75,6 +75,9 @@ const Wishlist = () => {
         <Spinner />
       ) : (
         <main className="w-full pt-5 bg-gradient-to-br from-[#e0f7fa] via-[#f1faff] to-[#f0f9ff] min-h-screen text-[#334155] animate-fadeIn">
+          <h2 className="w-full sm:w-11/12 mx-auto text-lg sm:text-xl font-semibold text-[#1C0311] mb-1 p-2 sm:p-3 border-l-4 border-[#54B1CE] bg-white shadow rounded-tr-lg rounded-br-lg">
+            Wishlists
+          </h2>
           <div className="flex flex-col sm:flex-row gap-6 w-full sm:w-11/12 m-auto pb-10">
             <div className="flex-1 bg-white/80 shadow-xl rounded-xl border border-[#bae6fd] overflow-hidden">
               {/* Back Button */}

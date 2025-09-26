@@ -39,11 +39,11 @@ const SideFilter = ({ price, subcategory, subcategoryList, ratings, setPrice, se
   };
 
   return (
-    <div className="sm:flex flex-col sm:w-64 md:w-72 lg:w-80 px-3">
+    <div className="sm:flex flex-col px-3">
       <div className="flex flex-col bg-white rounded-xl shadow-lg">
         {/* Header */}
         <div className="flex items-center justify-between gap-5 px-4 py-2 border-b">
-          <p className="hidden sm:block text-lg font-medium text-[#54B1CE]">Filters</p>
+          <p className="hidden lg:block text-lg font-medium text-[#54B1CE]">Filters</p>
           <span
             className="border p-2 rounded shadow uppercase text-[#54B1CE] text-xs cursor-pointer font-medium"
             onClick={clearFilters}
